@@ -1,0 +1,48 @@
+#SET{annee_choisie, #ENV{calendrier_annee, #AUJOURDHUI|annee}}
+#SET{mois_choisi, #ENV{calendrier_mois, #AUJOURDHUI|mois}}
+
+#SET{periode_secondes, #EVAL{3600*24*30}}
+[(#CONFIG{sarkaspip_agenda/type_resume, oui}|=={oui}|?{' '})
+	#SET{periode_secondes, #GET{periode_secondes}|mult{#CONFIG{sarkaspip_agenda/max_mois_resume, 6}}}
+]
+#SET{date_fin, #GET{annee_choisie}|concat{'-',#GET{mois_choisi},'-','15'}|strtotime|plus{#GET{periode_secondes}}|fin_mois_precedent{'Y-m-d'}}
+
+<div id="noisette_miniagenda" class="noisette">
+	<h1><a class="intitule" href="[(#URL_PAGE{agenda,[id_rubrique=(#RACINE_SPECIALISEE{agenda})][&amp;annee=(#AUJOURDHUI|annee)][&amp;mois=(#AUJOURDHUI|mois)]})]">
+			<:sarkaspip:agenda:>
+	</a></h1>
+
+	<div class="contenu">
+		[(#REM) <!-- Definition du contexte de l'agenda --> ]
+		[(#RACINE_SPECIALISEE{agenda}|agenda_definir_contexte{
+								'mini_calendrier_mensuel',
+								[(#CONFIG{sarkaspip_agenda/mois1, 1})],
+								[(#CONFIG{sarkaspip_agenda/format_pagination, annee})],
+								#SELF}
+		)]
+
+		[(#REM) <!-- Recensement des evenements du mois choisi et du mois suivant --> ]
+		<BOUCLE_agenda(ARTICLES)
+			{id_secteur=#RACINE_SPECIALISEE{agenda}}
+			{agenda date_redac, periode, #GET{annee_choisie}, #GET{mois_choisi}, 1, (#GET{date_fin}|annee), (#GET{date_fin}|mois), (#GET{date_fin}|jour)}
+			{par date_redac}>
+			[(#RACINE_SPECIALISEE{agenda}|agenda_recenser_evenement{
+								[(#ID_ARTICLE)], 
+								[(#DATE_REDAC)], 
+								[(#TITRE)]}
+			)]
+		</BOUCLE_agenda>
+
+		[(#REM) <!-- Bloc en-tete mois et pagination du mini-agenda -->] 
+		[(#RACINE_SPECIALISEE{agenda}|agenda_mini_afficher{
+								[(#EVAL{_SARKASPIP_CONFIG_AGENDA_SYMBOLE_PRECEDENT})],
+								[(#EVAL{_SARKASPIP_CONFIG_AGENDA_SYMBOLE_SUIVANT})],
+								[(#CONFIG{sarkaspip_agenda/jour1, 1})],
+								[(#CONFIG{sarkaspip_agenda/affichage_hors_mois, oui})],
+								[(#CONFIG{sarkaspip_agenda/type_resume, oui})],
+								[(#CONFIG{sarkaspip_agenda/max_mois_resume, 6})],
+								[(#CONFIG{sarkaspip_agenda/taille_resume, 5})],
+								[(#CONFIG{sarkaspip_agenda/format_resume, d-m H:i})]}
+		)]
+	</div>
+</div>

@@ -1,0 +1,59 @@
+[(#REM)
+<!-- 
+	Barre de navigation, ouverte sur la hierarchie courante
+
+	On fait un plan, et, quand on avance vers une rubrique,
+	on l'affiche si son parent est expose ou est la racine du site.
+-->]
+<script type="text/javascript">
+//<![CDATA[	
+	jQuery(document).ready(function() {
+		var timed = 400;
+		var timer = 700;
+		
+/*		$('#login_top').css('opacity',0.7).css('position','fixed'); */
+		
+		jQuery('.menulist li a.hover').hover( function() {
+			var me = $(this);
+			var t = setTimeout(function(){
+			me
+			.toggleother(cible)
+			.removeClass('hoverwait');
+		},
+			jQuery(this).next('.cache').toggle('slow') ? timer : timed
+		);
+		
+			if (t) { clearTimeout(t); t = null; }
+			t = setTimeout(function(){
+				jQuery(this).next('.cache').toggle('slow');
+				},
+				me.is('.deplie') ? timer : timed
+			);
+		}
+		, function(e){});
+	});
+//]]>
+</script>
+
+<B_rubriques>
+<div id="menu_rubriques" class="noisette menu_rub3">
+	<ul class="menulist">
+<BOUCLE_rubriques(RUBRIQUES) {racine}{id_rubrique!==#RACINE_SPECIALISEE}{par num titre}{par titre}>
+		<li>
+			[(#SET{classe, hover[ (#EXPOSE)]})]
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|!={2}|?{' '})[<a[ href="(#URL_RUBRIQUE)"][ class="(#GET{classe})"]>(#TITRE|couper{80})</a>]]
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|?{' '})<INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique}{classe=#GET{classe}}>]
+			    <B_ss_rubriques>
+				<div class="cache">
+					<BOUCLE_ss_rubriques(RUBRIQUES){id_parent}{par num titre}{par titre}>
+						#SET{classe, #EXPOSE}
+						[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|!={2}|?{' '})[<a[ href="(#URL_RUBRIQUE)"][ class="(#GET{classe})"]>(#TITRE|couper{80})</a>]]
+						[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|?{' '})<INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique}{classe=#GET{classe}}>]
+					</BOUCLE_ss_rubriques>
+				</div>
+				</B_ss_rubriques>
+		</li>
+</BOUCLE_rubriques>
+	</ul>
+</div>
+</B_rubriques>

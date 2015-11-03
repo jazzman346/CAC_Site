@@ -1,0 +1,40 @@
+[(#REM) 
+<!-- Affichage de la liste des albums trouves lors d'une recherche
+	Recoit en argument :
+		- recherche : critere de recherche
+-->
+]
+<B_albums_recherche>
+	<div id="recherche_album" class="commentaires">
+		<a rel="nofollow" href="#header" title="<:sarkaspip:kezako_haut_page:>" class="fonction revenir_haut_page"></a>
+		<h2><:sarkaspip:recherche_albums_resultat:>&nbsp;&#40;#GRAND_TOTAL&#41;</h2>				
+		#ANCRE_PAGINATION
+		[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_article, 3}|match{^(1|3)$}|?{' '})
+		  [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_article}})</div>]
+		]
+		<ul>
+<BOUCLE_albums_recherche(ARTICLES) {recherche}{id_secteur=#RACINE_SPECIALISEE{galerie}} {par points} {inverse}{pagination #CONFIG{sarkaspip_recherche/pas_pagination_recherche_article, 5}}>
+		[(#INCLURE{fond=noisettes/recherche/inc_recherche_extrait}
+			{titre=#TITRE}
+			{afficher_date=oui}
+			{date=#DATE}
+			{url=#URL_PAGE{album, id_article=#ID_ARTICLE}}
+			{afficher_logo=non}
+			{afficher_auteur=non}
+			{ajax}
+		)]
+</BOUCLE_albums_recherche>
+		</ul>
+		[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_article, 3}|match{^(2|3)$}|?{' '})
+		  [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_article}})</div>]
+		]
+	</div>	
+</B_albums_recherche>		
+
+
+
+
+
+
+
+

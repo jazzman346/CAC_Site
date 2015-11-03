@@ -1,0 +1,193 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_bandeau:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_bandeau_haut:></legend>
+			<p><:sarkaspip:cfg_inf_bandeau_haut:></p>
+			<label>
+				<input type="radio" name="haut" value="1" [(#ENV{haut, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="haut" value="0" [(#ENV{haut, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+
+			<div id="bloc_haut">
+				<br />
+				<label><:sarkaspip:cfg_lbl_hauteur_minimale:></label>
+				<input type="text" name="haut_minheight" value="#ENV{haut_minheight, 50}" size="3" class="fondl" />
+				<br />
+				<p><:sarkaspip:cfg_inf_logo_reduit:></p>
+				<label>
+					<input type="radio" name="logo_reduit" value="1" [(#ENV{logo_reduit, 1}|=={1}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_oui:>
+				</label>
+				<label>
+					<input type="radio" name="logo_reduit" value="0" [(#ENV{logo_reduit, 1}|=={0}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_non:>
+				</label>
+				<div id="bloc_logo">
+					<label><:sarkaspip:cfg_lbl_taille_logo:></label>
+					<input type="text" name="taille_logo" value="#ENV{taille_logo, 150}" size="3" class="fondl" />
+				</div>
+				<br />
+				<p><:sarkaspip:cfg_inf_titre_site:></p>
+				<label>
+					<input type="radio" name="titre_site" value="1" [(#ENV{titre_site, 1}|=={1}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_oui:>
+				</label>
+				<label>
+					<input type="radio" name="titre_site" value="0" [(#ENV{titre_site, 1}|=={0}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_non:>
+				</label>
+				<br /><br />
+				<label><:sarkaspip:cfg_lbl_slogan:></label>
+				<input type="text" name="slogan" value="#ENV{slogan}" size="40" class="fondl" />
+				<br />
+			</div>
+		</fieldset>
+
+		#SET{menu_horizontal_affiche, non}
+	[(#CONFIG{sarkaspip_menus/position_rubriques, 1}|=={5}|?{' '})
+		#SET{menu_horizontal_affiche, oui}
+		[(#SET{menu_horizontal_modele, <:sarkaspip:cfg_lgd_menu_rubriques:>})]
+	]
+	[(#CONFIG{sarkaspip_menus/position_secteurs, 0}|=={5}|?{' '})
+		#SET{menu_horizontal_affiche, oui}
+		[(#SET{menu_horizontal_modele, <:sarkaspip:cfg_lgd_menu_secteurs:>})]
+	]
+	[(#CONFIG{sarkaspip_menus/position_pages, 1}|=={5}|?{' '})
+		#SET{menu_horizontal_affiche, oui}
+		[(#SET{menu_horizontal_modele, <:sarkaspip:cfg_lgd_menu_pages_speciales:>})]
+	]
+	[(#CONFIG{sarkaspip_menus/position_perso, 0}|=={5}|?{' '})
+		#SET{menu_horizontal_affiche, oui}
+		[(#SET{menu_horizontal_modele, <:sarkaspip:cfg_lgd_menu_perso:>})]
+	]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_bandeau_bas:></legend>
+			<p><:sarkaspip:cfg_inf_bandeau_bas:></p>
+			<label>
+				<input type="radio" name="bas" value="1" [(#ENV{bas, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="bas" value="0" [(#ENV{bas, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+			<br />
+			<div id="bloc_bas">
+				<label><:sarkaspip:cfg_lbl_hauteur_minimale:></label>
+				<input type="text" name="bas_minheight" value="#ENV{bas_minheight, 23}" size="3" class="fondl" />
+				<br />
+	[(#GET{menu_horizontal_affiche}|=={oui}|?{' '})
+				<p><:sarkaspip:cfg_inf_bandeau_bas_menu{lbl_menu=#GET{menu_horizontal_modele}}:></p>
+				<p><:sarkaspip:cfg_inf_alignement_menu:></p>
+				<label>
+					<input type="radio" name="menu_align" value="0" [(#ENV{menu_align, 0}|=={0}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_align_gauche:>
+				</label>
+				<label>
+					<input type="radio" name="menu_align" value="auto" [(#ENV{menu_align, 0}|=={auto}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_align_centre:>
+				</label>
+				<p><:sarkaspip:cfg_inf_alignement_item:></p>
+				<label>
+					<input type="radio" name="item_align" value="left" [(#ENV{item_align, left}|=={left}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_align_gauche:>
+				</label>
+				<label>
+					<input type="radio" name="item_align" value="center" [(#ENV{item_align, left}|=={center}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_align_centre:>
+				</label>
+				<div id="bloc_largeur_item">
+					<br />
+					<label>
+						<:sarkaspip:cfg_lbl_largeur_item:>
+						<input type="text" name="item_largeur" value="#ENV{item_largeur, 150}" size="4" class="fondl" />
+					</label>
+				</div>
+				<div id="bloc_largeur_menu">
+					<label>
+						<:sarkaspip:cfg_lbl_largeur_menu:>
+						<input type="text" name="menu_largeur" value="#ENV{menu_largeur, 600}" size="4" class="fondl" />
+					</label>
+				</div>
+	]
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_bandeau_chemin:></legend>
+			<p><:sarkaspip:cfg_inf_bandeau_chemin:></p>
+			<label>
+				<input type="radio" name="chemin" value="1" [(#ENV{chemin, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="chemin" value="0" [(#ENV{chemin, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+			<br />
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_bandeau}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{haut, 1}|=={0}|?{' '})
+			jQuery("#menu_raccourci_defaut").attr({checked: "checked"});
+			jQuery("#bloc_haut").hide();
+		]
+		[(#ENV{bas, 1}|=={0}|?{' '}) jQuery("#bloc_bas").hide();]
+		[(#ENV{menu_align, 0}|=={0}|?{' '})	jQuery("#bloc_largeur_menu").hide();]
+		[(#ENV{logo_reduit, 1}|=={0}|?{' '}) jQuery("#bloc_logo").hide();
+		]
+		jQuery("input[name='haut']").change(function() {
+			if (jQuery("input[name='haut']:checked").val() == 1)
+				jQuery("#bloc_haut").show();
+			else {
+				jQuery("#menu_raccourci_defaut").attr({checked: "checked"});
+				jQuery("#bloc_haut").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='bas']").change(function() {
+			if (jQuery("input[name='bas']:checked").val() == 1)
+				jQuery("#bloc_bas").show();
+			else {
+				jQuery("#bloc_bas").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='menu_align']").change(function() {
+			if (jQuery("input[name='menu_align']:checked").val() == 0)
+				jQuery("#bloc_largeur_menu").hide();
+			else {
+				jQuery("#bloc_largeur_menu").show();
+				jQuery("input[name='item_largeur']").attr({value: "150"});
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='logo_reduit']").change(function() {
+			if (jQuery("input[name='logo_reduit']:checked").val() == 1)
+				jQuery("#bloc_logo").show();
+			else {
+				jQuery("#bloc_logo").hide();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

@@ -1,0 +1,11 @@
+[(#REM) <!-- affichage complet ou synthetique des n breves les plus recentes du site ou du secteur concerne --> ]
+<B_breves>
+	<div id="noisette_breves" class="noisette">
+		<h1><a class="intitule" href="#URL_PAGE{breve}"><:sarkaspip:breves:></a></h1>	
+		[(#CONFIG{sarkaspip_noisettes/liste_breves, 2}|!={1}|?{' '})<div class="contenu mixte">]
+<BOUCLE_breves(BREVES){id_secteur ?}{id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}}{par date}{inverse}{0,#CONFIG{sarkaspip_noisettes/max_breves, 5}}>
+		[(#INCLURE{fond=noisettes/breve/inc_breve_#CONFIG{sarkaspip_noisettes/liste_breves, 2}}{id_breve}{editable=non})]
+</BOUCLE_breves>
+		[(#CONFIG{sarkaspip_noisettes/liste_breves, 2}|!={1}|?{' '})</div>]
+	</div>
+</B_breves>

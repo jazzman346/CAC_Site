@@ -1,0 +1,21 @@
+[(#REM) 
+<!-- Albums de la galerie
+	Recoit en argument :
+		- id_article: id de l'album en cours d'affichage
+-->
+]
+<B_albums_freres>
+	<div class="contenu">
+		#ANCRE_PAGINATION
+		<h2 class="titre_bloc"><:sarkaspip:albums_freres:></h2>
+		<div class="liste"><ul>
+<BOUCLE_albums_freres(ARTICLES){id_secteur=#RACINE_SPECIALISEE{galerie}}{par num titre, titre}{pagination #CONFIG{sarkaspip_noisettes/pas_pagination_navigation, 10}}>
+			<li>#EXPOSE{
+					<span class="titre">#TITRE</span>,
+					#INCLURE{fond=noisettes/article/inc_article_lien}{id_article}{classe=titre}}
+			</li>
+</BOUCLE_albums_freres>
+		</ul></div>
+		[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_noisettes/modele_pagination_navigation}})</div>]
+	</div> <!-- Fin contenu -->
+</B_albums_freres>

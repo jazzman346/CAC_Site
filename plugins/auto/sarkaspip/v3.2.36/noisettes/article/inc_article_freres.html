@@ -1,0 +1,42 @@
+[(#REM) 
+<!-- Articles de la rubrique, classes par numero s'ils sont numerotes, ou par date inverse sinon
+	Recoit en argument :
+		- id_rubrique: id de la rubrique concernee
+		- id_article: id de l'article en cours d'affichage
+-->
+]
+[(#SET{bulle, <:sarkaspip:navigation_bulle_vers_article:>})]
+<B_test_numero>
+<BOUCLE_test_numero(ARTICLES){id_rubrique}{titre==^[0-9]+\.}{0,1}>
+	<B_article_rubrique_numerotes>
+	#ANCRE_PAGINATION
+	<div class="contenu">
+		<h2 class="titre_bloc"><:sarkaspip:articles_meme_rubrique:></h2>
+		<div class="liste"><ul>
+	<BOUCLE_article_rubrique_numerotes(ARTICLES){id_rubrique}{par num titre}{pagination #CONFIG{sarkaspip_noisettes/pas_pagination_navigation, 10}}>
+			[<li><[(#EXPOSE{span class="titre",a class="titre"[ href="(#URL_ARTICLE)"][ title="(#GET{bulle})"]})]>
+				(#TITRE)
+			</[(#EXPOSE{span,a})]></li>]
+	</BOUCLE_article_rubrique_numerotes>
+		</ul></div>
+		[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_noisettes/modele_pagination_navigation}})</div>]
+	</div>
+	</B_article_rubrique_numerotes>
+</BOUCLE_test_numero>
+</B_test_numero>
+
+	<B_article_rubrique_date>
+		#ANCRE_PAGINATION
+		<div class="contenu">
+			<h2 class="titre_bloc"><:sarkaspip:articles_meme_rubrique:></h2>
+			<div class="liste"><ul>
+	<BOUCLE_article_rubrique_date(ARTICLES){id_rubrique}{par date}{inverse}{pagination #CONFIG{sarkaspip_noisettes/pas_pagination_navigation, 10}}>
+			[<li><[(#EXPOSE{span class="titre",a class="titre"[ href="(#URL_ARTICLE)"][ title="(#GET{bulle})"]})]>
+					(#TITRE)
+			</[(#EXPOSE{span,a})]></li>]
+	</BOUCLE_article_rubrique_date>
+			</ul></div>
+		[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_noisettes/modele_pagination_navigation}})</div>]
+		</div>
+	</B_article_rubrique_date>
+<//B_test_numero>		

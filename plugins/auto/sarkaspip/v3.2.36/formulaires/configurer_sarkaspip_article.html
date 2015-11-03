@@ -1,0 +1,78 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_article:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+	[(#ENV{_cfg_}|form_hidden)]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_description:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_logo}
+				{explication=<:sarkaspip:cfg_inf_article_sans_logo:>}
+				{env}>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_cartouche}
+				{explication_popularite=<:sarkaspip:cfg_inf_article_popularite:>}
+				{explication_notation=<:sarkaspip:cfg_inf_article_notation:>}
+				{explication_socialtags=<:sarkaspip:cfg_inf_article_socialtags:>}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_documents_joints:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_descriptif_document}{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_images_jointes:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_effet_image}
+				{explication=<:sarkaspip:cfg_inf_effet_image:>}
+				{choix=portfolio}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_commentaires:></legend>
+			<p><:sarkaspip:cfg_inf_article_commentaires:></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_presentation_commentaires}
+				{defaut_presentation=2}
+				{defaut_tri=2}
+				{defaut_auteur=1}
+				{defaut_mail=2}
+				{env}>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_sens_tri}
+				{explication=<:sarkaspip:cfg_inf_commentaires_sens_tri:>}
+				{suffixe=_commentaires}
+				{label_sens_normal=<:sarkaspip:cfg_lbl_tri_chrono:>}
+				{label_sens_inverse=<:sarkaspip:cfg_lbl_tri_antichrono:>}
+				{defaut_sens=1}
+				{env}>
+			<p><:sarkaspip:cfg_inf_commentaires_lien_auteur:></p>
+			<label>
+				<input type="radio" name="auteur_commentaires" value="1" [(#ENV{auteur_commentaires, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_inf_lien_auteur_oui:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="auteur_commentaires" value="2" [(#ENV{auteur_commentaires, 1}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_inf_lien_auteur_non:>
+			</label>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{defaut_pas=20}
+				{defaut_position=2}
+				{suffixe=_commentaires}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_petition:></legend>
+			<p><:sarkaspip:cfg_inf_petition:></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}{defaut_pas=20}{defaut_position=2}{suffixe=_signatures}{env}>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_article}|afficher_config)]
+</div>

@@ -1,0 +1,370 @@
+/* NOISETTES.CSS                                                        */
+/* Cette feuille contient:                                              */
+/* - les styles des noisettes des colonnes extra et navigation          */
+/* - les styles des menus verticaux et horizontaux                      */
+/* -------------------------------------------------------------------- */
+
+/* Initialisation des variables permettant de déterminer un alignement à droite ou à gauche */
+#SET{css_align, left}
+#SET{badge_align, left}
+#SET{css_bg_position, 170}
+[(#CONFIG{sarkaspip_noisettes/position_badges, 1}|=={1}|oui)
+	[(#CONFIG{sarkaspip_layout/numero_layout, 13}|match{^(8|9|10|14|15|16)$}|oui)
+		[(#SET{badge_align, right})]
+	]
+]
+[(#CONFIG{sarkaspip_noisettes/position_badges, 1}|=={2}|oui)
+	[(#CONFIG{sarkaspip_layout/numero_layout, 13}|match{^(7|9|10|13|15|16)$}|oui)
+		[(#SET{badge_align, right})]
+	]
+]
+
+[(#CONFIG{sarkaspip_layout/numero_layout, 13}|match{^(8|9|10|14|15|16)$}|oui)
+	[(#SET{css_align, right})]
+]
+[(#CONFIG{sarkaspip_layout/numero_layout, 13}|match{^(8|9|10|14|15|16)$}|oui)
+	[(#SET{css_bg_position, 9})]
+]
+
+/* Noisettes pouvant etre inserees dans les colonnes extra et navigation */
+/* Styles generiques */
+.noisette {margin-bottom: 15px; color: #CONFIG{sarkaspip_styles/fg_noisette, #808080};}
+
+.noisette h1, h2, h3 {margin: 0; font-size: 1em;}
+.noisette h1.intitule, .noisette h1 a.intitule {
+	display: block;	margin-bottom: 10px; font-weight: bold; font-size: 1.5em; text-align: center; line-height:1.2em;
+	[border: 1px solid (#CONFIG{sarkaspip_styles/ca_noisette, #808080});]
+	background: #CONFIG{sarkaspip_styles/bg_noisette_titre, #808080}[ url((#CHEMIN{images/bg_noisette_titre#CONFIG{sarkaspip_styles/bi_extension_noisette_titre, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_noisette_titre})];
+	[color: (#CONFIG{sarkaspip_styles/fg_noisette_titre, #ffffff});]
+	padding : 2px 0;}
+.noisette h1 a.intitule:hover {
+	background: #CONFIG{sarkaspip_styles/hb_noisette_titre, #eeeeee}[ url((#CHEMIN{images/bg_hover_noisette_titre#CONFIG{sarkaspip_styles/hi_extension_noisette_titre, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_noisette_titre})];
+	[color: (#CONFIG{sarkaspip_styles/ho_noisette_titre, #808080}); ]
+	[text-decoration: (#CONFIG{sarkaspip_styles/td_noisette_titre, none});]}
+
+.noisette .contenu {margin-bottom: 5px; padding: 0; 
+		[border: 1px solid (#CONFIG{sarkaspip_styles/ca_noisette, #808080});]
+		background: #CONFIG{sarkaspip_styles/bg_noisette, #FFFFFF};}
+.noisette .contenu.mixte {padding: 5px 0 0;}
+.noisette .contenu.mixte .pagination {padding: 5px 0 0;}
+.noisette .contenu h2.titre_bloc,
+.noisette .contenu h2 a.titre_bloc {
+	display: block;	margin: 0; padding: 1px; font-size: 1.25em; line-height: 1.5em; font-weight: bold; text-align: center;
+	[border-bottom: 1px solid (#CONFIG{sarkaspip_styles/ca_noisette, #808080});]
+	background: #CONFIG{sarkaspip_styles/bg_noisette_soustitre, #eeeeee}[ url((#CHEMIN{images/bg_noisette_soustitre#CONFIG{sarkaspip_styles/bi_extension_noisette_soustitre, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_noisette_soustitre})];
+	[color: (#CONFIG{sarkaspip_styles/fg_noisette_soustitre, #808080});]}
+.noisette .contenu h2 a.titre_bloc:hover {
+	background: #CONFIG{sarkaspip_styles/hb_noisette_soustitre, #808080}[ url((#CHEMIN{images/bg_hover_noisette_soustitre#CONFIG{sarkaspip_styles/hi_extension_noisette_soustitre, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_noisette_soustitre})];
+	[color: (#CONFIG{sarkaspip_styles/ho_noisette_soustitre, #ffffff}); ]
+	[text-decoration: (#CONFIG{sarkaspip_styles/td_noisette_soustitre, none});]}
+
+.noisette .contenu .liste ul {margin: 0; padding: 0;}
+.noisette .contenu .liste ol {margin: 0; padding: 0 5px;}
+.noisette .contenu .liste ol li {list-style: decimal inside;}
+.noisette .contenu h2.titre, .noisette .contenu h2 a.titre, .noisette .contenu .liste li .titre {
+	display: block; padding: 0 0 5px 10px; margin: 0 5px;	font-weight: bold; text-decoration: none;
+	color: #CONFIG{sarkaspip_styles/fg_noisette, #808080};
+	[background: url((#CHEMIN{images/puce-n0.gif})) left top no-repeat;]}
+.noisette .contenu .liste ol li .titre {background: none; display: inline; margin:0; padding: 0;}
+.noisette .contenu h2 a.titre:hover, .noisette .contenu .liste li a.titre:hover{
+	color: #CONFIG{sarkaspip_styles/ho_noisette, #808080};
+	text-decoration: #CONFIG{sarkaspip_styles/td_noisette, underline};}
+.noisette .contenu .liste li span.titre {color: #000000;} /* A REVOIR */
+
+.noisette .contenu .date_bloc {
+	margin-left: 30%; padding: 1px; font-size: 0.9em; text-align: center;
+	[border-bottom: 1px solid (#CONFIG{sarkaspip_styles/ca_noisette, #808080});]
+	[border-left: 1px solid (#CONFIG{sarkaspip_styles/ca_noisette, #808080});]}
+
+.noisette .contenu div.introduction, .noisette .contenu a.introduction {
+	display: block;	margin: 0 5px; padding:0 0 5px 10px;	
+	color: #CONFIG{sarkaspip_styles/fg_noisette, #808080};}
+.noisette .contenu a.introduction:hover{
+	color: #CONFIG{sarkaspip_styles/ho_noisette, #808080};
+	text-decoration: #CONFIG{sarkaspip_styles/td_noisette, underline};}
+.noisette .contenu div.introduction * {margin: 0;}
+
+.noisette .contenu .liste {margin: 0;	padding: 5px 0;}
+.noisette .contenu .texte {margin: 0; padding: 5px; line-height: 1.1em;}
+.noisette .contenu .texte p {margin:0.7em 0em; padding:0;}
+
+.noisette .contenu .notes {margin: 0; padding: 5px; line-height: 100%;[ border-top: 1px solid (#CONFIG{sarkaspip_styles/ca_noisette, #808080});]}
+.noisette .contenu .notes p {margin: 0;}
+
+.noisette .contenu h3 {padding: 3px 0; line-height: 1.1em;}
+.noisette .contenu  a {}
+.noisette .contenu a:hover {}
+.noisette .contenu strong {}
+.noisette .contenu blockquote, .noisette .contenu code {margin : 2px;}
+
+/* Styles specifiques pour la pagination dans les noisettes */
+.noisette .pagination {margin: 0 5px 5px; font-size: 1em;}
+
+/* Styles specifiques pour l'herbier */
+#noisette_herbier.noisette .contenu .texte {text-align: center;}
+#noisette_herbier.noisette .contenu .texte ul {width: 120px; margin: 0 auto;}
+
+/* Styles specifiques pour les statistiques */
+#noisette_statistiques.noisette .contenu .texte {text-align: center;}
+
+/* Styles specifiques pour la navigation des articles et rubrique mots-cles et categories */
+#noisette_filtre.noisette .contenu h2.titre_bloc.bouton {border-bottom: 0;	
+	background: #CONFIG{sarkaspip_styles/hb_noisette_soustitre, #808080}[ url((#CHEMIN{images/bg_hover_noisette_soustitre#CONFIG{sarkaspip_styles/hi_extension_noisette_soustitre, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_noisette_soustitre})];
+	[color: (#CONFIG{sarkaspip_styles/ho_noisette_soustitre, #ffffff}); ]
+	[text-decoration: (#CONFIG{sarkaspip_styles/td_noisette_soustitre, none});]}
+
+#noisette_filtre.noisette .contenu h2 a.titre_bloc.bouton {border-bottom: 0;}
+#noisette_navigation.noisette .contenu .liste li .titre,
+#noisette_filtre.noisette .contenu .liste li .titre,
+#noisette_motscles.noisette .contenu .liste li .titre {
+	display: block;
+	padding: 0 0 5px 10px;
+	margin: 0 5px;
+	font-size: 1em;
+	font-weight: bold;
+	text-decoration: none;
+}
+#noisette_navigation.noisette .contenu .liste li span.titre,
+#noisette_filtre.noisette .contenu .liste li span.titre,
+#noisette_motscles.noisette .contenu .liste li span.titre {[background: url((#CHEMIN{images/puce-n1.gif})) left top no-repeat;]}
+#noisette_navigation.noisette .contenu .liste li a.titre,
+#noisette_filtre.noisette .contenu .liste li a.titre,
+#noisette_motscles.noisette .contenu .liste li a.titre {background-image: none;}
+#noisette_navigation.noisette .contenu .liste li a.titre:hover,
+#noisette_filtre.noisette .contenu .liste li a.titre:hover,
+#noisette_motscles.noisette .contenu .liste li a.titre:hover {
+	color: #CONFIG{sarkaspip_styles/ho_noisette, #808080};
+	[ background: url((#CHEMIN{images/puce-n1.gif})) left top no-repeat;]
+	text-decoration: #CONFIG{sarkaspip_styles/td_noisette, underline};}
+
+/* Styles specifiques pour les badges */
+.noisette .badges a {display: block; margin: 2px 0; padding: 0; border: 0; width: 80px; height: 15px;[ float:(#GET{badge_align});][ clear: (#GET{badge_align});] }
+.noisette .badges a:hover {text-decoration: none;}
+#logo_rss {[background: url((#CHEMIN{images/badge_rss.png})) no-repeat;]}
+#logo_rss:hover {[background: url((#CHEMIN{images/badge_rss_hover.png})) no-repeat;]}
+#logo_sarkaspip {[background: url((#CHEMIN{images/badge_sarkaspip.png})) no-repeat;]}
+#logo_sarkaspip:hover {[background: url((#CHEMIN{images/badge_sarkaspip_hover.png})) no-repeat;]}
+#logo_spip {[background: url((#CHEMIN{images/badge_spip.png})) no-repeat;]}
+#logo_spip:hover {[background: url((#CHEMIN{images/badge_spip_hover.png})) no-repeat;]}
+#logo_xhtml {[background: url((#CHEMIN{images/badge_xhtml.png})) no-repeat;]}
+#logo_xhtml:hover {[background: url((#CHEMIN{images/badge_xhtml_hover.png})) no-repeat;]}
+#logo_perso {[background: url((#CHEMIN{images/badge_perso.png})) no-repeat;]}
+#logo_perso:hover {[background: url((#CHEMIN{images/badge_perso_hover.png})) no-repeat;]}
+
+/* Styles specifiques pour le mini-agenda */
+#noisette_miniagenda.noisette {overflow: hidden; width:180px}
+#noisette_miniagenda.noisette .contenu table {table-layout: fixed; border-spacing:0; width:100% !important /*FF*/; width:178px /*IE*/; font-size: 1.1em; text-align: center;border-collapse:inherit;}
+#noisette_miniagenda.noisette .contenu table thead {
+	background: #CONFIG{sarkaspip_styles/bg_noisette_titre, #808080};
+	[color: (#CONFIG{sarkaspip_styles/fg_noisette_titre, #ffffff});]}
+#noisette_miniagenda.noisette .contenu table th {text-align: center; padding: 2px 0;}
+#noisette_miniagenda.noisette .contenu table td {line-height: 1.1em; color: #CONFIG{sarkaspip_styles/fg_noisette, #808080}}
+#noisette_miniagenda.noisette .contenu table td.libre,
+#noisette_miniagenda.noisette .contenu table td.occupe {[background-color: (#CONFIG{sarkaspip_styles/bg_noisette, #ffffff});] [border: 1px solid (#CONFIG{sarkaspip_styles/bg_noisette, #ffffff});]}
+#noisette_miniagenda.noisette .contenu table td.horsperiode {
+    [background: (#CONFIG{sarkaspip_styles/bg_horsmois, #eeeeee});]
+    [border: 1px solid (#CONFIG{sarkaspip_styles/bg_horsmois, #eeeeee});]
+	[color: (#CONFIG{sarkaspip_styles/fg_horsmois, #808080});]}
+#noisette_miniagenda.noisette .contenu table td.today {font-weight: bolder;  
+    [background: (#CONFIG{sarkaspip_styles/bg_aujourdhui, transparent});]
+    [border: 1px solid (#CONFIG{sarkaspip_styles/ca_aujourdhui, #990000});]}
+#noisette_miniagenda.noisette .contenu table td a {font-weight: bolder;}
+#noisette_miniagenda.noisette .contenu table td a:hover {}
+
+#noisette_miniagenda.noisette .contenu h2 a.titre_bloc {padding: 0 0; font-size: 1.2em;[border-top: 1px solid (#CONFIG{sarkaspip_styles/ca_noisette, #808080});]}
+#noisette_miniagenda.noisette .contenu h2.titre_bloc.centre,
+#noisette_miniagenda.noisette .contenu h2 a.titre_bloc.bord {padding: 1px 0; border-top: 0;float: left;font-size: 1.2em;}
+#noisette_miniagenda.noisette .contenu h2.titre_bloc.centre {width: 50%;}
+#noisette_miniagenda.noisette .contenu h2 a.titre_bloc.bord {width: 25%;}
+#noisette_miniagenda.noisette .contenu h2 a.titre_bloc.bord.vide:hover {
+	background: #CONFIG{sarkaspip_styles/bg_noisette_soustitre, #eeeeee}[ url((#CHEMIN{images/bg_noisette_soustitre#CONFIG{sarkaspip_styles/bi_extension_noisette_soustitre, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_noisette_soustitre})]; }
+
+#noisette_miniagenda.noisette .contenu .texte {padding: 2px; [border-top: 1px solid (#CONFIG{sarkaspip_styles/ca_noisette, #808080});]}
+#noisette_miniagenda.noisette .contenu table#footer_evenements {padding: 2px 0; table-layout: fixed; [border-top: 1px solid (#CONFIG{sarkaspip_styles/ca_noisette, #808080});] text-align: left; font-size: 1em;}
+#noisette_miniagenda.noisette .contenu table#footer_evenements td{line-height:1.1em;}
+#noisette_miniagenda.noisette .contenu table#footer_evenements td.footer_colg {padding: 1px; font-weight: bold;
+	[(#CONFIG{sarkaspip_agenda/format_resume, d-m H:i}|=={d-m H:i}|?{width: 37% !important /*FF*/;width: 66px /*IE*/, width: 20% !important /*FF*/;width: 36px /*IE*/});]}
+#noisette_miniagenda.noisette .contenu table#footer_evenements td.footer_cold {padding: 1px;
+	[(#CONFIG{sarkaspip_agenda/format_resume, d-m H:i}|=={d-m H:i}|?{width: 63% !important /*FF*/;width: 112px /*IE*/, width: 80% !important /*FF*/;width: 142px /*IE*/});]}
+#noisette_miniagenda.noisette .contenu table#footer_evenements td.footer_cold a {font-weight: normal; [color: (#CONFIG{sarkaspip_styles/fg_noisette, #808080});]}
+#noisette_miniagenda.noisette .contenu table#footer_evenements td.footer_cold a:hover {[color: (#CONFIG{sarkaspip_styles/ho_noisette, #808080});]}
+
+/* Styles specifiques pour la noisette Rainette */
+#noisette_rainette.noisette .contenu .texte .maj {text-align: center;}
+#noisette_rainette.noisette .contenu .texte .resume {text-align: center; font-size: 1.2em; font-weight: bold;margin: 10px 0}
+#noisette_rainette.noisette .contenu .texte .resume ul{font-weight: normal; margin-top: 5px;font-size: 0.9em;}
+#noisette_rainette.noisette .contenu .texte .resume li{}
+#noisette_rainette.noisette .contenu .texte .temperature {font-size: 2em; font-weight: bold; margin: 0 5px;}
+#noisette_rainette.noisette .contenu .texte .previsions {font-size: 1.3em;}
+#noisette_rainette.noisette .contenu .texte .temperature img {float:left;}
+#noisette_rainette.noisette .contenu .texte .temperature p {padding: 30px 0 0 90px;}
+#noisette_rainette.noisette .contenu .texte .liens {text-align: center;}
+.pave-prevision {overflow: hidden; float: left; width: 168px; height: 190px;}
+.conteneur_selection {overflow: hidden; float: left; width: 168px; height: 190px;}
+
+/* Styles specifiques pour la noisette Nuage de mots */
+#noisette_nuage.noisette .contenu ul.nuage {padding:5px;}
+#noisette_nuage.noisette .contenu ul.nuage a {[color: (#CONFIG{sarkaspip_styles/fg_noisette, #808080});]}
+
+/* Menus vertical des rubriques et raccourcis inseres dans les colonnes extra et navigation */
+/* Navigation dans les rubriques - arborescence deroulante */
+.menu_rub1 { padding: 0; font-size: 1.2em;[ text-align: (#GET{css_align});]}
+.menu_rub1 ul.menulist,
+.menu_rub1 ul.menulist ul {
+	 background: #CONFIG{sarkaspip_styles/bg_menu, #6262a4}[ url((#CHEMIN{images/bg_menu#CONFIG{sarkaspip_styles/bi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_menu})];
+	 [border: 1px solid (#CONFIG{sarkaspip_styles/ca_menu, #ffffff}); ]
+	 border-bottom: 0;
+	 list-style: none;
+	 z-index: 500;
+	 margin: 0;
+	 padding: 0;
+	 line-height:1.2em;
+	 width:178px;}
+
+.menu_rub1 ul.menulist ul {position: absolute; top: -1px; [ (#GET{css_align}): 178px;]}
+.menu_rub1 ul.menulist li {position: relative; margin: 0; padding: 0;[ border-bottom: 1px solid (#CONFIG{sarkaspip_styles/ca_menu, #FFFFFF});]}
+.menu_rub1 ul.menulist li ul {display:none;}
+.menu_rub1 ul.menulist li:hover>ul {display:block;}
+
+.menu_rub1 ul.menulist a {
+	 background: #CONFIG{sarkaspip_styles/bg_menu, #6262a4}[ url((#CHEMIN{images/bg_menu#CONFIG{sarkaspip_styles/bi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_menu})];
+	[color: (#CONFIG{sarkaspip_styles/fg_menu, #ffffff}); ]text-decoration: none; display: block; padding: 5px;}
+
+.menu_rub1 ul.menulist a:hover {
+	background: #CONFIG{sarkaspip_styles/hb_menu, #323284}[ url((#CHEMIN{images/bg_hover_menu#CONFIG{sarkaspip_styles/hi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_menu})];
+	[color: (#CONFIG{sarkaspip_styles/ho_menu, #ffffff});]
+	[text-decoration: (#CONFIG{sarkaspip_styles/td_menu, none});]}
+.menu_rub1 ul.menulist li.smenu, .menu_rub1 ul.menulist li.smenu>a {
+	 background: #CONFIG{sarkaspip_styles/bg_menu, #6262a4}[ url((#CHEMIN{images/bg_menu#CONFIG{sarkaspip_styles/bi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_menu})];
+	[(#CHEMIN{images/bg_menu#CONFIG{sarkaspip_styles/hi_extension_menu, .gif}}|?{'', ' '})
+	[background-image: url((#CHEMIN{images/arrow_from_[(#GET{css_align})].gif}));
+	[ background-position: (#GET{css_bg_position})px;]
+	background-repeat: no-repeat;]]}
+.menu_rub1 ul.menulist li.smenu:hover, .menu_rub1 ul.menulist li.smenu>a:hover {
+	background: #CONFIG{sarkaspip_styles/hb_menu, #323284}[ url((#CHEMIN{images/bg_hover_menu#CONFIG{sarkaspip_styles/hi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_menu})];
+	[(#CHEMIN{images/bg_hover_menu#CONFIG{sarkaspip_styles/hi_extension_menu, .gif}}|?{'', ' '})
+	[background-image: url((#CHEMIN{images/arrow_from_top.gif}));
+	[ background-position: (#GET{css_bg_position}|moins{3})px;]
+	background-repeat: no-repeat;]]}
+.menu_rub1 ul.menulist a.menu_articles {}
+.menu_rub1 ul.menulist a.menu_articles:hover {}
+
+/* Navigation dans les rubriques - arborescence depliee */
+.menu_rub2 {font-size: 1.2em; border: 0; font-weight: normal;}
+.menu_rub2 ul {margin: 0; padding: 0; list-style: none;}
+.menu_rub2 ul li { margin: 0; padding: 0; border: 0; line-height: 1.3em;}
+.menu_rub2 ul li a {
+	display: block; width: 158px; margin-bottom: 0; padding: 5px 10px; 
+	[border: 1px solid (#CONFIG{sarkaspip_styles/ca_menu, #ffffff}); ]border-top: 0;
+	[color: (#CONFIG{sarkaspip_styles/fg_menu, #ffffff}); ]
+	background: #CONFIG{sarkaspip_styles/bg_menu, #6262a4}[ url((#CHEMIN{images/bg_menu#CONFIG{sarkaspip_styles/bi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_menu})];}
+
+.menu_rub2 ul li a#m1 {[border-top: 1px solid (#CONFIG{sarkaspip_styles/ca_menu, #6262a4});]}
+.menu_rub2 ul li ul li a {
+	display: block; width: 148px; margin-bottom: 0; padding: 5px 10px 5px 20px; 
+	[color: (#CONFIG{sarkaspip_styles/fg_menu, #ffffff}); ]
+	background: #CONFIG{sarkaspip_styles/bg_menu, #6262a4}[ url((#CHEMIN{images/bg_menu#CONFIG{sarkaspip_styles/bi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_menu})];}
+.menu_rub2 ul li ul li ul li a {
+	display: block; width: 138px; margin-bottom: 0; padding: 5px 10px 5px 30px; 
+	[color: (#CONFIG{sarkaspip_styles/fg_menu, #ffffff}); ]
+	background: #CONFIG{sarkaspip_styles/bg_menu, #6262a4}[ url((#CHEMIN{images/bg_menu#CONFIG{sarkaspip_styles/bi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_menu})];}
+.menu_rub2 a.on {
+	background: #CONFIG{sarkaspip_styles/hb_menu, #323284}[ url((#CHEMIN{images/bg_hover_menu#CONFIG{sarkaspip_styles/hi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_menu})];
+	[color: (#CONFIG{sarkaspip_styles/ho_menu, #ffffff}); ]font-weight: bold;}
+.menu_rub2 a:hover {
+	background: #CONFIG{sarkaspip_styles/hb_menu, #323284}[ url((#CHEMIN{images/bg_hover_menu#CONFIG{sarkaspip_styles/hi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_menu})];
+	[color: (#CONFIG{sarkaspip_styles/ho_menu, #ffffff}); ]
+	[text-decoration: (#CONFIG{sarkaspip_styles/td_menu, none});]}
+
+/* Navigation dans les rubriques - arborescence accordeon a ouverture automatique */
+.menu_rub3 {width: 100%; padding:0; font-size: 1.2em;}
+.menu_rub3 .cache {padding-left:10%; width: 90%; background: none; display: none;}
+.menu_rub3 .cache a {
+	display: block;[ border-top: 1px solid (#CONFIG{sarkaspip_styles/ca_menu, #ffffff});]
+	background: #CONFIG{sarkaspip_styles/bg_menu, #6262a4}[ url((#CHEMIN{images/bg_menu#CONFIG{sarkaspip_styles/bi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_menu})];}
+.menu_rub3 .cache a.on {background: #CONFIG{sarkaspip_styles/hb_menu, #323284}[ url((#CHEMIN{images/bg_hover_menu#CONFIG{sarkaspip_styles/hi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_menu})];}
+.menu_rub3 ul.menulist {background: none; border: 0; list-style: none; z-index: 500; margin: 0; padding: 0; line-height: 1.2em}
+.menu_rub3 ul.menulist li {position: relative; margin: 0; padding: 0;[ border-bottom: 1px solid (#CONFIG{sarkaspip_styles/ca_menu, #ffffff});]}
+.menu_rub3 ul.menulist a {
+	display: block; text-decoration: none; padding: 5px;
+	[color: (#CONFIG{sarkaspip_styles/fg_menu, #ffffff}); ]
+	background: #CONFIG{sarkaspip_styles/bg_menu, #6262a4}[ url((#CHEMIN{images/bg_menu#CONFIG{sarkaspip_styles/bi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_menu})];}
+.menu_rub3 ul.menulist a:hover {
+	background: #CONFIG{sarkaspip_styles/hb_menu, #323284}[ url((#CHEMIN{images/bg_hover_menu#CONFIG{sarkaspip_styles/hi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_menu})];
+	[color: (#CONFIG{sarkaspip_styles/ho_menu, #ffffff});]}
+.menu_rub3 ul.menulist a.on {
+	background: #CONFIG{sarkaspip_styles/hb_menu, #323284}[ url((#CHEMIN{images/bg_hover_menu#CONFIG{sarkaspip_styles/hi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_menu})];
+	[color: (#CONFIG{sarkaspip_styles/ho_menu, #ffffff});]}
+
+/* Bloc de menus des raccourcis de navigation*/
+.nav2 {font-size: 1.2em; width: 178px;[border: 1px solid (#CONFIG{sarkaspip_styles/ca_noisette, #808080});]}
+.nav2 ul {padding: 5px 0; margin: 0}
+.nav2 li {
+	list-style: none; margin: 5px 10px; line-height: 1.4em;
+	background: #CONFIG{sarkaspip_styles/bg_menu, #6262a4}[ url((#CHEMIN{images/bg_menu#CONFIG{sarkaspip_styles/bi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_menu})];
+	[ border: (#CONFIG{sarkaspip_styles/ca_menu, #ffffff}) solid 1px;]
+	[ color: (#CONFIG{sarkaspip_styles/fg_menu, #ffffff});]}
+.raccourci_nav1 {text-align: center;}
+.raccourci_nav1 a {display: block; width: 100%;[ color: (#CONFIG{sarkaspip_styles/fg_menu, #ffffff});]}
+.raccourci_nav1 a:hover {
+	[text-decoration: (#CONFIG{sarkaspip_styles/td_menu, none}); ]
+	background: #CONFIG{sarkaspip_styles/hb_menu, #323284}[ url((#CHEMIN{images/bg_hover_menu#CONFIG{sarkaspip_styles/hi_extension_menu, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_menu})];
+	[ color: (#CONFIG{sarkaspip_styles/ho_menu, #ffffff});]}
+.nav2 .auteur {margin: 7px 10px; padding-top: 3px; padding-bottom: 2px; text-align: center;	background: transparent; border: 0;}
+
+/* Menu horizontal dans le bandeau bas */
+[(#CONFIG{sarkaspip_bandeau/menu_align, 0}|!={0}|oui)
+	[(#SET{largeur_menu, [(#CONFIG{sarkaspip_bandeau/menu_largeur, 600})]})]
+]
+[(#CONFIG{sarkaspip_bandeau/item_largeur, 150}|!={0}|oui)
+	[(#SET{largeur_item, [(#CONFIG{sarkaspip_bandeau/item_largeur, 150})]})]
+]
+#SET{position_fleche, #GET{largeur_item}|moins{8}}
+
+.menu_horiz{font-size:1.2em;
+	[ width: (#GET{largeur_menu})px;]
+	[(#CONFIG{sarkaspip_bandeau/menu_align, 0}|=={0}|oui) margin: 0 15px 0;]
+	[(#CONFIG{sarkaspip_bandeau/menu_align, 0}|!={0}|oui)[ margin: 0 (#CONFIG{sarkaspip_bandeau/menu_align, 0}) 0;]]
+	[ min-height: (#CONFIG{sarkaspip_bandeau/bas_minheight, 23})px;]
+}
+.menu_horiz, .menu_horiz ul {list-style: none; line-height: 1; padding: 0;
+	[ min-height: (#CONFIG{sarkaspip_bandeau/bas_minheight, 23})px;]
+}
+.menu_horiz ul{width:100%; margin: 0; float: left;}
+
+.menu_horiz a {display: block; text-decoration: none; padding: 5px 10px;
+	[ color: (#CONFIG{sarkaspip_styles/fg_menu_horiz, #ffffff});]
+	[ border-left: (#CONFIG{sarkaspip_styles/ca_menu_horiz, #6262a4}) solid 1px;]
+	[ text-align: (#CONFIG{sarkaspip_bandeau/item_align, left});]
+}
+.menu_horiz a#mh_n1 {border-left: none;}
+.menu_horiz a.it_n1 {[ border-top: (#CONFIG{sarkaspip_styles/ca_menu_horiz, #6262a4}) solid 1px;]}
+.menu_horiz a.pere {[ background: url((#CHEMIN{images/arrow_from_left.gif})) center right no-repeat;][ background-position: (#GET{position_fleche})px;]}
+.menu_horiz a.pere:hover {[ background: url((#CHEMIN{images/arrow_from_top.gif})) center right no-repeat;][ background-position: (#GET{position_fleche}|moins{3})px;]}
+.menu_horiz a:hover {[ text-decoration: (#CONFIG{sarkaspip_styles/td_menu_horiz, none});][ color: (#CONFIG{sarkaspip_styles/ho_menu_horiz, #ffffff});]}
+
+.menu_horiz li {float: left; padding: 0;[ width: (#GET{largeur_item})px;]
+	background: #CONFIG{sarkaspip_styles/bg_menu_horiz, #6262a4}[ url((#CHEMIN{images/bg_menu_horiz#CONFIG{sarkaspip_styles/bi_extension_menu_horiz, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_menu_horiz})];}
+.menu_horiz li ul {position: absolute; left: -999em; height: auto; font-weight: normal;	margin: 0;	padding: 0; z-index:2;
+	[width: (#GET{largeur_item}|plus{10})px;]
+}
+.menu_horiz li li {padding: 0 ; overflow : hidden;
+  [ border-right: (#CONFIG{sarkaspip_styles/ca_menu_horiz, #6262a4}) solid 1px;]
+  border-left: none;
+  clear:left;
+  }
+
+.menu_horiz li ul ul {margin: -[(#CONFIG{sarkaspip_bandeau/bas_minheight, 23}|plus{1})px] 0 0 [(#CONFIG{sarkaspip_bandeau/item_largeur, 150})px];}
+.menu_horiz li:hover ul ul, .menu_horiz li:hover ul ul ul, .menu_horiz li:hover ul ul ul ul,
+.menu_horiz li.sfhover ul ul, .menu_horiz li.sfhover ul ul ul, .menu_horiz li.sfhover ul ul ul ul {left: -999em;}
+.menu_horiz li:hover ul, 
+.menu_horiz li li:hover ul, 
+.menu_horiz li li li:hover ul,
+.menu_horiz li li li li:hover ul {left: auto;}
+.menu_horiz li.sfhover ul {left:auto;}
+.menu_horiz li li.sfhover ul,
+.menu_horiz li li li.sfhover ul,
+.menu_horiz li li li li.sfhover ul {left: auto;}
+.menu_horiz li:hover,
+.menu_horiz li.sfhover {background: #CONFIG{sarkaspip_styles/hb_menu_horiz, #323284}[ url((#CHEMIN{images/bg_hover_menu_horiz#CONFIG{sarkaspip_styles/hi_extension_menu_horiz, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_menu_horiz})];}
+.menu_horiz li li a, .menu_horiz li li li a {[ border-bottom: (#CONFIG{sarkaspip_styles/ca_menu_horiz, #6262a4}) solid 1px;]}

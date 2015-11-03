@@ -1,0 +1,96 @@
+[(#REM) <!-- Menu dans colonne Navigation --> ]
+[(#ENV{position}|=={navigation}|oui)
+	#SET{classe_div, noisette nav2}
+	#SET{classe_li, raccourci_nav1}
+]
+[(#REM) <!-- Menu dans bandeau haut --> ]
+[(#ENV{position}|=={bandeau_haut}|oui)
+	#SET{classe_div, nav_raccourci}
+	#SET{classe_li, raccourci_bandeau}
+]
+[(#REM) <!-- Menu horizontal dans bandeau bas --> ]
+[(#ENV{position}|=={bandeau_bas}|oui)
+	#SET{classe_div, noisette menu_horiz}
+	#SET{classe_li, ''}
+]
+
+#SET{raccourci, non}
+#SET{no_menu, 1}
+<B_acces_rubriques>
+[(#GET{raccourci}|=={non}|oui)
+	<div id="menu_raccourcis" class="#GET{classe_div}"><ul>
+	[(#SET{raccourci, oui})]
+]
+<BOUCLE_acces_rubriques(RUBRIQUES) {id_rubrique==#RACINE_SPECIALISEE{agenda:galerie:forum}}>
+[(#ID_RUBRIQUE|=={#RACINE_SPECIALISEE{agenda}}|oui)
+	[(#CONFIG{sarkaspip_agenda/plugin, 1}|=={1}|oui)
+		<li[ class="(#GET{classe_li})"]><a[(#ENV{position}|=={bandeau_bas}|oui)[ id="mh_n(#GET{no_menu})"]][ href="(#URL_PAGE{agenda}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{annee,[(#AUJOURDHUI|annee)]}|parametre_url{mois,[(#AUJOURDHUI|mois)]})"]><:sarkaspip:agenda:></a></li>
+		#SET{no_menu, #GET{no_menu}|plus{1}}
+	]
+	[(#CONFIG{sarkaspip_agenda/plugin, 1}|=={2}|oui)
+		[(#PLUGIN{AGENDA}|oui)
+		<li[ class="(#GET{classe_li})"]><a[(#ENV{position}|=={bandeau_bas}|oui)[ id="mh_n(#GET{no_menu})"]][ href="(#URL_PAGE{agenda}|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{annee,#AUJOURDHUI|annee}|parametre_url{mois,#AUJOURDHUI|mois})"]><:sarkaspip:agenda:></a></li>
+		#SET{no_menu, #GET{no_menu}|plus{1}}
+		]
+	]
+]
+[(#ID_RUBRIQUE|=={#RACINE_SPECIALISEE{galerie}}|oui)
+		<li[ class="(#GET{classe_li})"]><a[(#ENV{position}|=={bandeau_bas}|oui)[ id="mh_n(#GET{no_menu})"]][ href="(#URL_PAGE{galerie}|parametre_url{id_rubrique,#ID_RUBRIQUE})"]><:sarkaspip:galerie:></a></li>
+		#SET{no_menu, #GET{no_menu}|plus{1}}
+]
+[(#ID_RUBRIQUE|=={#RACINE_SPECIALISEE{forum}}|oui)
+		<li[ class="(#GET{classe_li})"]><a[(#ENV{position}|=={bandeau_bas}|oui)[ id="mh_n(#GET{no_menu})"]][ href="(#URL_PAGE{forum_groupe})"]><:sarkaspip:forum:></a></li>
+		#SET{no_menu, #GET{no_menu}|plus{1}}
+]
+</BOUCLE_acces_rubriques>
+
+<B_acces_mots>
+[(#GET{raccourci}|=={non}|oui)
+	<div id="menu_raccourcis" class="#GET{classe_div}"><ul>
+	[(#SET{raccourci, oui})]
+]
+<BOUCLE_acces_mots(MOTS) {type != squelette_habillage}{0,1}>
+		<li[ class="(#GET{classe_li})"]><a[(#ENV{position}|=={bandeau_bas}|oui)[ id="mh_n(#GET{no_menu})"]][ href="(#URL_PAGE{mot})"]><:sarkaspip:mots_clefs:></a></li>
+		#SET{no_menu, #GET{no_menu}|plus{1}}
+</BOUCLE_acces_mots>
+
+<B_acces_herbier>
+[(#GET{raccourci}|=={non}|oui)
+	<div id="menu_raccourcis" class="#GET{classe_div}"><ul>
+	[(#SET{raccourci, oui})]
+]
+<BOUCLE_acces_herbier(SITES) {id_secteur!==#RACINE_SPECIALISEE{galerie,not_in}}{0,1}>
+	<li[ class="(#GET{classe_li})"]><a[(#ENV{position}|=={bandeau_bas}|oui)[ id="mh_n(#GET{no_menu})"]][ href="(#URL_PAGE{herbier})"]><:sarkaspip:herbier_sites|ucfirst:></a></li>
+		#SET{no_menu, #GET{no_menu}|plus{1}}
+</BOUCLE_acces_herbier>
+
+<B_acces_syndics>
+[(#GET{raccourci}|=={non}|oui)
+	<div id="menu_raccourcis" class="#GET{classe_div}"><ul>
+	[(#SET{raccourci, oui})]
+]
+<BOUCLE_acces_syndics(SYNDIC_ARTICLES) {id_secteur!==#RACINE_SPECIALISEE{galerie,not_in}}{0,1}>
+		<li[ class="(#GET{classe_li})"]><a[(#ENV{position}|=={bandeau_bas}|oui)[ id="mh_n(#GET{no_menu})"]][ href="(#URL_PAGE{site})"]><:sarkaspip:sur_web:></a></li>
+		#SET{no_menu, #GET{no_menu}|plus{1}}
+</BOUCLE_acces_syndics>
+
+[(#VAL{1}|afaire_ticket_existe|oui)
+	[(#PLUGIN{TICKETS}|oui)
+		[(#GET{raccourci}|=={non}|oui)
+		<div id="menu_raccourcis" class="#GET{classe_div}"><ul>
+		[(#SET{raccourci, oui})]
+		]
+		<li[ class="(#GET{classe_li})"]><a[(#ENV{position}|=={bandeau_bas}|oui)[ id="mh_n(#GET{no_menu})"]][ href="(#URL_PAGE{afaire})"]><:sarkaspip:afaire:></a></li>
+		#SET{no_menu, #GET{no_menu}|plus{1}}
+	]
+]
+
+[(#PIPELINE{
+	menu_pages_speciales_fin,
+	[(#ARRAY{args, [(#ARRAY{position, #ENV{position}, classe_li, #GET{classe_li}, no_menu, #GET{no_menu}})], data, ''})]}
+)]
+
+[(#GET{raccourci}|=={oui}|oui)
+	</ul>
+</div>
+]

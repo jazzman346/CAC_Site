@@ -1,0 +1,382 @@
+/* ELEMENTS.CSS                                                         */
+/* Cette feuille contient:                                              */
+/* - les styles de la partie centrale du site                           */
+/* -------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------- */
+/* 	Styles des titres de page                                           */
+/* -------------------------------------------------------------------- */
+/* Titre generique */
+.titre h1 {font-weight: bold; margin: 0 0 5px; padding-bottom: 5px;
+	color: #CONFIG{sarkaspip_styles/fg_description, #6262a4};
+	border-bottom: 2px solid #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+	
+/* Boutons de fonction positionnes a droite du titre */
+a.fonction {display: block; float: right; width: 24px; height: 24px; margin-left: 10px;}
+a.fonction.repondre_commentaire {width: 16px; height: 16px; margin-right: 0;[ background-image: url((#CHEMIN{images/commentaire_repondre.gif})); ]background-repeat: no-repeat;}
+#commenter {[background-image: url((#CHEMIN{images/article_commenter.gif})); ]background-repeat: no-repeat;}
+#verrouiller {[background-image: url((#CHEMIN{images/forum_sujet_verrouiller.gif})); ]background-repeat: no-repeat;}
+#deverrouiller {[background-image: url((#CHEMIN{images/forum_sujet_deverrouiller.gif})); ]background-repeat: no-repeat;}
+#deresoudre {[background-image: url((#CHEMIN{images/forum_sujet_non_resolu.gif})); ]background-repeat: no-repeat;}
+#resoudre {[background-image: url((#CHEMIN{images/forum_sujet_resolu.gif})); ]background-repeat: no-repeat;}
+#signer {[background-image: url((#CHEMIN{images/article_commenter.gif})); ]background-repeat: no-repeat;}
+#creer_pdf {[background-image: url((#CHEMIN{images/article_pdf.gif})); ]background-repeat: no-repeat;}
+#voir_commentaires {[background-image: url((#CHEMIN{images/article_commentaires.gif})); ]background-repeat: no-repeat;}
+#voir_signatures {[background-image: url((#CHEMIN{images/article_signatures.gif})); ]background-repeat: no-repeat;}
+#recommander {[background-image: url((#CHEMIN{images/article_recommander.gif})); ]background-repeat: no-repeat;}
+a.fonction.revenir_haut_page {[background-image: url((#CHEMIN{images/arrow_to_top.gif})); ]background-repeat: no-repeat;}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles du cartouche (auteurs, date, popularite, notation)           */
+/* -------------------------------------------------------------------- */
+.cartouche { font-weight: normal; font-size: 1.1em; line-height: 1.1em; text-align: right; margin: 0 0 30px 10px; padding: 0; float: right;
+	color: #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+.complements {font-weight: normal; margin: 10px 0 5px; font-size: 1.1em;}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles de la description (champs editoriaux)                        */
+/* -------------------------------------------------------------------- */
+/* Styles generiques */
+.description {margin: 10px 0 30px; font-size: 1.2em; line-height: 1em;}
+.description li {margin-left: 10px;	line-height: 1.4em;}
+.description p {font-size: 1em;}
+.description .soustitre {float: none; line-height: 1em; font-size: 1.4em; font-weight: bold; font-style: italic; margin: 0; padding: 0;
+	 color: #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+.description .chapo {margin: 0 0 30px; font-style: italic; color: #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+.description .texte {}
+.description .lien_site {margin: 10px 0 20px; padding-top: 10px; font-size: 1em; 
+	border-top: 1px dotted #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+.description .ps {margin: 10px 0 20px; padding-top: 10px; font-size: 1em; 
+	border-top: 1px dotted #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+.description .notes {margin: 10px 0 20px; padding-top: 10px; font-size: 1em; 
+	border-top: 1px dotted #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+.description .filles {margin: 10px 0 20px; padding-top: 10px; font-size: 1em; 
+	border-top: 1px dotted #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+.description .filles a {padding: 0 0 0 15px; [background: transparent url((#CHEMIN{images/puce0.jpg})) left center no-repeat; ]text-decoration: none;}
+.description .filles a:hover {[background: transparent url((#CHEMIN{images/puce1.jpg})) left center no-repeat; ];text-decoration: none;}
+ 
+/* -------------------------------------------------------------------- */
+/* 	Styles des messages d'avertissement                                 */
+/* -------------------------------------------------------------------- */
+.avertissement {margin-top: 20px; padding: 10px; background: #f0d0d0; border: 1px solid red; font-size: 1.2em;}
+.forum .avertissement {font-size: 1em;}
+.formulaire_spip .avertissement {margin: 0 0 20px 0; padding: 10px; background: #f0d0d0; border: 1px solid red; font-size: 1em;}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles des blocs type portfolio (images, documents joints, breves)  */
+/* -------------------------------------------------------------------- */
+/* Styles generiques */
+.portfolio {clear: both; margin-bottom: 30px; padding-top: 2px;width:100%;}
+.portfolio h2 {font-size: 1.9em; line-height: 1em; font-weight: bold; margin: 0 0 10px; padding: 0 0 5px 20px;
+	color: #CONFIG{sarkaspip_styles/fg_description, #6262a4};
+	border-bottom: 2px solid #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+	
+/* Portfolio des images jointes */
+.portfolio a img {margin: 10px 10px; border: 4px solid #CONFIG{sarkaspip_styles/ca_portfolio, #eeeeee};}
+.portfolio a:hover img {border-color: #CONFIG{sarkaspip_styles/ch_portfolio, #6262a4};}
+
+/* Portfolio des documents jointes */
+.portfolio dl {[width: (#EVAL{_SARKASPIP_CONFIG_LARGEUR_DOCUMENT})px; ]height: 11em; text-align: center; margin: 10px; float: left;}
+.portfolio dt {[width: (#EVAL{_SARKASPIP_CONFIG_LARGEUR_DOCUMENT})px; ]font-weight: bold;}
+.portfolio dt a img {border: 0;}
+.portfolio dt a:hover img {border: 0;}
+.portfolio dd {[width: (#EVAL{_SARKASPIP_CONFIG_LARGEUR_DOCUMENT})px; ]margin: 0; padding: 0;}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles des blocs de type commentaires                               */
+/* -------------------------------------------------------------------- */
+.commentaires {padding: 0 0 10px 0; margin: 0 0 30px 0; clear: both;}
+.commentaires h2 {font-size: 1.9em; line-height: 1.2em; font-weight: bold; padding: 0 0 5px 20px; margin: 0;
+	[background: url((#CHEMIN{images/commentaires.gif})) top left no-repeat;]
+	color: #CONFIG{sarkaspip_styles/fg_commentaire, #6262a4};
+	border-bottom: 2px solid #CONFIG{sarkaspip_styles/fg_commentaire, #6262a4};}
+.commentaires h2.date {margin-top:30px; padding: 0 0 5px 20px;[background: url((#CHEMIN{images/liste_syndics.gif})) top left no-repeat;]}
+.commentaires .message {margin: 0; padding: 10px 0 10px;
+	background: #CONFIG{sarkaspip_styles/bg_commentaire, transparent}[ url((#CHEMIN{images/bg_commentaire#CONFIG{sarkaspip_styles/bi_extension_commentaire, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_commentaire})];
+	border-top: 1px dotted #CONFIG{sarkaspip_styles/ca_commentaire, #6262a4};}
+.commentaires .message:hover {background: #CONFIG{sarkaspip_styles/hb_commentaire, #f0f0fa};}
+.commentaires #co_n1.message,.commentaires .co_n1 {border-top: 0; padding: 20px 0 10px;}
+.commentaires .message .titre {font-size: 1.2em; font-weight:bold; margin:0 0 10px 50px;}
+.commentaires .message .gravatar {float:left}
+.commentaires .message .cartouche_simple {margin-left: 50px; font-size: 1.1em;
+	color: #CONFIG{sarkaspip_styles/fg_commentaire, #6262a4};}
+.commentaires .message .texte{margin-left : 50px; padding-top: 5px;font-size:1.2em;line-height:1.1em;}
+.commentaires .message .texte ul li{border-top:none;}
+.commentaires ul { line-height: 1.1em;}
+.commentaires ul#exif {width:50%;margin : 0 auto;text-align:center;border:1px dotted;}
+.commentaires li {padding:10px 0; height:auto; border-top: 1px dotted #CONFIG{sarkaspip_styles/ca_commentaire, #6262a4};}
+.commentaires li:hover {background: #CONFIG{sarkaspip_styles/hb_commentaire, #f0f0fa};}
+.commentaires a.titre{padding-top: 5px; margin: 0; font-size: 1.3em; font-weight: bold; line-height:1em; text-decoration: none;
+	color: #CONFIG{sarkaspip_styles/fg_commentaire, #6262a4};}
+.commentaires li .cartouche{margin : 0 0 10px 10px; font-size: 1.1em;}
+.commentaires li .complements{font-size: 1.1em;}
+
+/* Styles specifiques de la presentation hierarchique par fils */
+.commentaires .message .cartouche_simple .titre {margin-left: 0;}
+.commentaires .message.fil {padding-left: 50px;}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles des blocs de type extraits                                   */
+/* -------------------------------------------------------------------- */
+.extrait {margin: 0 0 20px;	padding: 0 0 10px 15px;
+	background: #CONFIG{sarkaspip_styles/bg_extrait, transparent}[ url((#CHEMIN{images/bg_extrait#CONFIG{sarkaspip_styles/bi_extension_extrait, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_extrait})];
+	border-left: 5px solid #CONFIG{sarkaspip_styles/ca_extrait, #6262a4};
+	border-bottom: 1px solid #CONFIG{sarkaspip_styles/ca_extrait, #6262a4};}
+.extrait h3 a.titre {display: block; padding-top: 5px; margin: 0; font-size: 1.6em; font-weight: bold; line-height:1em; text-decoration: none;
+	color: #CONFIG{sarkaspip_styles/fg_extrait, #6262a4};}
+.extrait h3 a.titre:hover {color: #CONFIG{sarkaspip_styles/ho_extrait, #6262a4}; text-decoration: #CONFIG{sarkaspip_styles/td_extrait, underline};}
+.extrait .cartouche {color: #CONFIG{sarkaspip_styles/fg_extrait, #6262a4};}
+.extrait .lire_suite {text-align: left; margin: 10px 0 0; font-size: 1.1em;}
+.extrait .cartouche a, .extrait .complements a  {color: #CONFIG{sarkaspip_styles/fg_extrait_lien, #990000}; text-decoration: none;}
+.extrait .lire_suite a {padding: 0 0 5px 20px;[ background: url((#CHEMIN{images/lire_suite.gif})) left center no-repeat;]
+	color: #CONFIG{sarkaspip_styles/fg_extrait_lien, #990000}; text-decoration: none;}
+.extrait .cartouche a:hover, .extrait .complements a:hover, .extrait .lire_suite a:hover {
+	color: #CONFIG{sarkaspip_styles/ho_extrait_lien, #990000}; text-decoration: #CONFIG{sarkaspip_styles/td_extrait_lien, underline};}
+.extrait .introduction {margin: 10px 0 0; font-size:1.2em; line-height : 1.4em;}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles des blocs de type arbre (plan, agenda)                       */
+/* -------------------------------------------------------------------- */
+.arbre {margin: 0; padding-bottom: 10px;}
+.arbre ul { list-style-type: none; padding: 0; margin: 0; font-size: 1em; line-height: 1em;}
+.arbre ul li {font-weight: bold; padding: 5px 10px 10px; margin: 0 0 15px; 
+	border: 2px solid #CONFIG{sarkaspip_styles/ca_arbre, #888888};
+	background: #CONFIG{sarkaspip_styles/bg_arbre, #eeeeee}[ url((#CHEMIN{images/bg_arbre#CONFIG{sarkaspip_styles/bi_extension_arbre, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_arbre})];}
+.arbre ul li li {padding: 0 0 0 15px; margin: 0; border: 0; background: none;}
+.arbre ul li li li {padding: 0 0 0 15px; margin: 0; border: 0; background: none;}
+.arbre .noeud {padding: 5px 0 5px 15px; font-size: 1.5em; line-height: 1.4em; text-decoration: none;
+	color: #CONFIG{sarkaspip_styles/fg_arbre_noeud, #888888};}
+.arbre a.noeud:hover {[background-image: url((#CHEMIN{images/puce0.jpg})); ]background-position: left center; background-repeat: no-repeat; 
+	color: #CONFIG{sarkaspip_styles/ho_arbre_noeud, #888888};
+	text-decoration: #CONFIG{sarkaspip_styles/td_arbre_noeud, none};}
+.arbre a.feuille {padding: 0 0 0 15px; font-size: 1.1em; font-weight: normal; line-height: 1.2em;
+	color: #CONFIG{sarkaspip_styles/fg_arbre_feuille, #6262a4};}
+.arbre a.feuille:hover {[background-image: url((#CHEMIN{images/puce-n0.gif})); ]background-position: left center; background-repeat: no-repeat; 
+	color: #CONFIG{sarkaspip_styles/ho_arbre_feuille, #888888};
+	text-decoration: #CONFIG{sarkaspip_styles/td_arbre_feuille, underline};}
+.arbre a.feuille .date {}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles des blocs de type planches                                   */
+/* -------------------------------------------------------------------- */
+.planche {margin-top: 30px;}
+.planche h2 {font-size: 1.9em; line-height: 1em; font-weight: bold; margin: 0 0 10px; padding: 0 0 5px 20px;
+	color: #CONFIG{sarkaspip_styles/fg_description, #6262a4};
+	border-bottom: 2px solid #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+.planche ul {margin: 0; padding: 0; list-style-type: none;}
+.planche li {width: 45%; min-height: 18em; float: left; margin: 0 0 20px; padding: 10px 0;
+	background: #CONFIG{sarkaspip_styles/bg_planche, transparent}[ url((#CHEMIN{images/bg_planche#CONFIG{sarkaspip_styles/bi_extension_planche, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_planche})];
+	border-top: 1px dotted #CONFIG{sarkaspip_styles/ca_planche, #6262a4};}
+.planche li.n1 {border-top: 0;}
+.planche li.gauche {margin-right: 20px;}
+.planche li.droite {margin-left: 20px; float: right;}
+.planche h3 a.titre {display: block; padding-top: 5px; margin: 0; font-size: 1.6em; font-weight: bold; line-height:1em; text-decoration: none;
+	color: #CONFIG{sarkaspip_styles/fg_planche, #6262a4};}
+.planche h3 a.titre:hover {color: #CONFIG{sarkaspip_styles/ho_planche, #6262a4}; text-decoration: #CONFIG{sarkaspip_styles/td_planche, underline};}
+.planche .complements {font-weight: normal; margin: 10px 0 5px; font-size: 1.1em;}
+.planche .cartouche {text-align: left; margin: 0; float: none;}
+.planche .cartouche a, .planche .complements a  {color: #CONFIG{sarkaspip_styles/fg_planche_lien, #990000}; text-decoration: none;}
+.planche .cartouche a:hover, .planche .complements a:hover {
+	color: #CONFIG{sarkaspip_styles/ho_planche_lien, #990000}; text-decoration: #CONFIG{sarkaspip_styles/td_planche_lien, underline};}
+.planche a img {float:right; margin: 0 0 5px 5px; border: 4px solid  #CONFIG{sarkaspip_styles/ca_planche_logo, #eeeeee};}
+.planche a:hover img {border: 4px solid #CONFIG{sarkaspip_styles/ch_planche_logo, #6262a4};}
+.planche .introduction {margin: 10px 0 0;font-size:1.2em;line-height:1.4em;}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles specifiques a chaque page                                    */
+/* -------------------------------------------------------------------- */
+/* Style specifique a la notation (plugin Notation) */
+.description .plugin {margin: 10px 0 0; padding-top: 10px; font-size: 1em; line-height: 1.6em; 
+	border-top: 1px dotted #CONFIG{sarkaspip_styles/fg_description, #6262a4};
+	color: #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+.description .notation div.star-rating a {border: 0; text-align: left;}
+.description .notation .note { color: #CONFIG{sarkaspip_styles/fg_description, #6262a4};}
+
+/* Style specifique aux bookmarks sur les reseaux sociaux (plugin Social Tags) */
+.description .socialtags {margin: 0; padding: 0;}
+
+/* Titres de blocs */
+#images_jointes.portfolio h2 {[background: url((#CHEMIN{images/portfolio_images.gif})) top left no-repeat;]}
+#documents_joints.portfolio h2 {[background: url((#CHEMIN{images/portfolio_documents.gif})) top left no-repeat;]}
+#articles_recents.portfolio h2,
+#article_commentaire.portfolio h2,
+#articles_auteur.portfolio h2,
+#articles_rubrique.portfolio h2 {[background: url((#CHEMIN{images/liste_articles.gif})) top left no-repeat;]}
+#breves_site.commentaires h2 {[background: url((#CHEMIN{images/liste_breves.gif})) top left no-repeat;]}
+#sites_site.portfolio h2 {[background: url((#CHEMIN{images/liste_sites.gif})) top left no-repeat;]}
+.portfolio h2.jalon {[background: url((#CHEMIN{images/liste_tickets.gif})) top left no-repeat;]}
+
+/* Page rubrique */
+.rubrique {margin: 0; padding-bottom: 10px;}
+.rubrique .titre {}
+.rubrique .titre h1 {margin: 0 0 35px;}
+
+/* Page article */
+.article {margin: 0; padding-bottom: 10px;}
+.article .cartouche {font-size: 0.92em}
+
+/* -- Styles des petitions de l'article */
+#signatures.commentaires h2 {[background: url((#CHEMIN{images/liste_signatures.gif})) top left no-repeat;]}
+#signatures.commentaires table{width: 100%; margin-top: 10px; font-size: 1.2em;}
+
+/* Page sommaire */
+/* -- Edito et une */
+#edito.article, #une.article {margin: 0 0 30px; padding: 5px 10px; text-align: justify;}
+#edito.article {
+	border: 2px solid #CONFIG{sarkaspip_styles/ca_edito, #808080};
+	background: #CONFIG{sarkaspip_styles/bg_edito, #eeeeee}[ url((#CHEMIN{images/bg_edito#CONFIG{sarkaspip_styles/bi_extension_edito, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_edito})];}
+#une.article {
+	border: 2px solid #CONFIG{sarkaspip_styles/ca_une, #808080};
+	background: #CONFIG{sarkaspip_styles/bg_une, #eeeeee}[ url((#CHEMIN{images/bg_une#CONFIG{sarkaspip_styles/bi_extension_une, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_une})];}
+#edito.article .titre, #edito.article .soustitre, #une.article .titre, #une.article .soustitre {}
+#edito.article .titre h1, #une.article .titre h1 {border: 0;}
+#edito.article a.fonction, #une.article a.fonction {display: none;}
+#edito.article .cartouche, #une.article .cartouche {font-size: 1.2em}
+#une.article .complements {font-size: 0.91em; margin-bottom: 10px;}
+
+/* -- Albums recents */
+#albums_recents.planche h2,
+#albums_auteur.planche h2 {[background: url((#CHEMIN{images/liste_albums.gif})) top left no-repeat;]}
+#albums_recents.planche li,
+#albums_auteur.planche li {
+	[(#CONFIG{sarkaspip_sommaire/album_1_colonne, 0}|non)min-height: 18em;]
+	[(#CONFIG{sarkaspip_sommaire/album_1_colonne, 0}|oui)width: 100%;]}
+
+/* Page evenement */
+#evenement.article .cartouche {text-align: left; float: left; margin: 0 10px 30px 0;}
+
+/* Page auteur */
+.auteur {margin: 0; padding-bottom: 10px;}
+#albums_auteur.planche li {[(#CONFIG{sarkaspip_auteur/album_1_colonne, 0}|oui)width: 100%;]}
+
+/* Page site */
+.site {margin: 0; padding-bottom: 10px;}
+
+/* -- Thumbshot du site */
+.site a img {margin: 0 0 10px 10px; border: 4px solid #CONFIG{sarkaspip_styles/ca_planche_logo, #eeeeee};}
+.site a:hover img{border-color: #CONFIG{sarkaspip_styles/ch_planche_logo, #6262a4};}
+
+/* -- Liste des articles syndiques */
+#articles_syndiques.commentaires h2 {[background: url((#CHEMIN{images/liste_syndics.gif})) top left no-repeat;]}
+#articles_syndiques.commentaires .titre {margin: 0;}
+#articles_syndiques.commentaires .texte{margin: 5px 0 0;}
+.site .description li {margin-left: 0; margin-bottom: 10px;}
+.site .description li:hover {background:#CONFIG{sarkaspip_styles/hb_commentaire, #f0f0fa};}
+
+/* Page galerie */
+.galerie {margin: 0; padding-bottom: 10px;width:100%;}
+.galerie .planche li {[(#CONFIG{sarkaspip_galerie/album_1_colonne, 0}|oui)width: 100%; min-height: 0;]}
+
+/* Page Herbier */
+.herbier {margin: 0; padding-bottom: 10px;width:100%;}
+.herbier .planche li {width: 100%; min-height: 0;}
+
+/* Page Recherche */
+.recherche {margin: 0; padding-bottom: 10px; width:100%;}
+#recherche_rubrique.commentaires h2 {margin:0; [background: url((#CHEMIN{images/portfolio_documents.gif})) top left no-repeat;]}
+#recherche_mot_article.commentaires h2 {margin:0; [background: url((#CHEMIN{images/liste_breves.gif})) top left no-repeat;]}
+#recherche_breve.commentaires h2 {margin:0; [background: url((#CHEMIN{images/liste_breves.gif})) top left no-repeat;]}
+#recherche_site.commentaires h2 {margin:0; [background: url((#CHEMIN{images/liste_sites.gif})) top left no-repeat;]}
+#recherche_commentaire.commentaires h2 {margin:0; [background: url((#CHEMIN{images/commentaires.gif})) top left no-repeat;]}
+#recherche_article.commentaires h2 {margin:0; [background: url((#CHEMIN{images/liste_articles.gif})) top left no-repeat;]}
+#recherche_album.commentaires h2 {margin:0; [background: url((#CHEMIN{images/portfolio_images.gif})) top left no-repeat;]}
+#recherche_evenement.commentaires h2 {margin:0; [background: url((#CHEMIN{images/evenement.gif})) top left no-repeat;]}
+
+/* Page album */
+.album {padding: 0 0 10px 0; margin: 0 0 30px 0; clear: both; width:100%;}
+.carrousel {display: block; margin: 0 0 20px; padding: 10px 0}
+#a_defilement.carrousel {overflow: hidden; position: relative;}
+.carrousel .contenu {margin: 0 auto; position: relative;}
+#a_pagination.carrousel .contenu li {display: block; float: left;}
+.carrousel .contenu .vignette a img {margin-right: 5px; border: 4px solid #CONFIG{sarkaspip_styles/ca_carrousel, #eeeeee};}
+.carrousel .contenu .vignette a:hover img {border: 4px solid #CONFIG{sarkaspip_styles/ch_carrousel, #6262a4};}
+.carrousel .contenu .vignette a.survol {display:none;position:absolute;background: transparent url(#CHEMIN{images/pointeur_bas.gif}) no-repeat bottom center;}
+.carrousel .contenu .vignette a.survol img {margin: 0; border: 4px solid #CONFIG{sarkaspip_styles/ch_carrousel, #6262a4};}
+.carrousel .navigation {margin: 10px 0 20px; text-align: center; font-size: 1.2em; font-weight: bold;}
+.carrousel .navigation a {background: #CONFIG{sarkaspip_styles/bg_pagination, transparent}; 
+	color: #CONFIG{sarkaspip_styles/fg_pagination, #6262a4};}
+.carrousel .navigation a:hover {background: #CONFIG{sarkaspip_styles/hb_pagination, #f0f0a4}; 
+	color: #CONFIG{sarkaspip_styles/ho_pagination, #6262a4};
+	text-decoration: #CONFIG{sarkaspip_styles/td_pagination, none};}
+.carrousel .pagination {margin: 10px 0 20px; text-align: center; font-weight: bold;}
+
+.carrousel .contenu ul.vignettes span {[width: (#EVAL{_SARKASPIP_CONFIG_TAILLE_MAX_VIGNETTE_4}|plus{8})px;]}/* max thumbnail width + 2px */
+.carrousel .contenu ul.vignettes span.wrap1 {margin: 0 5px 5px 5px; display: inline-block; vertical-align: top; text-align: center;}
+.carrousel .contenu ul.vignettes span.wrap2 {[height: (#EVAL{_SARKASPIP_CONFIG_TAILLE_MAX_VIGNETTE_4}|plus{16})px; ]
+	background: #CONFIG{sarkaspip_styles/bg_carrousel, transparent}[ url((#CHEMIN{images/bg_carrousel#CONFIG{sarkaspip_styles/bi_extension_carrousel, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_carrousel})];
+	border: 4px solid #CONFIG{sarkaspip_styles/ca_carrousel, #eeeeee}; display: table-cell; vertical-align: middle;}
+.carrousel .contenu ul.vignettes span.wrap2:hover {
+	background: #CONFIG{sarkaspip_styles/hb_carrousel, #888888}[ url((#CHEMIN{images/hb_carrousel#CONFIG{sarkaspip_styles/hi_extension_carrousel, .gif}}))][ (#CONFIG{sarkaspip_styles/hi_proprietes_carrousel})]; 
+	border: 4px solid #CONFIG{sarkaspip_styles/ch_carrousel, #6262a4};}
+.carrousel .contenu ul.vignettes span.wrap2 a {display: block; [width: (#EVAL{_SARKASPIP_CONFIG_TAILLE_MAX_VIGNETTE_4}|plus{8})px;]}      /* max thumbnail width + 2px */
+.carrousel .contenu ul.vignettes span.titre {
+	display: block;  
+	height: 4em;    
+	padding-top: 5px;
+	font-size: 90%; overflow: hidden;
+	margin-left:auto;
+	margin-right:auto;
+	line-height : 1.2em;}
+
+.zoom {display: block; margin: 0 0 20px; padding: 10px 0;}
+.zoom #conteneur_photo {padding:0; margin: 0 0 10px;}
+.zoom #titre_photo {padding:0; margin: 0 0 20px; font-size: 1.2em; font-weight: bold; text-align: center;}
+.zoom #descriptif_photo {padding:0; margin: 0 0 20px;}
+.zoom #exif_photo {padding:0; margin: 0 0 20px;}
+
+#exif_photo.commentaires table{width: 300px;  font-family: verdana; border: 0; margin :0 auto;}
+#exif_photo.commentaires table tr{height: 20px;}
+#exif_photo.commentaires table td.titre {background-color : #EFEFEF; padding: 0 5px; border-bottom : 1px dotted #000000; font-weight:bold;height: 20px;}
+#exif_photo.commentaires table td.minilogo {text-align: right; height: 20px;}
+#exif_photo.commentaires table td.colonne1{width: 130px; font-size: 90%; text-align: right; padding: 5px;}
+#exif_photo.commentaires table td.colonne2{width: 170px;}
+
+/* Page forum */
+.forum {margin-bottom: 30px;}
+.forum .groupe {margin-bottom: 20px;}
+.forum .groupe h2.titre {
+	padding: 10px 5px; 
+	font-weight: bold; 
+	font-size: 1.2em; 
+	color: #CONFIG{sarkaspip_styles/fg_thead_forum, #ffffff}; 
+	border: 1px solid #CONFIG{sarkaspip_styles/ca_tb_forum, #6262a4};
+	border-bottom: 0;
+	background-color: #CONFIG{sarkaspip_styles/bg_thead_forum, #6262a4};}
+.forum .groupe h2.titre a {	color: #CONFIG{sarkaspip_styles/fg_thead_forum, #ffffff};}
+.forum .groupe h2.titre a:hover { color: #CONFIG{sarkaspip_styles/fg_thead_forum, #ffffff}; text-decoration: underline;}
+.forum .groupe .bord {border: 1px solid #CONFIG{sarkaspip_styles/ca_tb_forum, #6262a4};}
+.forum .cartouche {font-size: 0.92em}
+.forum .outils { clear: both; margin-bottom: 10px;}
+
+#reponses.forum h2 {font-size: 1.9em; line-height: 1.2em; font-weight: bold; padding: 0 0 5px 20px; margin: 0;
+	[background: url((#CHEMIN{images/reponses.gif})) top left no-repeat;]
+	color: #CONFIG{sarkaspip_styles/fg_trep_forum, #6262a4};
+	border-bottom: 2px solid #CONFIG{sarkaspip_styles/ca_trep_forum, #6262a4};}
+
+.forum table {width: 100%; font-size: 1.2em; border-collapse: separate;}
+.forum table th {
+	padding: 10px 5px; 
+	color: #CONFIG{sarkaspip_styles/fg_tshead_forum, #6262a4}; 
+	background-color: #CONFIG{sarkaspip_styles/bg_tshead_forum, #f0f0fa};}
+	font-weight: bold;}
+.forum table th.centre {text-align: center;}
+.forum table tbody tr:hover {background: #CONFIG{sarkaspip_styles/hb_tb_forum, #f0f0fa};}
+.forum table tr.row_odd {background: #CONFIG{sarkaspip_styles/bg_todd_forum, transparent}; color: inherit}
+.forum table tr.row_even {background: #CONFIG{sarkaspip_styles/bg_teven_forum, transparent}; color: inherit}
+.forum table td {padding: 10px 5px; vertical-align: top; line-height: 1.1em; border-top: 1px solid #CONFIG{sarkaspip_styles/ca_tb_forum, #6262a4};}
+.forum table td.rp_n1 {border-top: 0;}
+.forum table td.etat {width: 4%;}
+.forum table td.etat.forumferme {[background: url((#CHEMIN{images/forum_ferme.png})) no-repeat center 10px;]}
+.forum table td.sujets, .forum table td.messages {text-align: center; width: 7%;}
+.forum table td.dernier_message {text-align: left; width: 21%;}
+.forum table td.dernier_message a.titre {font-style: italic;}
+.forum table td.description {font-weight: bold; font-size: 1em;}
+.forum table td.description h3.titre a {color: #CONFIG{sarkaspip_styles/fg_tb_forum, #6262a4}; font-weight: bold;}
+.forum table td.description h3.titre a:hover {text-decoration: underline;}
+.forum table td.description .texte {font-weight: normal;}
+
+.forum table tr#rp_n1 {border-top: 0;}
+.forum .detail_auteur {width: 150px; background-color: #CONFIG{sarkaspip_styles/bg_trep_forum, #f0f0fa}; vertical-align: top;}
+.forum .premier_message {margin-left: 155px; padding: 0 5px;}
+.forum .gravatar_pere {margin-right: 50px; float: left;}
+.forum .gravatar {font-weight: bold;}

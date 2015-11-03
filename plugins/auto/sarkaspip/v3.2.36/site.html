@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{7200}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<BOUCLE_meta(SITES){id_syndic}>
+		<INCLURE{fond=noisettes/inc_header}
+			{meta_titre=#NOM_SITE*}
+			{meta_description=(#DESCRIPTIF|couper{150})}>
+	</BOUCLE_meta>
+		<INCLURE{fond=noisettes/inc_header}
+			{meta_titre=<:sarkaspip:sites_web:>}>
+	<//B_meta>
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=site}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+		<BOUCLE_site(SITES) {id_syndic}>
+			[(#REM) <!-- affichage du titre de la page et de la description du site si id_syndic est non nul --> ]
+			<div class="site">
+				[(#INCLURE{fond=noisettes/site/inc_site_description}{id_syndic}{editable=oui})<br />]
+			</div>
+			#SET{nb_jours, #CONFIG{sarkaspip_site/nbj_syndication_2, 60}}
+			#SET{rubrique_site, #ID_RUBRIQUE}
+		</BOUCLE_site>
+			#SET{nb_jours, #CONFIG{sarkaspip_site/nbj_syndication_1, 30}}
+   			<div class="titre"><h1><:sarkaspip:sur_web:>,&nbsp;<:sarkaspip:articles_syndiques_n_jours{nb_jour=#GET{nb_jours}}:></h1></div>
+		<//B_site>
+
+			[(#REM) <!-- affichage des syndications du site courant ou de tout le site --> ]
+			[(#INCLURE{fond=noisettes/site/inc_site_articles_syndiques}{id_syndic}{nb_jours=#GET{nb_jours}}{ajax})]
+		</div> <!-- content -->
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=site}{id_rubrique=#GET{rubrique_site}}>
+	</div>
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]		
+		<INCLURE{fond=noisettes/extra}{env}{page=site}{id_rubrique=#GET{rubrique_site}}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=site}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>

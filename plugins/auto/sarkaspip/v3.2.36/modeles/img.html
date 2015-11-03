@@ -1,0 +1,93 @@
+[(#REM)
+<!-- 
+	Modele pour <img>
+	
+	Si on choisit le mode de fonctionnement du modele "exclusif image" (recommande) alors les documents ne seront pas affiches.
+	Sinon, en mode non exclusif, le fonctionnement sera classique (compatible versions precedentes)
+
+	Si on est en mode "image" (utilisation de ajouter image dans l'espace prive)
+	- si embed=oui, on affiche l'image complete
+	- sinon, si taille est precisee, on affiche l'image avec la taille demandee,
+	- sinon, si la taille n'est pas precisee ou les vignettes pas activees, on affiche l'image avec la taille des vignettes configuree dans l'espace prive
+	  ou 150 par defaut
+	  
+	Si on est en mode "document" (utilisation de ajouter document dans l'espace prive)
+	- sinon, si embed=oui, on affiche l'image complete
+	- si l'image a une vignette personnalisee, on affiche cette vignette
+	- sinon, on affiche l'image avec la taille des vignettes configuree dans l'espace prive
+	  ou 150 par defaut
+	 
+	Si on est en mode "vignette" (correspond a une vignette personnalisee d'un autre document)
+	on affiche l'image complete
+
+	Si un lien est passe #ENV{lien} on ajoute la balise <a> avec href=lien
+	sinon on met le href a #URL_DOCUMENT, ce qui permet a toutes les images d'etre cliquables
+
+	Si on passe en argument l'effet galerie souhaite (mediabox) on l'utilise en priorite.
+	Sinon, on utilise l'effet configure pour le squelette
+ -->
+]
+<BOUCLE_document(DOCUMENTS) {id_document}{mode?}{tout}>
+	#SET{classe_image, #ENV{lien_class}}
+	[(#ENV{effet}|oui)
+		[(#SET{classe_image, [(#ENV{effet})][ (#ENV{lien_class})]})]
+	]
+	[(#ENV{effet}|non)
+		[(#CONFIG{sarkaspip_modeles/mode_galerie_img, 0}|=={1}|oui)
+			[(#SET{classe_image, mediabox[ (#ENV{lien_class})]})]
+		]
+	]
+	
+	[(#ENV{embed}|oui)
+		#SET{affichage, image}
+		#SET{taille_reduire, #EVAL{_SARKASPIP_CONFIG_IMG_TAILLE_MAX_EMBED}}
+		#SET{fichier, #FICHIER|copie_locale|image_reduire{#GET{taille_reduire}}}
+		#SET{width, #FICHIER|copie_locale|image_reduire{#GET{taille_reduire}}|largeur}
+		#SET{height, #FICHIER|copie_locale|image_reduire{#GET{taille_reduire}}|hauteur}
+	]
+	[(#ENV{embed}|non)
+		[(#MODE|=={image}|oui)
+			#SET{affichage, image}
+			#SET{taille_vignette, #CONFIG{taille_preview,150}}
+			#SET{taille_reduire, #ENV{taille,#GET{taille_vignette}}}
+			#SET{fichier, #FICHIER|copie_locale|image_reduire{#GET{taille_reduire}}}
+			#SET{width, #FICHIER|copie_locale|image_reduire{#GET{taille_reduire}}|largeur}
+			#SET{height, #FICHIER|copie_locale|image_reduire{#GET{taille_reduire}}|hauteur}
+		]
+		[(#MODE|=={vignette}|oui)
+			#SET{affichage, image}
+		]
+		[(#MODE|=={document}|oui)
+			#SET{affichage, logo}
+		]
+	]
+	<BOUCLE_vignette(DOCUMENTS)	{id_vignette=#ID_DOCUMENT}>
+		#SET{titre, #TITRE|texte_backend}
+		#SET{url, #ENV{lien}|sinon{#URL_DOCUMENT}}
+	</BOUCLE_vignette>
+	</B_vignette>
+		#SET{titre, #_document:TITRE|texte_backend}
+		#SET{url, #ENV{lien}|sinon{#_document:URL_DOCUMENT}}
+	<//B_vignette>
+	[(#GET{titre}|non)
+		[(#SET{titre, [(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets|texte_backend)]})]
+	]
+
+	<span class="spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[ style="float:(#ENV{align}|match{left|right});"]>
+		[(#REM) <!-- image complete ou retaillee --> ]
+		[(#GET{affichage}|=={image}|oui)
+			[<a href="(#GET{url})"[ class="(#GET{classe_image})"][ title="(#GET{titre})"]>]
+				<img src="#URL_DOCUMENT"[ width="(#GET{width})"][ height="(#GET{height})"][ alt="(#GET{titre})"] />
+			[(#GET{url}|?{</a>})]
+		]
+		
+		[(#REM) <!-- sinon logo document --> ]
+		[(#GET{affichage}|=={logo}|oui)
+			[(#CONFIG{sarkaspip_modeles/exclusif_img, non}|=={non}|oui)
+			<a href="#GET{url}"[ title="(#GET{titre})"]>
+				[(#LOGO_DOCUMENT||inserer_attribut{alt,#GET{titre}})]
+			</a>
+			]
+		]
+	</span>
+</BOUCLE_document>

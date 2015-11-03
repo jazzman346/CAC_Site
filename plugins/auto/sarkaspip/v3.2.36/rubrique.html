@@ -1,0 +1,75 @@
+<BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{7200}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	[(#SET{options,
+	<link rel="alternate" type="application/rss+xml" title="<:sarkaspip:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+	})]
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=#TITRE*}
+		{meta_description=#INTRODUCTION{#EVAL{_SARKASPIP_CONFIG_INTRO_META}}|supprimer_tags}
+		{meta_options=#GET{options}}>
+
+<body dir="#LANG_DIR" >
+<div id="container" class="rubrique#ID_RUBRIQUE">
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=rubrique}>
+	</div>
+
+	<div id="wrapper">
+		<div id="content">
+			[(#REM) <!-- Contenu de la rubrique --> ]
+			<div id="rubrique" class="rubrique">
+				[(#REM) <!-- Titre, logo, texte de la rubrique --> ]
+				<INCLURE{fond=noisettes/rubrique/inc_rubrique_description}
+					{id_rubrique}
+					{avec_filles=#CONFIG{sarkaspip_rubrique/avec_filles, non}}>
+
+				[(#REM) <!-- Documents (sauf images) du portfolio de la rubrique --> ]
+				<INCLURE{fond=noisettes/document/inc_documents_joints}
+					{id_rubrique}
+					{avec_descriptif=#CONFIG{sarkaspip_rubrique/avec_descriptif, non}}>
+
+				[(#REM) <!-- Images du portfolio de la rubrique --> ]
+				#SET{plugin, aucun}
+				#SET{diaporama, non}
+				[(#CONFIG{sarkaspip_rubrique/mode_galerie, 0}|!={0}|oui)
+					[(#SET{plugin, mediabox})]
+				]
+				[(#CONFIG{sarkaspip_rubrique/mode_galerie, 0}|=={2}|oui)
+					[(#SET{diaporama, oui})]
+				]
+				<INCLURE{fond=noisettes/document/inc_images_jointes}
+					{id_rubrique}
+					{effet_galerie=#GET{plugin}}
+					{avec_diaporama=#GET{diaporama}}>
+			</div> <!-- Fin rubrique -->
+	
+			[(#REM) <!-- Articles de la rubrique --> ]
+			[(#CONFIG{sarkaspip_rubrique/position_articles, 1}|=={1}|?{' '})
+				<INCLURE{fond=noisettes/rubrique/inc_rubrique_articles}{ajax}{id_rubrique}>
+			]
+		</div> <!--content-->
+	</div> <!--wrapper-->
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=rubrique}{id_secteur}>
+	</div>  <!--navigation-->
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=rubrique}{id_secteur}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=rubrique}{squelette=#SQUELETTE}>
+	</div>  <!--footer-->
+
+</div>
+</body>
+</html>
+[(#REM) <!-- ================================== ERREUR BOUCLE VIDE  ================================== --> ]
+</BOUCLE_rubrique_principal>

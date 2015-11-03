@@ -1,0 +1,56 @@
+[(#REM) <!-- Noisette d'affichage de l'agenda natif en format listing annuel
+	- id_rubrique: la racine specialisee choisie pour agenda
+	- annee: l'annee choisie pour etre affichee
+	- mois: mois choisi
+	- categorie: filtre a appliquer aux evenements
+ --> ]
+[(#REM) <!-- Definition du contexte de l'agenda --> ]
+[(#ENV{id_rubrique}|agenda_definir_contexte{
+						'listing_annuel',
+						[(#CONFIG{sarkaspip_agenda/mois1, 1})],
+						[(#CONFIG{sarkaspip_agenda/format_pagination, annee})]}
+)]
+
+[(#REM) <!-- Recensement des evenements --> ]
+#SET{annee_choisie, #ENV{annee, #AUJOURDHUI|annee}}
+[(#CONFIG{sarkaspip_agenda/mois1, 1}|=={1}|?{' '})
+#SET{annee_choisie, #ENV{annee, #AUJOURDHUI|annee}}
+]
+<BOUCLE_agenda(ARTICLES)
+	{id_secteur=#ENV{id_rubrique}}
+	{par date_redac}>
+	[(#ENV{id_rubrique}|agenda_recenser_evenement{
+						[(#ID_ARTICLE)], 
+						[(#DATE_REDAC)], 
+						[(#TITRE)]}
+	)]
+</BOUCLE_agenda>
+
+[(#REM) <!-- Listing annuel des evenements --> ]
+<div id="agenda_annuel" class="arbre">
+	<div class="titre"><h1>[(#CONFIG{sarkaspip_agenda/titre, <:sarkaspip:agenda:>}|entites_html)]</h1></div>
+	[<div class="description">(#CONFIG{sarkaspip_agenda/descriptif}|propre)</div>]
+	<div class="pagination">
+		[(#ENV{id_rubrique}|agenda_liste_paginer{
+						[(#ENV{annee})],
+						[(#ENV{mois})],
+						[(#ENV{categorie,-1})],
+						[(#EVAL{_SARKASPIP_CONFIG_SYMBOLE_PAGINATION})],
+						[(#EVAL{_SARKASPIP_CONFIG_AGENDA_ANCRE_PAGINATION})],
+						'normal'}
+		)]
+	</div>
+
+	[(#ENV{id_rubrique}|agenda_liste_afficher{
+						[(#ENV{annee})],
+						[(#ENV{mois})],
+						[(#ENV{categorie,-1})],
+						[(#CONFIG{sarkaspip_agenda/sens_tri, normal})]}
+	)]
+
+	[<div class="avertissement">
+		(#ENV{id_rubrique}|agenda_liste_avertir{
+						[(#ENV{annee})],
+						[(#ENV{mois})]})
+	</div>]
+</div>

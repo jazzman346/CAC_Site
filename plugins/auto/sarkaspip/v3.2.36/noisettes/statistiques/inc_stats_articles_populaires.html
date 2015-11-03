@@ -1,0 +1,16 @@
+[(#REM) <!-- affichage du hit-parade des articles --> ]
+<B_hitparade>
+	[(#CONFIG{sarkaspip_noisettes/composition_stats_2, 3}|match{^(1|3)$}|?{' '})
+		<h1 class="intitule"><:sarkaspip:hit_parade:></h1>
+	]
+	<div class="contenu">
+		<h2 class="titre_bloc"><:sarkaspip:top_articles:></h2>
+		<div class="liste"><ul>
+<BOUCLE_hitparade(ARTICLES){id_secteur!==#RACINE_SPECIALISEE}{par popularite}{inverse}{0,#CONFIG{sarkaspip_noisettes/max_articles_top, 5}}>
+			[<li><a class="titre" href="#URL_ARTICLE"[ title="(#POPULARITE)&nbsp;%&nbsp;"]>
+				(#TITRE)
+			</a></li>]
+</BOUCLE_hitparade>
+		</ul></div>
+	</div>
+</B_hitparade>

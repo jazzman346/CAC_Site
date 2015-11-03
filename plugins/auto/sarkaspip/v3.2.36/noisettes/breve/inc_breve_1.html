@@ -1,0 +1,18 @@
+[(#REM)
+<!-- 
+	Noisette pour l'affichage des breves (1 bloc par breve)
+    Recoit en argument :
+		- id_breve
+		- editable: indique si on doit activer ou pas les crayons
+ -->
+]
+<BOUCLE_breve(BREVES) {id_breve}>
+	<div class="contenu">
+		[<h2><a class="[(#ENV{editable}|=={oui}|?{#EDIT{titre}}) ]titre_bloc" href="#URL_BREVE">(#TITRE)</a></h2>]
+		<div class="date_bloc">[(#DATE|nom_jour)]&nbsp;[(#DATE|affdate_jourcourt)]</div>
+		<div class="[(#ENV{editable}|=={oui}|?{#EDIT{texte}}) ]texte">[(#TEXTE|typo_couleur|image_reduire{120,0})]</div>
+		<div class="nettoyeur"></div>
+		[<div class="notes">(#NOTES)</div>]
+		[<div class="notes"><:sarkaspip:sur_web:>&nbsp;:&nbsp;<a href="#URL_SITE">(#NOM_SITE)</a></div>]
+	</div> <!-- Fin contenu -->
+</BOUCLE_breve>

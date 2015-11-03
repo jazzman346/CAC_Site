@@ -1,0 +1,22 @@
+[(#REM) <!-- Liste des sites syndiques sur l'ensemble du site
+Recoit en argument :
+		- id_syndic: id du site en cours d'affichage eventuellement
+ --> ]
+<B_sites_freres>
+	<div class="contenu">
+		#ANCRE_PAGINATION
+		[(#ENV{id_syndic}|?{<h2><a class="titre_bloc bouton"[ href="(#URL_PAGE{site})"] title="<:sarkaspip:filtre_bulle_site_tout:>"><:sarkaspip:filtre_soustitre_site_tout:></a></h2>,
+							<h2 class="titre_bloc bouton"><:sarkaspip:filtre_soustitre_site_tout:></h2>,})]
+	</div>
+	<div class="contenu">
+		<h2 class="titre_bloc"><:sarkaspip:filtre_soustitre_site:></h2>
+		<div class="liste"><ul>
+<BOUCLE_sites_freres(SITES){syndication=oui}{id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}}{par nom_site}{pagination #CONFIG{sarkaspip_noisettes/pas_pagination_filtre, 10}}>
+      [[<li><(#EXPOSE{span class="titre",a class="titre" title="<:sarkaspip:filtre_bulle_syndications_1_site:>"[ href="(#URL_PAGE{site}|parametre_url{id_syndic,#ID_SYNDIC})"]})>]
+					(#NOM_SITE)
+			[</(#EXPOSE{span,a})></li>]]
+</BOUCLE_sites_freres>
+		</ul></div>
+		[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_noisettes/modele_pagination_filtre}})</div>]
+	</div> <!-- Fin contenu -->
+</B_sites_freres>

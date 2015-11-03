@@ -1,0 +1,76 @@
+<BOUCLE_forum(FORUMS){id_forum}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{7200}
+#SET{verrou, ''}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=#TITRE}
+		{meta_description=#INTRODUCTION{#EVAL{_SARKASPIP_CONFIG_INTRO_META}}|supprimer_tags}>
+		
+<body dir="#LANG_DIR">
+<div id="container">
+	<BOUCLE_article_forum(ARTICLES){id_article}>
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=forum_sujet}{id_rubrique}{id_article}>
+	</div>
+
+	[(#SET{statut_forum, [(#ID_ARTICLE|statut_forum)]})]
+	[(#GET{statut_forum}|=={ouvert}|non)#SET{verrou, lock}]
+
+	<div id="wrapper">
+		<div id="content">
+			<div id="sujet" class="forum">
+				[(#REM) <!-- Titre, logo, texte du sujet --> ]
+				<INCLURE{fond=noisettes/forum/inc_forum_sujet_description}
+					{id_forum}
+					{statut_forum=#GET{statut_forum}}
+					{verrou=#GET{verrou}}>
+			</div>
+
+			[(#REM) <!-- Les reponses au sujet --> ]
+			<INCLURE{fond=noisettes/forum/inc_forum_sujet_reponses}
+				{statut_forum=#GET{statut_forum}}
+				{id_thread}
+				{id_forum}
+				{verrou=#GET{verrou}}
+				{sens_tri=#CONFIG{sarkaspip_forum/sens_tri_reponses, 0}}
+				{self}
+				{ajax}>
+
+			[(#REM) <!-- Formulaire de reponse --> ]
+			[(#_forum:TITRE|strstr{_verrouille_}|oui) #SET{verrou, lock}]
+			[(#GET{verrou}|non)
+			<div class="formulaire" id="formulaire_reponse">#FORMULAIRE_FORUM{#SELF}</div>
+			]
+
+			<script type='text/javascript'>
+			//<![CDATA[
+				jQuery(document).ready(function() {
+					jQuery('#formulaire_forum .saisie_titre').hide();
+				});
+			//]]>
+			</script>
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=forum_sujet}{id_rubrique}{id_secteur}{id_article}>
+	</div>
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=forum_sujet}{id_secteur}{id_rubrique}{id_article}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=forum_sujet}{squelette=#SQUELETTE}>
+	</div>
+	</BOUCLE_article_forum>
+</div>
+</body>
+</html>
+</BOUCLE_forum>
+

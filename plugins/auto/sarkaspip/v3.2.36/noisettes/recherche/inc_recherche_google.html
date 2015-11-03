@@ -1,0 +1,15 @@
+<div class="nav_recherche contenu ">
+	<h2 class="titre_bloc"><:sarkaspip:sstitre_recherche_web:></h2>
+	<a href="http://www.google.fr"><img class="moteur" src="#CHEMIN{images/logo-google.gif}" alt="Google" /></a>
+	<div class="formulaire_spip formulaire_recherche" id="google">
+		[(#REM) <!-- Google Search --> ]
+		<form method="get" action="http://www.google.fr/search">
+			<div>
+				<label for="q"><:info_rechercher_02:></label>
+				<input type="text" name="q" id="q" class="text" size="10" maxlength="255" value="<:sarkaspip:requete:>" onfocus="this.value='';" />
+				<input type="hidden" name="hl" value="fr" />
+				<input type="image" src="[(#CHEMIN{rechercher.gif})]" class="submit" value="" />
+			</div>
+		</form>
+	</div>
+</div>

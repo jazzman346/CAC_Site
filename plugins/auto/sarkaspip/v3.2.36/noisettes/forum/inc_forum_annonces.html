@@ -1,0 +1,41 @@
+[(#REM) 
+<!-- Affichage des annonces d'un forum
+	Recoit en argument :
+		- id_article: id de l'article concerne
+		- statut_forum: si ferme, permet de verrouiller tous les fils 
+-->
+]
+#SET{regexp, ^\\[(annonce)\\]}
+<B_forum_annonces>
+
+
+
+
+<div class="groupe">
+	<h2 class="titre"><:sarkaspip:titre_annonces_forum:></h2>
+	<div class="bord">
+		<table summary="<:sarkaspip:resume_annonces_forum:>">
+			<thead>
+				<tr>
+					<th colspan="2"><:sarkaspip:colonne_sujet:></th>
+					<th class="centre"><:sarkaspip:colonne_resolu:></th>
+					<th class="centre"><:sarkaspip:colonne_nombre_reponses:></th>
+					<th><:sarkaspip:colonne_dernier_message:></th>
+				</tr>
+			</thead>
+			<tbody>
+<BOUCLE_forum_annonces(FORUMS){id_article}{plat}{id_parent=0}{!par date_thread}{titre==#GET{regexp}}>
+		<INCLURE{fond=noisettes/forum/inc_forum_sujet_ligne}
+			{id_article}
+			{id_forum}
+			{id_thread}
+			{titre}
+			{compteur_boucle=#COMPTEUR_BOUCLE}
+			{statut_forum=#ENV{statut_forum}}
+			{sujet=annonce}>
+</BOUCLE_forum_annonces>
+			</tbody>
+		</table>
+	</div>
+</div>
+</B_forum_annonces>

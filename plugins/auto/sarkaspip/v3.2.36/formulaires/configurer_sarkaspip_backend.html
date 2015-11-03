@@ -1,0 +1,80 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_backend:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_rss_articles:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_flux_rss}
+				{explication=<:sarkaspip:cfg_inf_rss_articles:>}
+				{suffixe=_articles}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_rss_albums:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_flux_rss}
+				{explication=<:sarkaspip:cfg_inf_rss_albums:>}
+				{suffixe=_albums}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_rss_evenements:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_flux_rss}
+				{explication=<:sarkaspip:cfg_inf_rss_evenements:>}
+				{suffixe=_evenements}
+				{env}>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_backend}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{rss_articles, oui}|!={oui}|?{' '})
+			jQuery("#bloc_rss_articles").hide();
+		]
+		[(#ENV{rss_albums, oui}|!={oui}|?{' '})
+			jQuery("#bloc_rss_albums").hide();
+		]
+		[(#ENV{rss_evenements, oui}|!={oui}|?{' '})
+			jQuery("#bloc_rss_evenements").hide();
+		]
+		jQuery("input[name='rss_articles']").change(function() {
+			if (jQuery("input[name='rss_articles']:checked").val() == 'oui') {
+				jQuery("#bloc_rss_articles").show();
+			}
+			else {
+				jQuery("#bloc_rss_articles").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='rss_albums']").change(function() {
+			if (jQuery("input[name='rss_albums']:checked").val() == 'oui') {
+				jQuery("#bloc_rss_albums").show();
+			}
+			else {
+				jQuery("#bloc_rss_albums").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='rss_evenements']").change(function() {
+			if (jQuery("input[name='rss_evenements']:checked").val() == 'oui') {
+				jQuery("#bloc_rss_evenements").show();
+			}
+			else {
+				jQuery("#bloc_rss_evenements").hide();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

@@ -1,0 +1,21 @@
+[(#REM) 
+<!-- Articles de la rubrique, classes par numero s'ils sont numerotes, ou par date inverse sinon
+	Recoit en argument :
+		- id_rubrique: id de la rubrique agenda
+		- id_article: id de l'article affiche
+-->
+]
+<BOUCLE_evenement_affiche(ARTICLES){id_article}>
+	<B_evenements_jour>
+		<div class="contenu">
+			<h2 class="titre_bloc"><:sarkaspip:evenements_meme_journee:></h2>
+			<div class="liste"><ul>
+	<BOUCLE_evenements_jour(ARTICLES){id_secteur}{date_redac >= (#DATE_REDAC|debut_journee)}{date_redac <= (#DATE_REDAC|fin_journee)}{par date_redac}>
+				<li><[(#EXPOSE{span class="titre",a class="titre"[ href="(#URL_PAGE{evenement,id_article=#ID_ARTICLE})"]})]>
+					[(#DATE_REDAC|affdate{'H\hi'})][&nbsp;:&nbsp;(#TITRE)]
+				</#EXPOSE{span,a}></li>
+	</BOUCLE_evenements_jour>
+			</ul></div>
+		</div>
+	</B_evenements_jour>
+</BOUCLE_evenement_affiche>

@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{7200}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=sommaire}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+		#SET{page_vide, 1}
+		<BOUCLE_0_squelette(ARTICLES) {id_secteur=#RACINE_SPECIALISEE{squelette}}{0,1}>
+		[(#REM) <!-- Editorial de bienvenue --> ]
+		[(#CONFIG{sarkaspip_sommaire/article_edito, 0}|!={0}|?{' '})
+			<INCLURE{fond=noisettes/sommaire/inc_edito}>
+			#SET{page_vide, 0}
+		]
+		</BOUCLE_0_squelette>
+
+		[(#REM) <!-- Article a la Une --> ]
+		<B_une>
+			<div id="une" class="article">
+		<BOUCLE_une(ARTICLES) {id_secteur!==#RACINE_SPECIALISEE}{type_mot=squelette_habillage}{titre_mot=article_une}{doublons}{par date}{inverse}{0,1}>
+			<INCLURE{fond=noisettes/article/inc_article_description}
+				{id_article}
+				{afficher_commentaires=non}
+				{logo_rubrique=#CONFIG{sarkaspip_article/logo_rubrique, oui}}
+				{taille_logo=#CONFIG{sarkaspip_article/taille_logo, 150}}
+				{page=une}
+				{id_rubrique=#ID_RUBRIQUE}>
+			#SET{page_vide, 0}
+		</BOUCLE_une>
+			</div>
+		</B_une>
+
+		<BOUCLE_0_article(ARTICLES) {id_secteur!==#RACINE_SPECIALISEE}{0,1}>
+			[(#REM) <!-- Rubriques de niveau zero (secteurs) --> ]
+			[(#CONFIG{sarkaspip_sommaire/position_secteurs, 0}|=={1}|?{' '})
+				<INCLURE{fond=noisettes/sommaire/inc_secteurs}{lang}>
+				#SET{page_vide, 0}
+			]
+	
+			[(#REM) <!-- Derniers articles publies --> ]
+			[(#CONFIG{sarkaspip_sommaire/position_articles_recents, 1}|=={1}|?{' '})
+				<INCLURE{fond=noisettes/sommaire/inc_articles_recents}{doublons}{lang}>
+				#SET{page_vide, 0}
+			]
+		</BOUCLE_0_article>
+
+		<BOUCLE_0_album(ARTICLES) {id_secteur=#RACINE_SPECIALISEE{galerie}}{0,1}>
+			[(#REM) <!-- Derniers articles publies --> ]
+			[(#CONFIG{sarkaspip_sommaire/position_albums_recents, 1}|=={1}|?{' '})
+				<INCLURE{fond=noisettes/sommaire/inc_albums_recents}{lang}>
+				#SET{page_vide, 0}
+			]
+		</BOUCLE_0_album>
+
+		[(#GET{page_vide}|oui)
+			<div id="page_vide">
+				<div class="titre"><h1><:sarkaspip:erreur|ucfirst:>&nbsp;-&nbsp;<:sarkaspip:accueil_site:></h1></div>
+				<div class="description avertissement"><div class="texte"><:sarkaspip:msg_page_vide:></div></div>
+			</div>
+		]
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=sommaire}>
+	</div>  <!--navigation-->
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=sommaire}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=sommaire}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>

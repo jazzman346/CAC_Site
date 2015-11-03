@@ -1,0 +1,17 @@
+[(#REM)
+<!-- 
+	Noisette pour l'affichage des sites en partie #content
+    Recoit en argument :
+		- id_syndic
+		- editable: indique si on doit activer ou pas les crayons
+ -->
+]
+<BOUCLE_description(SITES) {id_syndic}>
+	#SET{nb_jour, #CONFIG{sarkaspip_site/nbj_syndication_2, 60}}
+	<div class="titre"><h1>#NOM_SITE,&nbsp;<:sarkaspip:articles_syndiques_n_jours{nb_jour=#GET{nb_jour}}:></h1></div>
+	<div class="description">
+		[<div class="logo droite"><a[ href="(#URL_SITE)"] title="<:sarkaspip:go_site:>">(#LOGO_SITE||image_reduire{120}||inserer_attribut{alt,#NOM_SITE|texte_backend})</a></div>]
+		[<div class="#EDIT{descriptif} texte">(#DESCRIPTIF|typo_couleur)</div>]
+		<br class="nettoyeur" />
+	</div> <!-- Fin description -->
+</BOUCLE_description>

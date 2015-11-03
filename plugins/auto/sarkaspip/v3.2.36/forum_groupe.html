@@ -1,0 +1,54 @@
+<BOUCLE_forum(RUBRIQUES) {id_rubrique=#ENV{id_rubrique, #RACINE_SPECIALISEE{forum}}}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{7200}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	[(#SET{options,
+	<link rel="alternate" type="application/rss+xml" title="<:sarkaspip:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+	})]
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=#TITRE}
+		{meta_description=#INTRODUCTION{#EVAL{_SARKASPIP_CONFIG_INTRO_META}}|supprimer_tags}
+		{meta_options=#GET{options}}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=forum_groupe}>
+	</div>
+
+	<div id="wrapper">
+		<div id="content">
+			[(#REM) <!-- Contenu de la rubrique --> ]
+			<div id="groupe" class="forum">
+				[(#REM) <!-- Titre, logo, texte de la rubrique --> ]
+				<INCLURE{fond=noisettes/rubrique/inc_rubrique_description}
+					{id_rubrique}
+					{avec_filles=non}>			
+				
+				[(#REM) <!-- Affichage du ou des differents groupes de forums --> ]
+				<INCLURE{fond=noisettes/forum/inc_forum_groupe}{id_rubrique=#ENV{id_rubrique, ''}}>
+			</div>
+		</div> <!--content-->
+	</div> <!--wrapper-->
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=forum_groupe}{id_rubrique}{id_secteur}>
+	</div>  <!--navigation-->
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=forum_groupe}{id_secteur}{id_rubrique}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=forum_groupe}{squelette=#SQUELETTE}>
+	</div>  <!--footer-->
+
+</div>
+</body>
+</html>
+[(#REM) <!-- ================================== ERREUR BOUCLE VIDE  ================================== --> ]
+</BOUCLE_forum>

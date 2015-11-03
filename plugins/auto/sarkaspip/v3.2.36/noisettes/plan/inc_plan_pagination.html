@@ -1,0 +1,11 @@
+[(#REM) 
+<!-- Bande de pagination du plan du site
+	Recoit en argument :
+		- tri: le tri courant (date, rubrique ou auteur)
+-->
+]
+<div class="pagination">
+	[(#ENV{tri}|!={par_date}|?{<a class="ajax" href="[(#URL_PAGE{plan,tri=par_date})]"><:sarkaspip:tri_par_date:></a>,<span class="on"><:sarkaspip:tri_par_date:></span>})][(#EVAL{_SARKASPIP_CONFIG_SYMBOLE_PAGINATION})]
+	[(#ENV{tri}|!={par_rubrique}|?{<a class="ajax" href="[(#URL_PAGE{plan,tri=par_rubrique})]"><:sarkaspip:tri_par_rubrique:></a>,<span class="on"><:sarkaspip:tri_par_rubrique:></span>})][(#EVAL{_SARKASPIP_CONFIG_SYMBOLE_PAGINATION})]
+	[(#ENV{tri}|!={par_auteur}|?{<a class="ajax" href="[(#URL_PAGE{plan,tri=par_auteur})]"><:sarkaspip:tri_par_auteur:></a>,<span class="on"><:sarkaspip:tri_par_auteur:></span>})]
+</div>

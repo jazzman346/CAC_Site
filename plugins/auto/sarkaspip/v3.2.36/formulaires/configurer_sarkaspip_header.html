@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_header:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<label><:sarkaspip:cfg_lbl_meta_auteur:></label><br />
+			<input type="text" name="auteur_site" value="[(#ENV{auteur_site, <:sarkaspip:realisation_squelette:>})]" size="40" class="fondl" />
+			<br />
+			<br />
+			<label><:sarkaspip:cfg_lbl_meta_robot:></label>
+			<input type="text" name="recurrence_robot" value="#ENV{recurrence_robot, 30}" size="3" class="fondl" />
+			<br />
+			<br />
+			<p><:sarkaspip:cfg_inf_meta_keywords:></p>
+			<label>
+				<textarea name="keywords_site" rows="4" cols="40" style="width:100%;">[(#ENV{keywords_site})]</textarea>
+			</label>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_header}|afficher_config)]
+</div>

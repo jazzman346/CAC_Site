@@ -1,0 +1,33 @@
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par la noisette Rainette du squelette
+	pour presenter les conditions temps reel d'une ville
+ -->
+]
+<div class="pave-prevision">
+	<p class="maj">
+		<:sarkaspip:meteo_titre_conditions:>[&nbsp;(#ENV{derniere_maj}|heures)h][(#ENV{derniere_maj}|minutes)]<br />
+		<:sarkaspip:fourni_par_weather_com:>
+	</p>
+	<div class="temperature">
+		[(#ENV{code_icone}|rainette_icone_meteo{grand}|image_reduire{#EVAL{_SARKASPIP_CONFIG_LARGEUR_ICONE_METEO}})]
+		<p>[(#ENV{temperature_reelle}|rainette_afficher_unite{temperature})]</p>
+	</div>
+	<br class="nettoyeur" />
+	<div class="resume">
+		[(#ENV{code_icone}|rainette_resume_meteo)]
+		<ul>
+			<li>
+				<span><:rainette:vent|ucfirst:></span>
+				[ : (#ENV{vitesse_vent}|rainette_afficher_unite{vitesse})][ - (#ENV{direction_vent}|rainette_afficher_direction)]
+			</li>
+			<li>
+				<span><:rainette:pression|ucfirst:></span>
+				[ : (#ENV{pression}|rainette_afficher_unite{pression})][ (#ENV{tendance_pression}|rainette_afficher_tendance{symbole})]
+			</li>
+		</ul>
+	</div>
+	<div class="liens">	
+		<:sarkaspip:meteo_lien_previsions:> <a class="lien-selection" href="#" onclick="$('#slide_selection').animate({marginLeft: -168}); return false;" title="<:sarkaspip:meteo_previsions_jour:>">>></a>
+	</div>
+</div>
+

@@ -1,0 +1,38 @@
+[(#REM) <!-- Bandeau Haut --> ]
+<div class="bandeau_haut">	
+	[(#PIPELINE{
+		bandeau_haut_debut,
+		[(#ARRAY{args, [(#ARRAY{id_rubrique, #ENV{id_rubrique}})], data, ''})]}
+	)]
+	<div class="nav_bandeau">  
+    	<!-- Navigation dans les langues -->
+		[(#CONFIG{sarkaspip_menus/position_langues, 4}|=={4}|?{' '})
+			<INCLURE{fond=noisettes/bandeau/inc_bandeau_langues}{env}>
+		]
+        <!-- Navigation dans les raccourcis -->
+		[(#CONFIG{sarkaspip_menus/position_pages, 1}|=={4}|?{' '})
+			<INCLURE{fond=noisettes/navigation/inc_menu_pages_speciales}{env}{position=bandeau_haut}>
+		]
+        <!-- Navigation dans les raccourcis -->
+		[(#CONFIG{sarkaspip_menus/position_formulaires, 1}|=={4}|?{' '})
+			<INCLURE{fond=noisettes/navigation/inc_menu_formulaires}{env}{id_rubrique=#ENV{id_rubrique,0}}{position=bandeau_haut}>
+		]
+	</div>
+	
+	#SET{logo, #LOGO_SITE_SPIP}
+	[(#CONFIG{sarkaspip_bandeau/logo_reduit, 1}|=={1}|?{' '})
+		[(#SET{logo, [(#LOGO_SITE_SPIP||image_reduire{#CONFIG{sarkaspip_bandeau/taille_logo, 150}})]})]
+	]
+	[<a class="site_logo" href="#URL_SITE_SPIP" title="<:sarkaspip:accueil_site:>">(#GET{logo})</a>]
+	<div class="site_nom">
+		[(#CONFIG{sarkaspip_bandeau/titre_site, 1}|=={1}|?{' '})
+		   [<h1><a href="#URL_SITE_SPIP" title="<:sarkaspip:accueil_site:>">(#NOM_SITE_SPIP)</a></h1>]
+		]
+	   [<h2>(#CONFIG{sarkaspip_bandeau/slogan})</h2>]
+	</div>
+	<br class="nettoyeur" />
+	[(#PIPELINE{
+		bandeau_haut_fin,
+		[(#ARRAY{args, [(#ARRAY{id_rubrique, #ENV{id_rubrique}})], data, ''})]}
+	)]
+</div>

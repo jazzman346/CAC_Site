@@ -1,0 +1,121 @@
+[(#REM) 
+<!-- 
+  bg = background; 
+  hb = hover du background;
+  bi = background-image; 
+  hi = hover du background-image;
+  fg = foreground;
+  ho = hover du foreground;
+  td = text-decoration;
+  ca = cadre = bordure;
+  ch = cadre hover;
+  bs = border-style;
+  hs = border-style hover;
+-->]
+
+[<p><strong>(#ENV{explication})</strong></p>]
+[(#ENV{choix}|match{(bg)}|?{' '})
+<label><:sarkaspip:cfg_lbl_css_bg{lbl_bg_complement=#ENV{complement_label_bg}}:></label>
+[(#SET{bg_color, [(#ENV{bg#ENV{suffixe}, #ENV{bg_defaut}}|ajuster_couleur_input{background})]})]
+[(#SET{color, [(#ENV{bg#ENV{suffixe}, #ENV{bg_defaut}}|ajuster_couleur_input{color})]})]
+<input type="color" name="bg#ENV{suffixe}" value="#ENV{bg#ENV{suffixe}, #ENV{bg_defaut}}" size="11" class="fondl[ (#ENV{bg#ENV{suffixe}, #ENV{bg_defaut}}|!={transparent}|?{palette})]"
+style="background-color: #GET{bg_color, #ENV{bg_defaut}}; color: #GET{color};" />
+<br />
+]
+[(#ENV{choix}|match{(bi)}|?{' '})
+<p><:sarkaspip:cfg_lbl_css_image_fond{lbl_bi_suffixe=#ENV{suffixe}}:></p>
+[(#EVAL{_SARKASPIP_DEBUG_CFG_FONDS}|=={oui}|?{' '})
+[<select name="fond_bi#ENV{suffixe}">
+	(#VAL{1}|lister_fonds{bi, #ENV{suffixe}})
+</select>]
+<br />
+]
+<label><:sarkaspip:cfg_lbl_css_bi1:></label>
+<label>
+	<input type="radio" name="bi_extension#ENV{suffixe}" value=".gif" [(#ENV{bi_extension#ENV{suffixe}, .gif}|=={.gif}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_gif:>
+</label>
+<label>
+	<input type="radio" name="bi_extension#ENV{suffixe}" value=".png" [(#ENV{bi_extension#ENV{suffixe}, .gif}|=={.png}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_png:>
+</label>
+<label>
+	<input type="radio" name="bi_extension#ENV{suffixe}" value=".jpg" [(#ENV{bi_extension#ENV{suffixe}, .gif}|=={.jpg}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_jpg:>
+</label>
+<br />
+<label><:sarkaspip:cfg_lbl_css_bi2:></label><br />
+<input type="text" name="bi_proprietes#ENV{suffixe}" value="#ENV{bi_proprietes#ENV{suffixe}}" size="60" class="fondl" />
+<br /><br />
+]
+[(#ENV{choix}|match{(hb)}|?{' '})
+<label><:sarkaspip:cfg_lbl_css_hb:></label>
+[(#SET{bg_color, [(#ENV{hb#ENV{suffixe}, #ENV{hb_defaut}}|ajuster_couleur_input{background})]})]
+[(#SET{color, #[(#ENV{hb#ENV{suffixe}, #ENV{hb_defaut}}|ajuster_couleur_input{color})]})]
+<input type="color" name="hb#ENV{suffixe}" value="#ENV{hb#ENV{suffixe}, #ENV{hb_defaut}}" size="11" class="fondl[ (#ENV{hb#ENV{suffixe}, #ENV{hb_defaut}}|!={transparent}|?{palette})]"
+style="background-color: #GET{bg_color, #ENV{bg_defaut}}; color: #GET{color};" />
+<br />
+]
+[(#ENV{choix}|match{(hi)}|?{' '})
+<p><:sarkaspip:cfg_lbl_css_image_hfond{lbl_hi_suffixe=#ENV{suffixe}}:></p>
+[(#EVAL{_SARKASPIP_DEBUG_CFG_FONDS}|=={oui}|?{' '})
+[<select name="fond_hi#ENV{suffixe}">
+	(#VAL{1}|lister_fonds{hi, #ENV{suffixe}})
+</select>]
+<br />
+]
+<label><:sarkaspip:cfg_lbl_css_bi1:></label>
+<label>
+	<input type="radio" name="hi_extension#ENV{suffixe}" value=".gif" [(#ENV{hi_extension#ENV{suffixe}, .gif}|=={.gif}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_gif:>
+</label>
+<label>
+	<input type="radio" name="hi_extension#ENV{suffixe}" value=".png" [(#ENV{hi_extension#ENV{suffixe}, .gif}|=={.png}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_png:>
+</label>
+<label>
+	<input type="radio" name="hi_extension#ENV{suffixe}" value=".jpg" [(#ENV{hi_extension#ENV{suffixe}, .gif}|=={.jpg}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_jpg:>
+</label>
+<br />
+<label><:sarkaspip:cfg_lbl_css_bi2:></label><br />
+<input type="text" name="hi_proprietes#ENV{suffixe}" value="#ENV{hi_proprietes#ENV{suffixe}}" size="60" class="fondl" />
+<br /><br />
+]
+[(#ENV{choix}|match{(fg)}|?{' '})
+<label><:sarkaspip:cfg_lbl_css_fg{lbl_fg_complement=#ENV{complement_label_fg}}:></label>
+[(#SET{bg_color, [(#ENV{fg#ENV{suffixe}, #ENV{fg_defaut}}|ajuster_couleur_input{background})]})]
+[(#SET{color, #[(#ENV{fg#ENV{suffixe}, #ENV{fg_defaut}}|ajuster_couleur_input{color})]})]
+<input type="color" name="fg#ENV{suffixe}" value="#ENV{fg#ENV{suffixe}, #ENV{fg_defaut}}" size="11" class="fondl[ (#ENV{fg#ENV{suffixe}, #ENV{fg_defaut}}|!={transparent}|?{palette})]"
+style="background-color: #GET{bg_color, #ENV{bg_defaut}}; color: #GET{color};" />
+<br />
+]
+[(#ENV{choix}|match{(ho)}|?{' '})
+<label><:sarkaspip:cfg_lbl_css_ho{lbl_ho_complement=#ENV{complement_label_ho}}:></label>
+[(#SET{bg_color, [(#ENV{ho#ENV{suffixe}, #ENV{ho_defaut}}|ajuster_couleur_input{background})]})]
+[(#SET{color, #[(#ENV{ho#ENV{suffixe}, #ENV{ho_defaut}}|ajuster_couleur_input{color})]})]
+<input type="color" name="ho#ENV{suffixe}" value="#ENV{ho#ENV{suffixe}, #ENV{ho_defaut}}" size="11" class="fondl[ (#ENV{ho#ENV{suffixe}, #ENV{ho_defaut}}|!={transparent}|?{palette})]"
+style="background-color: #GET{bg_color, #ENV{bg_defaut}}; color: #GET{color};" />
+<br />
+]
+[(#ENV{choix}|match{(td)}|?{' '})
+<label><:sarkaspip:cfg_lbl_css_td{lbl_ho_complement=#ENV{complement_label_ho}}:></label>
+<input type="text" name="td#ENV{suffixe}" value="#ENV{td#ENV{suffixe}, #ENV{td_defaut}}" size="15" class="fondl" />
+<br />
+]
+[(#ENV{choix}|match{(ca)}|?{' '})
+<label><:sarkaspip:cfg_lbl_css_ca{lbl_ca_complement=#ENV{complement_label_ca}}:></label>
+[(#SET{bg_color, [(#ENV{ca#ENV{suffixe}, #ENV{ca_defaut}}|ajuster_couleur_input{background})]})]
+[(#SET{color, #[(#ENV{ca#ENV{suffixe}, #ENV{ca_defaut}}|ajuster_couleur_input{color})]})]
+<input type="color" name="ca#ENV{suffixe}" value="#ENV{ca#ENV{suffixe}, #ENV{ca_defaut}}" size="11" class="fondl[ (#ENV{ca#ENV{suffixe}, #ENV{ca_defaut}}|!={transparent}|?{palette})]"
+style="background-color: #GET{bg_color, #ENV{bg_defaut}}; color: #GET{color};" />
+<br />
+]
+[(#ENV{choix}|match{(ch)}|?{' '})
+<label><:sarkaspip:cfg_lbl_css_ch{lbl_ch_complement=#ENV{complement_label_ch}}:></label>
+[(#SET{bg_color, [(#ENV{ch#ENV{suffixe}, #ENV{ch_defaut}}|ajuster_couleur_input{background})]})]
+[(#SET{color, #[(#ENV{ch#ENV{suffixe}, #ENV{ch_defaut}}|ajuster_couleur_input{color})]})]
+<input type="color" name="ch#ENV{suffixe}" value="#ENV{ch#ENV{suffixe}, #ENV{ch_defaut}}" size="11" class="fondl[ (#ENV{ch#ENV{suffixe}, #ENV{ch_defaut}}|!={transparent}|?{palette})]"
+style="background-color: #GET{bg_color, #ENV{bg_defaut}}; color: #GET{color};" />
+<br />
+]

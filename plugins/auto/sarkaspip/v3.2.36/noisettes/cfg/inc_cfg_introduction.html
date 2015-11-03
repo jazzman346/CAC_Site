@@ -1,0 +1,12 @@
+<label><:sarkaspip:cfg_lbl_intro_article:></label>
+<input type="text" name="intro_article" value="#ENV{intro_article, 300}" size="3" class="fondl" />
+<br />
+<p><:sarkaspip:cfg_inf_lire_suite:></p>
+<label>
+	<input type="radio" name="avec_lire_suite" value="oui" [(#ENV{avec_lire_suite, non}|=={oui}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_oui:>
+</label>
+<label>
+	<input type="radio" name="avec_lire_suite" value="non" [(#ENV{avec_lire_suite, non}|=={non}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_non:>
+</label>

@@ -1,0 +1,11 @@
+[<p>(#ENV{explication})</p>]
+<label><:sarkaspip:cfg_lbl_liste_secteurs:></label>
+<select name="rubrique_#ENV{secteur}" id="select_secteur">
+	<option value="0"[ (#ENV{rubrique_#ENV{secteur}, 0}|=={0}|?{selected="selected"})]>--</option>
+<BOUCLE_encours(RUBRIQUES){tout}{id_rubrique=#ENV{rubrique_#ENV{secteur}, 0}}>
+	[<option value="#ID_RUBRIQUE" selected="selected">(#TITRE|attribut_html)</option>]
+</BOUCLE_encours>
+<BOUCLE_secteurs(RUBRIQUES){tout}{racine}{id_rubrique!==#RACINE_SPECIALISEE}{par num titre}{par titre}>
+	[<option value="#ID_RUBRIQUE">(#TITRE|attribut_html)</option>]
+</BOUCLE_secteurs>
+</select>

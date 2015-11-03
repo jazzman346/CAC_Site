@@ -1,0 +1,33 @@
+[(#REM) 
+<!-- Affichage de la liste des breves trouvees lors d'une recherche 
+	Recoit en argument :
+		- recherche : le(s) mot(s) recherches
+-->
+]
+
+<B_breves_recherche>
+	<div id="recherche_breve" class="commentaires">
+		<a rel="nofollow" href="#header" title="<:sarkaspip:kezako_haut_page:>" class="fonction revenir_haut_page"></a>
+		<h2><:sarkaspip:recherche_breves_resultat:>&nbsp;&#40;#GRAND_TOTAL&#41;</h2>
+		#ANCRE_PAGINATION
+		[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_breve, 3}|match{^(1|3)$}|?{' '})
+		  [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_breve}})</div>]
+		]
+		<ul>
+<BOUCLE_breves_recherche(BREVES) {recherche}{id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}} {par points} {inverse} {pagination #CONFIG{sarkaspip_recherche/pas_pagination_recherche_breve, 5}}>
+		[(#INCLURE{fond=noisettes/recherche/inc_recherche_extrait}
+			{titre=#TITRE}
+			{afficher_date=oui}
+			{date=#DATE}
+			{url=#URL_BREVE}
+			{afficher_logo=non}
+			{afficher_auteur=non}
+			{ajax}
+		)]
+</BOUCLE_breves_recherche>
+		</ul>
+		[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_breve, 3}|match{^(2|3)$}|?{' '})
+		  [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_breve}})</div>]
+		]
+	</div>
+</B_breves_recherche>

@@ -1,0 +1,41 @@
+[<p>(#ENV{explication_popularite})</p>]
+<label>
+	<input type="radio" name="avec_popularite" value="oui" [(#ENV{avec_popularite, oui}|=={oui}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_oui:>
+</label>
+<label>
+	<input type="radio" name="avec_popularite" value="non" [(#ENV{avec_popularite, oui}|=={non}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_non:>
+</label>
+[(#PLUGIN{NOTATION}|oui)
+<br />
+[<p>(#ENV{explication_notation})</p>]
+<label>
+	<input type="radio" name="position_notation" value="0" [(#ENV{position_notation, 0}|=={0}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_bloc_non:>
+</label><br />
+<label>
+	<input type="radio" name="position_notation" value="1" [(#ENV{position_notation, 0}|=={1}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_bloc_cartouche:>
+</label><br />
+<label>
+	<input type="radio" name="position_notation" value="2" [(#ENV{position_notation, 0}|=={2}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_bloc_fin_description:>
+</label>
+]
+[(#PLUGIN{SOCIALTAGS}|oui)
+<br />
+[<p>(#ENV{explication_socialtags})</p>]
+<label>
+	<input type="radio" name="position_socialtags" value="0" [(#ENV{position_socialtags, 0}|=={0}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_bloc_non:>
+</label><br />
+<label>
+	<input type="radio" name="position_socialtags" value="1" [(#ENV{position_socialtags, 0}|=={1}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_bloc_cartouche:>
+</label><br />
+<label>
+	<input type="radio" name="position_socialtags" value="2" [(#ENV{position_socialtags, 0}|=={2}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_bloc_fin_description:>
+</label>
+]

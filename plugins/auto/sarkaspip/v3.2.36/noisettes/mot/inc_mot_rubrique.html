@@ -1,0 +1,30 @@
+<B_rubrique>
+<div id="recherche_rubrique" class="commentaires">
+	<a rel="nofollow" href="#header" title="<:sarkaspip:kezako_haut_page:>" class="fonction revenir_haut_page"></a>
+    <h2><:sarkaspip:recherche_rubriques_resultat:>&nbsp;&#40;#GRAND_TOTAL&#41;</h2>
+	#ANCRE_PAGINATION
+    [(#CONFIG{sarkaspip_recherche/position_pagination_recherche_article, 3}|match{^(1|3)$}|?{' '})
+      [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_article}})</div>]
+    ]
+    <ul>
+<BOUCLE_rubrique(RUBRIQUES){pagination #CONFIG{sarkaspip_recherche/pas_pagination_recherche_article, 5}}
+	{id_mot=#ENV{id1,#ENV{id2,#ENV{id3}}}}
+	{id_mot=#ENV{id2,#ENV{id3,#ENV{id1}}}}
+	{id_mot=#ENV{id3,#ENV{id1,#ENV{id2}}}}
+>
+	[(#INCLURE{fond=noisettes/recherche/inc_recherche_extrait}
+        {titre=#TITRE}
+        {afficher_date=non}
+        {url=#URL_RUBRIQUE}     
+        {afficher_logo=oui}
+        {logo=#LOGO_RUBRIQUE||inserer_attribut{alt,#TITRE|texte_backend}}
+        {afficher_auteur=non}
+        {ajax}
+    )]
+</BOUCLE_rubrique>
+	</ul>
+	[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_article, 3}|match{^(2|3)$}|?{' '})
+      [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_article}})</div>]
+    ]
+</div>
+</B_rubrique>

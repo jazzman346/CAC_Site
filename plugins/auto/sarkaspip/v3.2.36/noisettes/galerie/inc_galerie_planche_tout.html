@@ -1,0 +1,23 @@
+<B_galerie>
+<div class="planche">
+[(#REM) <!-- Pagination de la page galerie --> ]
+#ANCRE_PAGINATION
+[(#CONFIG{sarkaspip_galerie/position_pagination_1, 3}|match{^(1|3)$}|?{' '})
+	[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_galerie/modele_pagination_1}})</div>]
+]
+	<ul>
+<BOUCLE_galerie(ARTICLES){id_secteur=#RACINE_SPECIALISEE{galerie}}{par date}{inverse #CONFIG{sarkaspip_galerie/sens_tri_1, 1}}{pagination #CONFIG{sarkaspip_galerie/pas_pagination_1, 5}}>
+	<INCLURE{fond=noisettes/album/inc_album_introduction}
+		{id_article}
+		{1_colonne=#CONFIG{sarkaspip_galerie/album_1_colonne, 0}}
+		{taille_introduction=#CONFIG{sarkaspip_galerie/intro_album, 200}}
+		{pas_pagination=#CONFIG{sarkaspip_galerie/pas_pagination_1, 5}}
+		{compteur_boucle=#COMPTEUR_BOUCLE}>
+</BOUCLE_galerie>
+	</ul>
+	<br class="nettoyeur" />      
+	[(#CONFIG{sarkaspip_article/position_pagination_1, 3}|match{^(2|3)$}|?{' '})
+		[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_galerie/modele_pagination_1}})</div>]
+	]
+</div> <!-- Fin planche -->
+</B_galerie>

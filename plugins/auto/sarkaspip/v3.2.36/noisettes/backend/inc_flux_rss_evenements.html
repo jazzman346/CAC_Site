@@ -1,0 +1,7 @@
+[(#REM)	<!-- On diffuse les evenements des n derniers jours --> ]
+<BOUCLE_evenements_recents(ARTICLES){lang ?}{branche ?}{id_mot ?}{id_auteur ?}{id_secteur=#RACINE_SPECIALISEE{agenda}}{par date}{inverse}{0, #CONFIG{sarkaspip_backend/nb_evenements, 5}}{doublons EVENEMENT}>
+	<INCLURE{fond=inc-rss-item}{id_article}>
+</BOUCLE_evenements_recents>
+<BOUCLE_evenements_tres_recents(ARTICLES){lang ?}{branche ?}{id_mot ?}{id_auteur ?}{id_secteur=#RACINE_SPECIALISEE{agenda}}{par date}{inverse}{age<#CONFIG{sarkaspip_backend/age_evenements, 3}}{doublons EVENEMENT}>
+	<INCLURE{fond=inc-rss-item}{id_article}>
+</BOUCLE_evenements_tres_recents>

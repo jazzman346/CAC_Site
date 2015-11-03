@@ -1,0 +1,96 @@
+[(#REM) <!-- Pipeline de debut pour inserer des noisettes perso --> ]
+[(#PIPELINE{
+	colonne_navigation_debut,
+	[(#ARRAY{args, [(#ENV*|unserialize)], data, ''})]}
+)]
+
+[(#REM) <!-- Bloc des publications recentes --> ]
+[(#CONFIG{sarkaspip_noisettes/position_publications, 0}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/inc_dernieres_publications}{ajax}>
+]
+[(#REM) <!-- Bloc de recherche --> ]
+[(#CONFIG{sarkaspip_noisettes/position_recherche, 2}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/recherche/inc_recherche}>
+]
+
+[(#REM) <!-- Bloc de navigation des rubriques  --> ]
+[(#CONFIG{sarkaspip_menus/position_rubriques, 1}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/navigation/inc_menu_rubriques_#CONFIG{sarkaspip_menus/modele_rubriques, 1}}{id_rubrique}>
+]
+
+[(#REM) <!-- Bloc de navigation des raccourcis --> ]
+[(#CONFIG{sarkaspip_menus/position_pages, 1}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/navigation/inc_menu_pages_speciales}{position=navigation}>
+]
+[(#CONFIG{sarkaspip_menus/position_formulaires, 1}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/navigation/inc_menu_formulaires}{id_rubrique}{position=navigation}>
+]
+
+[(#REM) <!-- affichage de la noisette Nuage --> ]
+[(#PLUGIN{NUAGE}|?{' '})
+	[(#CONFIG{sarkaspip_noisettes/position_nuage, 0}|=={1}|?{' '})
+		<INCLURE{fond=noisettes/mot/inc_mot_nuage}>
+	]
+]
+
+[(#REM) <!-- affichage du mini-agenda -->]
+<BOUCLE_acces_agenda(RUBRIQUES) {id_rubrique=#RACINE_SPECIALISEE{agenda}}>
+[(#CONFIG{sarkaspip_noisettes/position_miniagenda, 2}|=={1}|oui)
+	<INCLURE{fond=noisettes/agenda/inc_mini_agenda_#CONFIG{sarkaspip_agenda/plugin, 1}}{ajax}{id_rubrique=#ID_RUBRIQUE}{self=#SELF}>
+]
+</BOUCLE_acces_agenda>
+
+[(#REM) <!-- affichage du panneau derniers commentaires sauf sur la page articles ou album --> ]
+[(#CONFIG{sarkaspip_noisettes/position_commentaires, 0}|=={1}|?{' '})
+	[(#ENV{page}|match{article|album}|?{'',' '})
+		<INCLURE{fond=noisettes/inc_commentaires, id_secteur, ajax}>
+	]
+]
+
+[(#REM) <!-- affichage du panneau derniers messages de forum sauf sur les pages du forum --> ]
+[(#CONFIG{sarkaspip_noisettes/position_messages, 0}|=={1}|?{' '})
+	[(#ENV{id_secteur}|=={#RACINE_SPECIALISEE{forum}}|?{'',' '})
+		<INCLURE{fond=noisettes/inc_messages, id_secteur, ajax}>
+	]
+]
+
+[(#REM) <!-- affichage du panneau d'annonce --> ]
+[(#CONFIG{sarkaspip_noisettes/position_annonce, 0}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/inc_annonce}>
+]
+
+[(#REM) <!-- affichage de la noisette Rainette --> ]
+[(#PLUGIN{RAINETTE}|?{' '})
+	[(#CONFIG{sarkaspip_noisettes/position_rainette, 0}|=={1}|?{' '})
+		<INCLURE{fond=noisettes/inc_rainette}>
+	]
+]
+
+[(#REM) <!-- affichage des X dernieres breves ou derniers sites en fonction du contexte --> ]
+[(#ENV{page}|!={herbier}|?{' '})
+	[(#CONFIG{sarkaspip_noisettes/position_herbier, 0}|=={1}|?{' '})
+		<INCLURE{fond=noisettes/herbier/inc_herbier_recents_#CONFIG{sarkaspip_noisettes/liste_herbier, 2}}{id_secteur}>
+	]
+]
+[(#ENV{page}|!={breve}|et{#CONFIG{sarkaspip_noisettes/position_breves, 2}|=={1}}|oui)
+	<INCLURE{fond=noisettes/breve/inc_breves_recentes}{id_secteur}>
+]
+
+[(#REM) <!-- Blocs de statistiques --> ]
+[(#CONFIG{sarkaspip_noisettes/position_stats_1, 1}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/statistiques/inc_stats_site}>
+]
+[(#CONFIG{sarkaspip_noisettes/position_stats_2, 0}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/statistiques/inc_stats_articles}>
+]
+
+[(#REM) <!-- Bloc des badges --> ]
+[(#CONFIG{sarkaspip_noisettes/position_badges, 1}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/inc_badges}>
+]
+
+[(#REM) <!-- Pipeline de fin pour inserer des noisettes perso --> ]
+[(#PIPELINE{
+	colonne_navigation_fin,
+	[(#ARRAY{args, [(#ENV*|unserialize)], data, ''})]}
+)]

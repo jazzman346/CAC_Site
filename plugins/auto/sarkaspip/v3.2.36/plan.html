@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{7200}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}{meta_titre=<:sarkaspip:plan_site:>}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=plan}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			<div[ id="plan_(#ENV{tri})"] class="arbre">
+				<div class="titre"><h1><:sarkaspip:plan_site:></h1></div>
+		<BOUCLE_0_article(ARTICLES) {0,1}>
+				<INCLURE{fond=noisettes/plan/inc_plan}{ajax}{tri}>
+		</BOUCLE_0_article>
+				<div id="avertissement" class="message_erreur"><:sarkaspip:msg_0_article_publie:></div>
+		<//B_0_article>
+			</div>
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=plan}>
+	</div>
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]		
+		<INCLURE{fond=noisettes/extra}{env}{page=plan}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=plan}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>
+

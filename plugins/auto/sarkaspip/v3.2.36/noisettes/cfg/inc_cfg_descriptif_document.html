@@ -1,0 +1,9 @@
+<p><:sarkaspip:cfg_inf_descriptif_doc:></p>
+<label>
+	<input type="radio" name="avec_descriptif" value="oui" [(#ENV{avec_descriptif, non}|=={oui}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_oui:>
+</label>
+<label>
+	<input type="radio" name="avec_descriptif" value="non" [(#ENV{avec_descriptif, non}|=={non}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_non:>
+</label>

@@ -1,0 +1,29 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_site:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_syndication:></legend>
+			<p><:sarkaspip:cfg_inf_syndication_nbj:></p>
+			<label><:sarkaspip:cfg_lbl_nb_jours_syndiques_1:> :</label>
+			<input type="text" name="nbj_syndication_1" value="#ENV{nbj_syndication_1, 30}" size="3" class="fondl" />
+			<br />
+			<label><:sarkaspip:cfg_lbl_nb_jours_syndiques_2:> :</label>
+			<input type="text" name="nbj_syndication_2" value="#ENV{nbj_syndication_2, 60}" size="3" class="fondl" />
+			<p><:sarkaspip:cfg_inf_syndication_pagination:></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{suffixe=_site}
+				{defaut_pas=50}
+				{defaut_position=3}
+				{env}>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_site}|afficher_config)]
+</div>

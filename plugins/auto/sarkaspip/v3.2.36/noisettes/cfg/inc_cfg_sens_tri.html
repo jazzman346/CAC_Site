@@ -1,0 +1,10 @@
+[<p>(#ENV{explication})</p>]
+<label>
+	<input type="radio" name="sens_tri#ENV{suffixe}" value="0" [(#ENV{sens_tri#ENV{suffixe}, #ENV{defaut_sens}}|=={0}|?{checked="checked"})] />
+	[(#ENV{label_sens_normal})]
+</label>
+<br />
+<label>
+	<input type="radio" name="sens_tri#ENV{suffixe}" value="1" [(#ENV{sens_tri#ENV{suffixe}, #ENV{defaut_sens}}|=={1}|?{checked="checked"})] />
+	[(#ENV{label_sens_inverse})]
+</label>

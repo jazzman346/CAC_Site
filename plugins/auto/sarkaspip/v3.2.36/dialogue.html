@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{7200}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=(#CONFIG{sarkaspip_formulaires/titre_dialogue, <:sarkaspip:dialoguer_site:>})}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=dialogue}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			<div id="dialogue" class="formulaire">
+				[<div class="titre"><h1>(#CONFIG{sarkaspip_formulaires/titre_dialogue, <:sarkaspip:dialoguer_site:>})</h1></div>]
+				[<div class="description">(#CONFIG{sarkaspip_formulaires/descriptif_dialogue, <:sarkaspip:dialogue_descriptif:>}|propre)</div>]
+				[(#SHOUTBOX{#EVAL{_SARKASPIP_CONFIG_SHOUTBOX_PAGE},#EVAL{_SARKASPIP_CONFIG_SHOUTBOX_TAILLE}})]
+			</div>
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=dialogue}>
+	</div>  <!--navigation-->
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=dialogue}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=dialogue}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>

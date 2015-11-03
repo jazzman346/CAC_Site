@@ -1,0 +1,42 @@
+<BOUCLE_rubrique_galerie(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{86400}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=(#CONFIG{sarkaspip_galerie/titre, <:sarkaspip:albums_galerie:>}|entites_html)}
+		{meta_description=#INTRODUCTION{#EVAL{_SARKASPIP_CONFIG_INTRO_META}}|supprimer_tags}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+			<INCLURE{fond=noisettes/bandeau}{page=galerie}{env}>
+	</div> <!--header-->
+	
+	<div id="wrapper">
+		<div id="content">
+			<div id="galerie" class="galerie">
+			  <INCLURE{fond=noisettes/galerie/inc_galerie_planche}{ajax}{id_rubrique}{categorie}>
+			</div> <!--galerie-->
+		</div> <!--content-->
+	</div> <!--wrapper-->
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+			<INCLURE{fond=noisettes/navigation}{env}{page=galerie}{id_secteur}>
+	</div> <!--navigation-->
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=galerie}{id_secteur}>
+	</div> <!--extra-->
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+			<INCLURE{fond=noisettes/pied}{env}{page=galerie}{squelette=#SQUELETTE}>
+	</div> <!--footer-->
+</div> <!--container-->
+</body>
+</html>
+[(#REM) <!-- ================================== ERREUR BOUCLE VIDE  ================================== --> ]
+</BOUCLE_rubrique_galerie>

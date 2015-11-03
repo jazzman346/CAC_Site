@@ -1,0 +1,84 @@
+/* BANDEAU.CSS                                                          */
+/* Cette feuille contient:                                              */
+/* - les styles de la partie haute du bandeau                           */
+/* - les styles de la partie basse du bandeau                           */
+/* - les styles du chemin du bandeau                                    */
+/* - les styles de la partie haute du pied de page                      */
+/* - les styles de la partie basse du pied de page                      */
+/* -------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------- */
+/* 	Styles du bandeau - partie haute                                    */
+/* -------------------------------------------------------------------- */
+
+/* Structure generale du bandeau haut */
+.bandeau_haut {
+	padding: 0 10px 0;[ min-height: (#CONFIG{sarkaspip_bandeau/haut_minheight, 50})px;]
+	background: #CONFIG{sarkaspip_styles/bg_bandeau_haut, #6262a4}[ url((#CHEMIN{images/bg_bandeau_haut#CONFIG{sarkaspip_styles/bi_extension_bandeau_haut, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_bandeau_haut})] ;}
+
+/* Navigation: liste des langues et raccourcis */
+.nav_bandeau{float: right; min-width: 150px; max-width: 45%; color: #CONFIG{sarkaspip_styles/fg_bandeau_haut, #eeeeee}; font-size: 1.2em; padding-top:10px;}
+.nav_raccourci, .nav_langue {margin-right: 5px; text-align: right;}
+.nav_langue {line-height: 1.6em;}
+.nav_langue ul, .nav_raccourci ul {padding: 0 5px 0 0; margin: 5px 0; line-height: 1em;}
+.nav_langue li, .nav_raccourci li  {display: inline; list-style: none;}
+.nav_langue li a, .nav_raccourci li a {color: #CONFIG{sarkaspip_styles/fg_bandeau_haut, #eeeeee}; text-decoration: none; padding: 0 2px 0 2px;}
+.nav_langue li a:hover, .nav_raccourci li a:hover {color: #CONFIG{sarkaspip_styles/ho_bandeau_haut, #aaaaaa}; text-decoration: #CONFIG{sarkaspip_styles/td_bandeau_haut, none};}
+.nav_langue li.on {font-size: 1.25em; font-weight: bold;}
+.nav_raccourci li.auteur a {font-weight: normal;}
+.raccourci_bandeau {} /* sert uniquement a faire le pendant de la structure des raccourcis dans la colonne navigation */
+
+/* Logo, titre et slogan du site */
+.site_logo {margin: 10px 20px 10px 10px; float: left;}
+.site_nom  {padding: 10px 0 0 10px; overflow: visible !important /*Firefox*/; overflow :hidden /*IE6*/;}
+.site_nom h1 {}
+.site_nom h1 a {color: #CONFIG{sarkaspip_styles/fg_bandeau_haut, #eeeeee}; text-decoration: none;}
+.site_nom h1 a:hover {color: #CONFIG{sarkaspip_styles/ho_bandeau_haut, #eeeeee}; text-decoration: #CONFIG{sarkaspip_styles/td_bandeau_haut, none};}
+.site_nom h2 {font-size: 1.3em; line-height: 1em; margin: 0; color: #CONFIG{sarkaspip_styles/fg_bandeau_haut, #eeeeee}; display: inline;}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles du bandeau - partie basse                                    */
+/* -------------------------------------------------------------------- */
+.bandeau_bas {
+	[min-height: (#CONFIG{sarkaspip_bandeau/bas_minheight, 23})px; ]
+	background: #CONFIG{sarkaspip_styles/bg_bandeau_bas, #6262a4}[ url((#CHEMIN{images/bg_bandeau_bas#CONFIG{sarkaspip_styles/bi_extension_bandeau_bas, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_bandeau_bas})];
+  text-align:left;}
+	
+a .bandeau_bas  {display:inline;}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles du bandeau - chemin                                          */
+/* -------------------------------------------------------------------- */
+.bandeau_chemin {
+	min-height:22px; margin-bottom: 20px; color: #CONFIG{sarkaspip_styles/fg_chemin, #6262a4}; padding: 0 15px;
+	background: #CONFIG{sarkaspip_styles/bg_chemin, #ddddef}[ url((#CHEMIN{images/bg_chemin#CONFIG{sarkaspip_styles/bi_extension_chemin, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_chemin})];
+	height:auto;line-height:1.4em;
+	}
+.bandeau_chemin .recherche_chemin {width: auto; float: right;}
+.bandeau_chemin a {padding: 0 5px 0 10px; color: #CONFIG{sarkaspip_styles/fg_chemin, #6262a4};}
+.bandeau_chemin a:hover {color: #CONFIG{sarkaspip_styles/ho_chemin, #808080}; text-decoration: #CONFIG{sarkaspip_styles/td_chemin, none};}
+.chemin {padding-top: 5px; font-size:1.2em;}
+
+/* Surcharge des boutons du plugin Boutons dans le Texte */
+.textsizeup, .textsizedown, .textonly {float: right; margin: 0 5px 0 0; padding: 0; border: 0;}
+.textsizeup:hover, .textsizedown:hover {}
+.textonly {display: none}
+
+/* -------------------------------------------------------------------- */
+/* 	Styles du pied de page - partie haute (non disponible)              */
+/* -------------------------------------------------------------------- */
+
+/* -------------------------------------------------------------------- */
+/* 	Styles du pied de page - partie basse                               */
+/* -------------------------------------------------------------------- */
+.pied_bas { font-size: 1.2em; 
+	min-height: #CONFIG{sarkaspip_pied/bas_minheight, 50}px;
+	padding: #CONFIG{sarkaspip_pied/bas_toppadding, 10}px 20px 10px;
+	text-align: #CONFIG{sarkaspip_styles/ta_pied_bas, right};
+	background: #CONFIG{sarkaspip_styles/bg_pied_bas, #6262a4}[ url((#CHEMIN{images/bg_pied_bas#CONFIG{sarkaspip_styles/bi_extension_pied_bas, .gif}}))][ (#CONFIG{sarkaspip_styles/bi_proprietes_pied_bas})];
+	color: #CONFIG{sarkaspip_styles/fg_pied_bas, #eeeeee};
+	[(#CONFIG{sarkaspip_pied/position_pied, 1}|=={0}|oui) display: none;]}
+.pied_bas .copyright {margin: 0 0 5px;}
+.pied_bas .credits {margin: 0 0 5px;}
+.pied_bas a {color: #CONFIG{sarkaspip_styles/fg_pied_bas, #eeeeee}; text-decoration: none;}
+.pied_bas a:hover {color: #CONFIG{sarkaspip_styles/ho_pied_bas, #aaaaaa}; text-decoration: #CONFIG{sarkaspip_styles/td_pied_bas, none};}

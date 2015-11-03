@@ -1,0 +1,57 @@
+<BOUCLE_auteur_principal(AUTEURS) {tout}{id_auteur}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{86400}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=#NOM*}
+		{meta_description=(#BIO|couper{150})}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=auteur}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			[(#REM) <!-- Informations sur l'auteur --> ]
+			<div class="auteur">
+				<INCLURE{fond=noisettes/auteur/inc_auteur_description}{id_auteur}>
+			</div>
+			[(#REM) <!-- articles publies par l'auteur --> ]
+			[(#CONFIG{sarkaspip_auteur/position_articles, 1}|=={1}|?{' '})
+				<INCLURE{fond=noisettes/auteur/inc_auteur_articles}{ajax}{id_auteur}>
+			]
+			[(#REM) <!-- albums publies par l'auteur --> ]
+			[(#CONFIG{sarkaspip_auteur/position_albums, 1}|=={1}|?{' '})
+				<INCLURE{fond=noisettes/auteur/inc_auteur_albums}{ajax}{id_auteur}>
+			]
+			[(#REM) <!-- Formumaire de contact de l'auteur --> ]
+			[(#CONFIG{sarkaspip_auteur/position_contact, 1}|=={1}|?{' '})
+				[<div class="formulaire">(#FORMULAIRE_ECRIRE_AUTEUR)</div>]
+			]
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=auteur}>
+	</div>
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=auteur}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=auteur}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>
+[(#REM) <!-- ================================== ERREUR BOUCLE VIDE  ================================== --> ]
+</BOUCLE_auteur_principal>

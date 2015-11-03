@@ -1,0 +1,20 @@
+<div id="noisette_badges" class="noisette">
+	<div class="badges">
+		[(#CONFIG{sarkaspip_noisettes/badge_xhtml}|=={on}|?{' '})
+			<a id="logo_xhtml" href="http://validator.w3.org/check?uri=referer" title="<:sarkaspip:verifier_xhtml:>">&nbsp;</a>
+		]
+		[(#CONFIG{sarkaspip_noisettes/badge_rss}|=={on}|?{' '})
+			<a id="logo_rss" href="./spip.php?page=backend" title="<:sarkaspip:syndiquer_site:>">&nbsp;</a>
+		]
+		[(#CONFIG{sarkaspip_noisettes/badge_sarka}|=={on}|?{' '})
+			<a id="logo_sarkaspip" href="http://www.sarka-spip.net" title="<:sarkaspip:squelette|ucfirst:>">&nbsp;</a>
+		]
+		[(#CONFIG{sarkaspip_noisettes/badge_spip}|=={on}|?{' '})
+			<a id="logo_spip" href="http://spip.net" title="<:sarkaspip:site_realise_avec_spip:>">&nbsp;</a>
+		]
+		[(#CONFIG{sarkaspip_noisettes/badge_perso}|=={on}|?{' '})
+			<a id="logo_perso"[ href="(#CONFIG{sarkaspip_noisettes/lien_badge_perso})"][ title="(#CONFIG{sarkaspip_noisettes/infobulle_badge_perso})"]>&nbsp;</a>
+		]
+		<br class="nettoyeur" />
+	</div>
+</div>

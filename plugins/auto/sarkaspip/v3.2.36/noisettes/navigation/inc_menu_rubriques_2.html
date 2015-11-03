@@ -1,0 +1,34 @@
+<B_rubriques_0>
+	<div id="menu_rubriques" class="noisette menu_rub2"><ul>
+<BOUCLE_rubriques_0(RUBRIQUES){racine}{id_rubrique!==#RACINE_SPECIALISEE}{par num titre}{par titre}>
+		<li>
+			[(#SET{classe, [(#EXPOSE)]})]
+			[(#SET{rang, [m(#COMPTEUR_BOUCLE)]})]
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|!={2}|?{' '})[<a[ href="(#URL_RUBRIQUE)"][ class="(#GET{classe})"][ id="(#GET{rang})"]>(#TITRE|couper{80})</a>]]
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|?{' '})<INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique}{classe=#GET{classe}}{rang=#GET{rang}}>]
+	<B_rubriques_1>
+		<ul>
+	<BOUCLE_rubriques_1(RUBRIQUES){id_parent}{par num titre}{par titre}>
+			<li>
+				[(#SET{classe, [(#EXPOSE)]})]
+				[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|!={2}|?{' '})[<a[ href="(#URL_RUBRIQUE)"][ class="(#GET{classe})"]>(#TITRE|couper{80})</a>]]
+				[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|?{' '})<INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique}{classe=#GET{classe}}>]
+		<B_rubriques_2>
+			<ul>
+		<BOUCLE_rubriques_2(RUBRIQUES){id_parent}{par num titre}{par titre}>
+				<li>
+					[(#SET{classe, [(#EXPOSE)]})]
+					[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|!={2}|?{' '})[<a[ href="(#URL_RUBRIQUE)"][ class="(#GET{classe})"]>(#TITRE|couper{80})</a>]]
+					[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|?{' '})<INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique}{classe=#GET{classe}}>]
+				</li>
+		</BOUCLE_rubriques_2>
+			</ul>
+		</B_rubriques_2>
+			</li>
+	</BOUCLE_rubriques_1>
+		</ul>
+	</B_rubriques_1>
+		</li>
+</BOUCLE_rubriques_0>
+	</ul></div>
+</B_rubriques_0>

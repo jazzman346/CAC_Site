@@ -1,0 +1,42 @@
+[(#REM) 
+<!-- Articles syndiques de l'ensemble du site ou d'un site reference donne
+	Recoit en argument :
+		- id_syndic: id du site concernee
+		- nb_jours: nombre de jours de syndication
+-->
+]
+[(#REM) <!-- affichage des syndications de tous les sites sinon --> ]
+<div id="articles_syndiques" class="commentaires">	    
+<B_articles_syndiques>
+#ANCRE_PAGINATION
+[(#CONFIG{sarkaspip_site/position_pagination_site, 3}|match{^(1|3)$}|?{' '})
+	[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_site/modele_pagination_site}})</div>]
+]
+<BOUCLE_articles_syndiques(SYNDIC_ARTICLES){id_syndic ?}{id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}}{par date}{inverse}{age<#ENV{nb_jours}}{pagination #CONFIG{sarkaspip_site/pas_pagination_site, 50}}>
+[(#DATE|affdate|unique{articles_syndiques}|oui)
+	[(#DATE|affdate|!={#GET{date_courante}}|oui)
+		[(#GET{date_courante}|oui)</ul>]
+	]
+	<h2 class="date">[(#DATE|nom_jour)][&nbsp;(#DATE|affdate)]</h2>
+	<ul>
+	[(#SET{date_courante, [(#DATE|affdate)]})]
+	[(#SET{compteur_li, 0})]
+]
+		[(#SET{compteur_li, #GET{compteur_li}|plus{1}})]
+		<li[ class="co_n(#GET{compteur_li})"]>
+		[(#ENV{id_syndic}|non)
+			[<div class="logo droite"><a[ href="(#URL_SITE)"][ title="(#NOM_SITE|texte_backend)"]>(#LOGO_SITE||image_reduire{40}||inserer_attribut{alt,#NOM_SITE|texte_backend})</a></div>]
+		]
+			[<a class="titre" href="#URL_ARTICLE">(#TITRE*)</a>]
+			[<div class="texte">(#DESCRIPTIF)</div>]
+			<br class="nettoyeur"/>
+		</li>
+</BOUCLE_articles_syndiques>
+	</ul>
+[(#CONFIG{sarkaspip_site/position_pagination_site, 3}|match{^(2|3)$}|?{' '})
+	[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_site/modele_pagination_site}})</div>]
+]
+</B_articles_syndiques>
+	<p class="avertissement"><:sarkaspip:msg_0_article_syndique:></p>
+<//B_articles_syndiques>
+</div> <!-- commentaires -->

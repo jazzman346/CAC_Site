@@ -1,0 +1,23 @@
+<div class="nav_recherche contenu ">
+	<h2 class="titre_bloc"><:sarkaspip:sstitre_recherche_web:></h2>
+	<a href="http://www.voila.fr/"><img class="moteur" src="#CHEMIN{images/logo-voila.gif}" alt="Voila" /></a>
+	<div class="formulaire_spip formulaire_recherche" id="voila">
+	[(#REM) <!-- Voila.fr --> ]
+	<form method="get" action="http://r.voila.fr/se">
+		<div>
+			<input type="hidden" name="dblg" value="fr" />
+			<input type="hidden" name="ctx" value="voila" />
+			<input type="hidden" name="lg" value="FR" />
+			<input type="hidden" name="sev" value="2" />
+			<input type="hidden" name="ref" value="ext" />
+			<input type="text" name="kw" class="text" size="10" maxlength="255"  value="<:sarkaspip:requete:>" onfocus="this.value='';" />
+			<input type="image" src="[(#CHEMIN{rechercher.gif})]" class="submit" value="" />
+			<br />
+			<input type="radio" name="db" value="web" checked="checked" /><:sarkaspip:web_france:>
+			<br />
+			<input type="radio" name="db" value="www_world" /><:sarkaspip:web_monde:>
+			
+		</div>
+	</form>
+	</div>
+</div>

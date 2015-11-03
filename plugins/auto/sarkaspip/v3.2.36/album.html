@@ -1,0 +1,95 @@
+<BOUCLE_album_principal(ARTICLES) {id_article}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{7200}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=#TITRE*}
+		{meta_description=#INTRODUCTION{#EVAL{_SARKASPIP_CONFIG_INTRO_META}}|supprimer_tags}>
+ 
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=album}{id_rubrique}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			[(#REM) <!-- Contenu de l'article --> ]
+			<div id="album" class="article">
+				[(#REM) <!-- Titre, logo, texte de la rubrique --> ]
+				<INCLURE{fond=noisettes/article/inc_article_description}
+					{id_article}
+					{page=album}
+					{afficher_commentaires=oui}
+					{avec_popularite=#CONFIG{sarkaspip_album/avec_popularite, oui}}
+					{avec_notation=#CONFIG{sarkaspip_album/position_notation, 0}}
+					{avec_socialtags=#CONFIG{sarkaspip_album/position_socialtags, 0}}
+					{logo_rubrique=#CONFIG{sarkaspip_album/logo_rubrique, oui}}
+					{taille_logo=#CONFIG{sarkaspip_album/taille_logo, 150}}>
+		
+				[(#REM) <!-- Presentation des photos --> ]
+				<INCLURE{fond=noisettes/album/inc_album_presentation_photos}
+					{id_article}
+					{id_document}>
+				
+				[(#REM) <!-- Documents (sauf images) du portfolio de la rubrique --> ]
+				[(#CONFIG{sarkaspip_album/position_documents, 1}|=={1}|?{' '})
+					[(#INCLURE{fond=noisettes/document/inc_documents_joints}{id_article})]
+				]
+			</div>
+    				
+			[(#REM) <!-- Commentaires --> ]
+			<br />
+			[(#PETITION|?{'', ' '})
+				[(#SET{statut, [(#ENV{id_article}|statut_forum)]})]
+				[(#GET{statut}|!={non_autorise}|oui)
+					[(#CONFIG{sarkaspip_album/mode_commentaires, 2}=={1}|oui)
+					<INCLURE{fond=noisettes/article/inc_article_commentaires_fils}
+						{ajax}
+						{id_article}
+						{statut=#GET{statut}}
+						{pas_pagination=#CONFIG{sarkaspip_album/pas_pagination_commentaires, 20}}
+						{modele_pagination=#CONFIG{sarkaspip_album/modele_pagination_commentaires}}
+						{position_pagination=#CONFIG{sarkaspip_album/position_pagination_commentaires, 2}}
+						{sens_tri=#CONFIG{sarkaspip_album/sens_tri_commentaires, 1}}
+						{presentation_auteur=#CONFIG{sarkaspip_album/auteur_commentaires, 1}}
+						{id_thread=#ENV{id_tread}}>
+					]
+					[(#CONFIG{sarkaspip_album/mode_commentaires, 2}=={1}|non)
+					<INCLURE{fond=noisettes/article/inc_article_commentaires}
+						{ajax}
+						{id_article}
+						{statut=#GET{statut}}
+						{sens_tri=#CONFIG{sarkaspip_album/sens_tri_commentaires, 1}}
+						{presentation_auteur=#CONFIG{sarkaspip_album/auteur_commentaires, 1}}
+						{pas_pagination=#CONFIG{sarkaspip_album/pas_pagination_commentaires, 20}}
+						{modele_pagination=#CONFIG{sarkaspip_album/modele_pagination_commentaires}}
+						{position_pagination=#CONFIG{sarkaspip_album/position_pagination_commentaires, 2}}>
+					]
+    			] 
+    		]	
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=album}{id_rubrique}{id_secteur}>
+	</div>
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=album}{id_rubrique}{id_secteur}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=album}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>
+[(#REM) <!-- ================================== ERREUR BOUCLE VIDE  ================================== --> ]
+</BOUCLE_album_principal>

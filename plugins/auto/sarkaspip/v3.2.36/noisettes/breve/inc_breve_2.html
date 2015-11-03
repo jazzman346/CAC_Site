@@ -1,0 +1,13 @@
+[(#REM)
+<!-- 
+	Noisette pour l'affichage reduit des breves (1 bloc pour toutes les breves)
+    Recoit en argument :
+		- id_breve
+ -->
+]
+<BOUCLE_breve(BREVES) {id_breve}>
+	<h2><a class="titre" href="#URL_BREVE" title="<:sarkaspip:go_breve:>">
+		[(#DATE|affdate_jourcourt)]&nbsp;-&nbsp;[(#TITRE)]
+	</a></h2>
+	<div class="introduction">[(#INTRODUCTION{#CONFIG{sarkaspip_noisettes/intro_breve, 100}})]</div>
+</BOUCLE_breve>

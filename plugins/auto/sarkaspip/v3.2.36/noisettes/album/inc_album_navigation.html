@@ -1,0 +1,9 @@
+[(#REM) <!-- affichage de la noisette de navigation vers les objets connexes ˆ l'article --> ]
+<div id="noisette_navigation" class="noisette">
+	<h1 class="intitule"><:sarkaspip:navigation_titre:></h1>
+		[(#REM) <!-- Liste des mots-cles de l'article --> ]
+		[(#REM) <!-- Liste des articles de la meme rubrique --> ]
+		<INCLURE{fond=noisettes/album/inc_album_freres}{ajax}{id_article}>
+		[(#REM) <!-- Liste des articles "Lire aussi" --> ]
+		<INCLURE{fond=noisettes/article/inc_article_lire_aussi}{ajax}{id_article}>
+</div>

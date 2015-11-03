@@ -1,0 +1,63 @@
+[(#REM) 
+<!-- Sujet et ses reponses. Affichage en fin de page du formulaire d'ajout d'une reponse
+	Recoit en argument :
+		- id_forum: id du sujet concerne
+		- id_thread: id du fil concerne
+		- verrou: indique si le sujet est verrouille ou pas
+		- le verrou sera posé si besoin en analysant le titre du post (recherche de "_verrouillé_")
+		- sens_tri : sens de tri par date des réponses
+-->
+]
+[(#ENV{verrou}|=={lock}|oui)#SET{verrou, lock}]
+<BOUCLE_titre(FORUMS){id_forum=#ENV{id_thread}}>
+		[(#TITRE|strstr{_verrouille_}|oui) #SET{verrou, lock}]
+</BOUCLE_titre><div id="reponses" class="forum">
+	<a id="reponses" name="reponses" href="#reponses"></a>
+	[(#GET{verrou}|non)
+		<a class="fonction" id="commenter" href="#formulaire_reponse" title="<:sarkaspip:ecrire_reponse:>"></a>
+	]
+	<h2><:sarkaspip:forum_sujet_reponses:></h2>
+
+<B_reponses>
+#ANCRE_PAGINATION
+[(#CONFIG{sarkaspip_forum/position_pagination_2, 2}|match{^(1|3)$}|?{' '})
+[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_forum/modele_pagination_2}})</div>]
+]	
+	<table>
+
+
+<BOUCLE_reponses(FORUMS){id_thread}{id_forum!=#ENV{id_forum}}{plat}{par date}{inverse #ENV{sens_tri}}{pagination #CONFIG{sarkaspip_forum/pas_pagination_2, 30}}>
+		<tr class="message">
+			<td class="detail_auteur[ rp_n(#COMPTEUR_BOUCLE)]">
+				<a id="forum[(#ID_FORUM)]" name="forum[(#ID_FORUM)]" href="#forum[(#ID_FORUM)]"></a>
+				[(#DATE|affdate)] <:sarkaspip:agrave:>&nbsp;[(#DATE|affdate{'H\hi'})]
+			
+				<div class="gravatar">
+				<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+					<a href="#URL_AUTEUR">#NOM</a>
+					<br class="nettoyeur" />
+					<br class="nettoyeur" />
+					[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar32.png}}||image_passe_partout{32}|image_recadre{32,32,center,FFFFFF}|inserer_attribut{class,spip_logos gravatar}|inserer_attribut{alt,[<:sarkaspip:logo_de:> (#NOM)]})]	
+				</BOUCLE_auteur>
+					[(#PLUGIN{GRAVATAR}|oui)
+						[(#GRAVATAR{#EMAIL, 32, #CHEMIN{images/gravatar32.png}}||image_passe_partout{32}|image_recadre{32,32,center,FFFFFF}|inserer_attribut{class,spip_logos gravatar}|inserer_attribut{alt,[<:sarkaspip:logo_de:> (#NOM)]})]
+					]
+				<//B_auteur>
+				</div>
+			</td>
+			<td[ class="rp_n(#COMPTEUR_BOUCLE)"]>
+				[<div class="#EDIT{texte} texte">
+					(#TEXTE|lignes_longues)
+					<INCLURE{fond=noisettes/forum/inc_forum_documents, id_forum}>
+				</div>]
+				[<a class="lien" href="#URL_SITE">(#NOM_SITE)</a>]
+			</td>
+		</tr>
+</BOUCLE_reponses>		
+	</table>
+[(#CONFIG{sarkaspip_forum/position_pagination_2, 2}|match{^(2|3)$}|?{' '})
+[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_forum/modele_pagination_2}})</div>]
+]				
+</B_reponses>	
+<br class="nettoyeur" />
+</div>

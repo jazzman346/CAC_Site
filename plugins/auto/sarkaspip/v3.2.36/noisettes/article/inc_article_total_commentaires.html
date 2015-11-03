@@ -1,0 +1,31 @@
+[(#REM) 
+<!-- Affichage de l'article: logo, titre, chapo, texte, ps...
+	Recoit en argument :
+		- id_article: id de l'article ou album concerne
+		- statut : statut du forum (non autorise, ouvert, ferme)
+		- page: article/album, permet de dŽterminer l'url de la page
+		- ancre_meme_page: introduction/description, permet d'afficher ou pas les l'icone et de renvoyer vers l'ancre de la page sinon l'ancre de la page article
+-->
+]
+<BOUCLE_combien(FORUMS) {id_article}{plat}></BOUCLE_combien>
+	[(#TOTAL_BOUCLE|=={0}|?{' '})
+		[(#SET{libelle, <:sarkaspip:0_commentaire|ucfirst:>})]
+	]
+	[(#TOTAL_BOUCLE|!={0}|?{' '})
+		[(#SET{libelle, [(#TOTAL_BOUCLE)&nbsp;[(#TOTAL_BOUCLE|=={1}|?{<:sarkaspip:1_commentaire:>,<:sarkaspip:commentaires:>})]]})]
+	]
+<//B_combien>
+[(#ENV{statut}|=={ferme}|oui)
+	[(#SET{libelle, [(#GET{libelle})&nbsp;<:sarkaspip:forum_ferme:>]})]
+]
+[(#ENV{ancre_meme_page}|=={oui}|?{' '})
+	<a class="fonction" id="voir_commentaires" href="#commentaires"[ title="(#GET{libelle})"]></a>
+]
+[(#ENV{ancre_meme_page}|=={non}|?{' '})
+	[(#ENV{page}|=={album}|?{'',' '})
+		[<a[ href="(#URL_ARTICLE|ancre_url{commentaires})"]>(#GET{libelle})</a>]
+	]
+	[(#ENV{page}|=={album}|?{' '})
+		[<a[ href="(#URL_PAGE{album, id_article=#ENV{id_article}}|ancre_url{commentaires})"]>(#GET{libelle})</a>]
+	]
+]

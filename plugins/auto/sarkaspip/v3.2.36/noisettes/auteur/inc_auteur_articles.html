@@ -1,0 +1,28 @@
+[(#REM) 
+<!-- Articles de l'auteur, classes par par date inverse
+	Recoit en argument :
+		- id_auteur: id de la l'auteur concerne
+-->
+]
+<B_article>
+	<div id="articles_auteur" class="portfolio">
+		<h2><:sarkaspip:articles_auteur:></h2>
+		#ANCRE_PAGINATION
+		[(#CONFIG{sarkaspip_auteur/position_pagination_articles, 2}|match{^(1|3)$}|?{' '})
+			[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_auteur/modele_pagination_articles}})</div>]
+		]
+<BOUCLE_article(ARTICLES){id_rubrique!==#BRANCHE_SPECIALISEE}{id_auteur}{par date}{inverse}{pagination #CONFIG{sarkaspip_auteur/pas_pagination_articles, 5}}>
+		[(#INCLURE{fond=noisettes/article/inc_article_introduction}
+			{id_article}
+			{afficher_mere=oui}
+			{afficher_commentaires=oui}
+			{logo_rubrique=#CONFIG{sarkaspip_auteur/logo_rubrique, oui}}
+			{avec_lire_suite=#CONFIG{sarkaspip_auteur/avec_lire_suite, non}}
+			{taille_logo=#CONFIG{sarkaspip_auteur/taille_logo_articles, 150}}
+			{taille_introduction=#CONFIG{sarkaspip_auteur/intro_article, 300}})]
+</BOUCLE_article>
+		[(#CONFIG{sarkaspip_auteur/position_pagination_articles, 2}|match{^(2|3)$}|?{' '})
+			[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_auteur/modele_pagination_articles}})</div>]
+		]
+	</div>
+</B_article>

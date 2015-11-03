@@ -1,0 +1,28 @@
+[(#REM) <!-- affichage n derniers sites de l'herbier du secteur ou du site global --> ]
+<B_herbier>
+	<div id="noisette_herbier" class="noisette">
+		<h1><a class="intitule" href="[(#URL_PAGE{herbier}|parametre_url{type,liste})]"><:sarkaspip:herbier_sites|ucfirst:></a></h1>
+		<div class="contenu"><div class="texte">
+			<ul>
+<BOUCLE_herbier(SITES) {id_secteur ?}{id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}}{par date}{inverse}{0,#CONFIG{sarkaspip_noisettes/max_herbier, 5}}>
+			[(#REM) <!-- Bloc des vignettes defilantes de l'herbier -->]
+				[<li>
+					<a[ href="(#URL_SITE)"][ title="(#NOM_SITE|texte_backend)"]>
+						(#LOGO_SITE||image_reduire{120}||inserer_attribut{alt,#NOM_SITE|texte_backend}||inserer_attribut{class,spip_logos})
+					</a>
+				</li>]
+</BOUCLE_herbier>
+			</ul>
+			<br class="nettoyeur" />
+	<BOUCLE_combien(SITES) {id_secteur ?}{id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}}></BOUCLE_combien>
+			[(#TOTAL_BOUCLE)&nbsp;[(#TOTAL_BOUCLE|=={1}|?{<:sarkaspip:1_site_herbier:>,<:sarkaspip:n_sites_herbier:>})] ]
+			[(#ENV{id_secteur}|?{<:sarkaspip:herbier_contexte_secteur:>,<:sarkaspip:herbier_contexte_global:>})] 
+	<//B_combien>
+		</div></div>
+	</div>
+</B_herbier>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#noisette_herbier ul').innerfade({ speed: 'slow', timeout: 4000, type: 'sequence', containerheight: '90px' });
+});
+</script>

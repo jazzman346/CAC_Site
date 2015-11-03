@@ -1,0 +1,14 @@
+<plugin>
+	<nom>Sarka-SPIP Nautica</nom>
+	<auteur>C&#233;dric Couvrat</auteur>
+	<licence>GPL</licence>
+	<version>0.2.0</version>
+	<slogan>Th&#232;me Sarka-SPIP 3 simple &#224; 2 colonnes en pastel bleu</slogan>
+	<description>Un th&#232;me bas&#233; sur <a href='http://www.oswd.org/design/preview/id/3126'>Nautica</a> pour un layout fixe de 776 pixels de large.</description>
+	<icon>vignette.png</icon>
+	<etat>stable</etat>
+	<prefix>theme_sarka_nautica</prefix>
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
+	<utilise id="SarkaSpip" name="Sarka-SPIP 3" version="[3.0.2;)" />
+	<categorie>theme</categorie>
+</plugin>

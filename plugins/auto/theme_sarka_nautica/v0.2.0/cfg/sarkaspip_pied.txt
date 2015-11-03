@@ -1,0 +1,1 @@
+a:11:{s:13:"position_pied";s:1:"1";s:14:"copyright_site";s:1:"1";s:12:"licence_site";s:0:"";s:12:"version_spip";s:1:"1";s:13:"version_sarka";s:1:"1";s:9:"lien_plan";s:1:"1";s:15:"collectif_sarka";s:1:"1";s:17:"licence_squelette";s:1:"1";s:14:"lien_squelette";s:1:"1";s:12:"outils_perso";s:0:"";s:15:"ancre_haut_page";s:1:"1";}

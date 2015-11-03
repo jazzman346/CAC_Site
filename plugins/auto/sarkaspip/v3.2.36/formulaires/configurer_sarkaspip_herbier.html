@@ -1,0 +1,77 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_herbier:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_herbier_page:></legend>
+			<p><:sarkaspip:cfg_inf_herbier_page:></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_information_page}
+				{choix=titre_descriptif}
+				{label_titre=<:sarkaspip:cfg_lbl_herbier_titre:>}
+				{label_descriptif=<:sarkaspip:cfg_lbl_herbier_descriptif:>}
+				{defaut_titre=<:sarkaspip:herbier_sites:>}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_herbier_modele:></legend>
+			<p><:sarkaspip:cfg_inf_herbier_modele:></p>
+			<label>
+				<input type="radio" name="modele" value="liste" [(#ENV{modele, liste}|=={liste}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_herbier_modele_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="modele" value="panorama" [(#ENV{modele, liste}|=={panorama}|?{checked="checked"})] disabled="disabled" />
+				<:sarkaspip:cfg_lbl_herbier_modele_2:>
+			</label>
+		</fieldset>
+
+		<fieldset id="bloc_modele_1">
+			<legend><:sarkaspip:cfg_lgd_herbier_pagination_1:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{suffixe=_1}
+				{defaut_pas=5}
+				{defaut_position=3}
+				{env}>
+		</fieldset>
+
+		<fieldset id="bloc_modele_2">
+			<legend><:sarkaspip:cfg_lgd_herbier_pagination_2:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{suffixe=_2}
+				{defaut_pas=10}
+				{defaut_position=1}
+				{env}>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_herbier}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{modele, liste}|=={liste}|?{jQuery("#bloc_modele_2").hide();})]
+		[(#ENV{modele, liste}|=={panorama}|?{jQuery("#bloc_modele_1").hide();})]
+
+		jQuery("input[name='modele']").change(function() {
+			if (jQuery("input[name='modele']:checked").val() != liste) {
+				jQuery("#bloc_modele_1").hide();
+				jQuery("#bloc_modele_2").show();
+			}
+			else {
+				jQuery("#bloc_modele_2").hide();
+				jQuery("#bloc_modele_1").show();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

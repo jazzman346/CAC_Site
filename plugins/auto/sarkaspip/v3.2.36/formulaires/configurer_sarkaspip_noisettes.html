@@ -1,0 +1,715 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_noisettes:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		[(#REM) <!-- Choix de la pagination des noisettes de navigation --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_navigation:></legend>
+			<p><:sarkaspip:cfg_inf_inc_navigation:></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{defaut_pas=10}
+				{suffixe=_navigation}
+				{choix=sans_position}
+				{env}>
+		</fieldset>
+
+		[(#REM) <!-- Choix de la pagination des noisettes de filtre --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_filtre:></legend>
+			<p><:sarkaspip:cfg_inf_inc_filtre:></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{defaut_pas=10}
+				{suffixe=_filtre}
+				{choix=sans_position}
+				{env}>
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation des publications --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_publications:></legend>
+			<p><:sarkaspip:cfg_inf_inc_publications:></p>
+			<label>
+				<input type="radio" name="position_publications" value="0" [(#ENV{position_publications, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_publications" value="1" [(#ENV{position_publications, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_publications" value="2" [(#ENV{position_publications, 0}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+			<div id="bloc_max_publications">
+			<br />
+			<label><:sarkaspip:cfg_lbl_max_publications:></label>
+				<input type="text" name="max_publications" value="#ENV{max_publications, 5}" size="2" class="fondl" />
+			<br />
+			</div>
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation du nuage de mots-cles --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_nuage:></legend>
+	[(#PLUGIN{NUAGE}|oui)
+			<p><:sarkaspip:cfg_inf_inc_nuage:></p>
+			<label>
+				<input type="radio" name="position_nuage" value="0" [(#ENV{position_nuage, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_nuage" value="1" [(#ENV{position_nuage, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_nuage" value="2" [(#ENV{position_nuage, 0}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<div id="bloc_nuage">
+				<br />
+			[(#CONFIG{sarkaspip_recherche/groupes_recherche}|oui)
+				<label><:sarkaspip:cfg_lbl_max_nuage:></label>
+				<input type="text" name="max_nuage" value="#ENV{max_nuage, 50}" size="3" class="fondl" />
+				<br /><br />
+				<INCLURE{fond=noisettes/cfg/inc_cfg_groupes_mots}
+					{suffixe=_nuage}
+					{label=<:sarkaspip:cfg_lbl_groupes_mots:>}
+					{id_groupe=#CONFIG{sarkaspip_recherche/groupes_recherche, #ARRAY{0,0}}}
+					{env}>
+			]
+			[(#CONFIG{sarkaspip_recherche/groupes_recherche}|non)
+				<p><:sarkaspip:cfg_inf_aucun_groupe_nuage:></p>
+			]
+			</div>
+	]
+	[(#PLUGIN{NUAGE}|non)
+			#SET{plugin, Nuage}
+			<p class="avertissement"><:sarkaspip:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+	]
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation du mini agenda --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_miniagenda:></legend>
+			<p><:sarkaspip:cfg_inf_inc_miniagenda_pos:></p>
+			<label>
+				<input type="radio" name="position_miniagenda" value="0" [(#ENV{position_miniagenda, 2}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_miniagenda" value="1" [(#ENV{position_miniagenda, 2}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_miniagenda" value="2" [(#ENV{position_miniagenda, 2}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation des commentaires --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_commentaires:></legend>
+			<p><:sarkaspip:cfg_inf_inc_commentaires:></p>
+			<label>
+				<input type="radio" name="position_commentaires" value="0" [(#ENV{position_commentaires, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_commentaires" value="1" [(#ENV{position_commentaires, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_commentaires" value="2" [(#ENV{position_commentaires, 0}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+			<div id="bloc_intro_commentaires">
+			<br />
+			<label><:sarkaspip:cfg_lbl_max_commentaires:></label>
+				<input type="text" name="max_commentaires" value="#ENV{max_commentaires, 50}" size="2" class="fondl" />
+			<br />
+			<label><:sarkaspip:cfg_lbl_intro_commentaires:></label>
+				<input type="text" name="intro_commentaire" value="#ENV{intro_commentaire, 100}" size="3" class="fondl" />
+			<br />
+			<br />
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{defaut_pas=10}
+				{suffixe=_commentaires}
+				{choix=sans_position}
+				{env}>
+			</div>
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation des messages de forum --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_messages:></legend>
+			<p><:sarkaspip:cfg_inf_inc_messages:></p>
+			<label>
+				<input type="radio" name="position_messages" value="0" [(#ENV{position_messages, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_messages" value="1" [(#ENV{position_messages, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_messages" value="2" [(#ENV{position_messages, 0}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+			<div id="bloc_intro_messages">
+			<br />
+			<label><:sarkaspip:cfg_lbl_max_messages:></label>
+				<input type="text" name="max_messages" value="#ENV{max_messages, 50}" size="2" class="fondl" />
+			<br />
+			<label><:sarkaspip:cfg_lbl_intro_messages:></label>
+				<input type="text" name="intro_message" value="#ENV{intro_message, 100}" size="3" class="fondl" />
+			<br />
+			<br />
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{defaut_pas=10}
+				{suffixe=_messages}
+				{choix=sans_position}
+				{env}>
+			</div>
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation des breves --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_breves:></legend>
+			<p><:sarkaspip:cfg_inf_inc_breves_pos:></p>
+			<label>
+				<input type="radio" name="position_breves" value="0" [(#ENV{position_breves, 2}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_breves" value="1" [(#ENV{position_breves, 2}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_breves" value="2" [(#ENV{position_breves, 2}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+			<div id="bloc_type_breves">
+				<p><:sarkaspip:cfg_inf_inc_breves_type:></p>
+				<label>
+					<input type="radio" name="liste_breves" value="1" [(#ENV{liste_breves, 2}|=={1}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_inc_breves_1:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="liste_breves" value="2" [(#ENV{liste_breves, 2}|=={2}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_inc_breves_2:>
+				</label>
+				<br /><br />
+				<label><:sarkaspip:cfg_lbl_max_breves:></label>
+				<input type="text" name="max_breves" value="#ENV{max_breves, 5}" size="2" class="fondl" />
+				<div id="bloc_intro_breve">
+					<label><:sarkaspip:cfg_lbl_intro_breve:></label>
+					<input type="text" name="intro_breve" value="#ENV{intro_breve, 100}" size="3" class="fondl" />
+				</div>
+			</div>
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation des articles syndiques des sites references --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_sites:></legend>
+			<p><:sarkaspip:cfg_inf_inc_sites:></p>
+			<label>
+				<input type="radio" name="liste_sites" value="1" [(#ENV{liste_sites, 2}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_sites_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="liste_sites" value="2" [(#ENV{liste_sites, 2}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_sites_2:>
+			</label>
+			<br /><br />
+			<div id="bloc_max_site">
+				<label><:sarkaspip:cfg_lbl_max_sites:></label>
+				<input type="text" name="max_sites" value="#ENV{max_sites, 5}" size="2" class="fondl" />
+			</div>
+			<label><:sarkaspip:cfg_lbl_max_syndic:></label>
+			<input type="text" name="max_syndic" value="#ENV{max_syndic, 5}" size="2" class="fondl" />
+			<br />
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation des sites de l'herbier --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_herbier:></legend>
+			<p><:sarkaspip:cfg_inf_inc_herbier_pos:></p>
+			<label>
+				<input type="radio" name="position_herbier" value="0" [(#ENV{position_herbier, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_herbier" value="1" [(#ENV{position_herbier, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_herbier" value="2" [(#ENV{position_herbier, 0}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+			<div id="bloc_type_herbier">
+				<p><:sarkaspip:cfg_inf_inc_herbier_type:></p>
+				<label>
+					<input type="radio" name="liste_herbier" value="1" [(#ENV{liste_herbier, 2}|=={1}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_inc_herbier_1:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="liste_herbier" value="2" [(#ENV{liste_herbier, 2}|=={2}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_inc_herbier_2:>
+				</label>
+				<br /><br />
+					<label><:sarkaspip:cfg_lbl_max_herbier:></label>
+					<input type="text" name="max_herbier" value="#ENV{max_herbier, 5}" size="2" class="fondl" />
+			</div>
+		</fieldset>
+
+		[(#REM) <!-- Choix des moteurs de recherche --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_recherche:></legend>
+			<p><:sarkaspip:cfg_inf_inc_rechspip_pos:></p>
+			<label>
+				<input type="radio" name="position_rechspip" value="3" [(#ENV{position_rechspip, 3}|=={3}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_3:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_rechspip" value="4" [(#ENV{position_rechspip, 3}|=={4}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_7:>
+			</label>
+			<br />
+			<br />
+			<p><:sarkaspip:cfg_inf_inc_recherche_pos:></p>
+			<label>
+				<input type="radio" name="position_recherche" value="1" [(#ENV{position_recherche, 2}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_recherche" value="2" [(#ENV{position_recherche, 2}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+			<br />
+			<p><:sarkaspip:cfg_inf_inc_recherche_ext:></p>
+			<label>
+				<input type="radio" name="moteur_externe" value="0" [(#ENV{moteur_externe, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_recherche_ext_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="moteur_externe" value="1" [(#ENV{moteur_externe, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_recherche_ext_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="moteur_externe" value="2" [(#ENV{moteur_externe, 1}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_recherche_ext_2:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="moteur_externe" value="3" [(#ENV{moteur_externe, 1}|=={3}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_recherche_ext_3:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="moteur_externe" value="4" [(#ENV{moteur_externe, 1}|=={4}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_recherche_ext_4:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="moteur_externe" value="5" [(#ENV{moteur_externe, 1}|=={5}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_recherche_ext_5:>
+			</label>
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation des statistiques du site --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_statsite:></legend>
+			<p><:sarkaspip:cfg_inf_inc_statsite_pos:></p>
+			<label>
+				<input type="radio" name="position_stats_1" value="0" [(#ENV{position_stats_1, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_stats_1" value="1" [(#ENV{position_stats_1, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_stats_1" value="2" [(#ENV{position_stats_1, 1}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation des statistiques sur les articles --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_stathit:></legend>
+			<p><:sarkaspip:cfg_inf_inc_stathit_pos:></p>
+			<label>
+				<input type="radio" name="position_stats_2" value="0" [(#ENV{position_stats_2, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_stats_2" value="1" [(#ENV{position_stats_2, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_stats_2" value="2" [(#ENV{position_stats_2, 0}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+			<div id="bloc_stats_2_compo">
+				<br />
+				<p><:sarkaspip:cfg_inf_inc_stathit_compo:></p>
+				<label>
+					<input type="radio" name="composition_stats_2" value="1" [(#ENV{composition_stats_2, 3}|=={1}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_inc_stathit_compo_1:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="composition_stats_2" value="2" [(#ENV{composition_stats_2, 3}|=={2}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_inc_stathit_compo_2:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="composition_stats_2" value="3" [(#ENV{composition_stats_2, 3}|=={3}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_inc_stathit_compo_3:>
+				</label>
+				<br />
+				<br />
+			</div>
+			<div id="bloc_stats_2_max_top">
+				<label><:sarkaspip:cfg_lbl_stathit_max_top:></label>
+				<input type="text" name="max_articles_top" value="#ENV{max_articles_top, 5}" size="2" class="fondl" />
+				<br />
+			</div>
+			<div id="bloc_stats_2_max_hasard">
+				<label><:sarkaspip:cfg_lbl_stathit_max_hasard:></label>
+				<input type="text" name="max_articles_hasard" value="#ENV{max_articles_hasard, 5}" size="2" class="fondl" />
+				<br />
+			</div>
+		</fieldset>
+
+		[(#REM) <!-- Choix des badges --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_badges:></legend>
+			<p><:sarkaspip:cfg_inf_inc_badges_pos:></p>
+			<label>
+				<input type="radio" name="position_badges" value="0" [(#ENV{position_badges, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_badges" value="1" [(#ENV{position_badges, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_badges" value="2" [(#ENV{position_badges, 1}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+			<br />
+			<div id="bloc_badges_liste">
+				<p><:sarkaspip:cfg_inf_inc_badges_liste:></p>
+				<label>
+					<input type="checkbox" name="badge_xhtml" [checked="(#ENV{badge_xhtml}|=={on}|?{checked})"] />
+					<:sarkaspip:cfg_lbl_inc_badges_xhtml:>
+				</label>
+				<br />
+				<label>
+					<input type="checkbox" name="badge_rss" [checked="(#ENV{badge_rss}|=={on}|?{checked})"] />
+					<:sarkaspip:cfg_lbl_inc_badges_rss:>
+				</label>
+				<br />
+				<label>
+					<input type="checkbox" name="badge_sarka" [checked="(#ENV{badge_sarka}|=={on}|?{checked})"] />
+					<:sarkaspip:cfg_lbl_inc_badges_sarka:>
+				</label>
+				<br />
+				<label>
+					<input type="checkbox" name="badge_spip" [checked="(#ENV{badge_spip}|=={on}|?{checked})"] />
+					<:sarkaspip:cfg_lbl_inc_badges_spip:>
+				</label>
+				<br />
+				<label>
+					<input type="checkbox" name="badge_perso" [checked="(#ENV{badge_perso}|=={on}|?{checked})"] />
+					<:sarkaspip:cfg_lbl_inc_badges_perso:>
+				</label>
+				<br />
+				<ul id="bloc_badges_perso">
+					<li><label><:sarkaspip:cfg_lbl_badge_perso_lien:>
+							<input type="text" name="lien_badge_perso" value="#ENV{lien_badge_perso, http://}" size="30" class="fondl" />
+						</label></li>
+					<li><label><:sarkaspip:cfg_lbl_badge_perso_infobulle:>
+							<input type="text" name="infobulle_badge_perso" value="#ENV{infobulle_badge_perso, ''}" size="30" class="fondl" />
+						</label></li>
+				</ul>
+			</div>
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation des annonces --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_annonce:></legend>
+			<p><:sarkaspip:cfg_inf_inc_annonce_pos:></p>
+			<label>
+				<input type="radio" name="position_annonce" value="0" [(#ENV{position_annonce, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_annonce" value="1" [(#ENV{position_annonce, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_annonce" value="2" [(#ENV{position_annonce, 0}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+			<div id="bloc_annonce_id">
+				<INCLURE{fond=noisettes/cfg/inc_cfg_article_specialise}
+					{explication=<:sarkaspip:cfg_inf_annonce_id:>}
+					{article=annonce}
+					{multiple=oui}
+					{env}>
+			</div>
+		</fieldset>
+
+		[(#REM) <!-- Choix de presentation de la meteo --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_inc_rainette:></legend>
+	[(#PLUGIN{RAINETTE}|oui)
+			<p><:sarkaspip:cfg_inf_inc_rainette_pos:></p>
+			<label>
+				<input type="radio" name="position_rainette" value="0" [(#ENV{position_rainette, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_rainette" value="1" [(#ENV{position_rainette, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_rainette" value="2" [(#ENV{position_rainette, 0}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_2:>
+			</label>
+			<br />
+			<div id="bloc_rainette_ville">
+				<p><:sarkaspip:cfg_inf_inc_rainette_ville:></p>
+				<label><:sarkaspip:cfg_lbl_rainette_ville:></label>
+				<input type="text" name="rainette_ville" value="#ENV{rainette_ville, FRXX0076}" size="10" class="fondl" /><br />
+				<label><:sarkaspip:cfg_lbl_rainette_nb_prevision:></label>
+				<input type="text" name="rainette_prevision" value="#ENV{rainette_prevision, 7}" size="3" class="fondl" />
+			</div>
+	]
+	[(#PLUGIN{RAINETTE}|non)
+			#SET{plugin, Rainette}
+			<p class="avertissement"><:sarkaspip:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+	]
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_noisettes}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{position_publications, 0}|=={0}|?{jQuery("#bloc_max_publications").hide();})]
+		[(#ENV{position_nuage, 0}|=={0}|?{jQuery("#bloc_nuage").hide();})]
+		[(#ENV{position_commentaires, 0}|=={0}|?{jQuery("#bloc_intro_commentaires").hide();})]
+		[(#ENV{position_messages, 0}|=={0}|?{jQuery("#bloc_intro_messages").hide();})]
+		[(#ENV{liste_breves, 2}|!={2}|?{jQuery("#bloc_intro_breve").hide();})]
+		[(#ENV{position_breves, 2}|=={0}|?{jQuery("#bloc_type_breves").hide();})]
+		[(#ENV{liste_sites, 2}|!={1}|?{jQuery("#bloc_max_site").hide();})]
+		[(#ENV{position_herbier, 0}|=={0}|?{jQuery("#bloc_type_herbier").hide();})]
+		[(#ENV{position_stats_2, 0}|=={0}|?{jQuery("#bloc_stats_2_compo,#bloc_stats_2_max_hasard,#bloc_stats_2_max_top").hide();})]
+		[(#ENV{position_stats_2, 0}|!={0}|?{
+			[(#ENV{composition_stats_2, 3}|=={1}|?{jQuery("#bloc_stats_2_max_hasard").hide();})]
+			[(#ENV{composition_stats_2, 3}|=={2}|?{jQuery("#bloc_stats_2_max_top").hide();})]}
+		)]
+		[(#ENV{position_badges, 1}|=={0}|?{jQuery("#bloc_badges_liste").hide();jQuery("#bloc_badges_perso").hide();})]
+		[(#ENV{position_badges, 1}|!={0}|?{
+			[(#ENV{badge_perso}|!={on}|?{jQuery("#bloc_badges_perso").hide();})]
+		})]
+		[(#ENV{position_annonce, 0}|=={0}|?{jQuery("#bloc_annonce_id").hide();})]
+		[(#ENV{position_rainette, 0}|=={0}|?{jQuery("#bloc_rainette_ville").hide();})]
+
+		jQuery("input[name='position_publications']").change(function() {
+			if (jQuery("input[name='position_publications']:checked").val() != 0)
+				jQuery("#bloc_max_publications").show();
+			else
+				jQuery("#bloc_max_publications").hide();
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='position_nuage']").change(function() {
+			if (jQuery("input[name='position_nuage']:checked").val() != 0)
+				jQuery("#bloc_nuage").show();
+			else
+				jQuery("#bloc_nuage").hide();
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='position_commentaires']").change(function() {
+			if (jQuery("input[name='position_commentaires']:checked").val() != 0)
+				jQuery("#bloc_intro_commentaires").show();
+			else
+				jQuery("#bloc_intro_commentaires").hide();
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='position_messages']").change(function() {
+			if (jQuery("input[name='position_messages']:checked").val() != 0)
+				jQuery("#bloc_intro_messages").show();
+			else
+				jQuery("#bloc_intro_messages").hide();
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='liste_breves']").change(function() {
+			if (jQuery("input[name='liste_breves']:checked").val() == 2)
+				jQuery("#bloc_intro_breve").show();
+			else
+				jQuery("#bloc_intro_breve").hide();
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='position_breves']").change(function() {
+			if (jQuery("input[name='position_breves']:checked").val() != 0) {
+				jQuery("#bloc_type_breves").show();
+			}
+			else {
+				jQuery("#bloc_type_breves").hide();
+			}
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='liste_sites']").change(function() {
+			if (jQuery("input[name='liste_sites']:checked").val() == 1)
+				jQuery("#bloc_max_site").show();
+			else
+				jQuery("#bloc_max_site").hide();
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='position_herbier']").change(function() {
+			if (jQuery("input[name='position_herbier']:checked").val() != 0) {
+				jQuery("#bloc_type_herbier").show();
+			}
+			else {
+				jQuery("#bloc_type_herbier").hide();
+			}
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='position_stats_2']").change(function() {
+			if (jQuery("input[name='position_stats_2']:checked").val() != 0) {
+				jQuery("#bloc_stats_2_compo").show();
+				if (jQuery("input[name='composition_stats_2']:checked").val() == 1) {
+					jQuery("#bloc_stats_2_max_top").show();
+					jQuery("#bloc_stats_2_max_hasard").hide();
+				}
+				else if (jQuery("input[name='composition_stats_2']:checked").val() == 2) {
+					jQuery("#bloc_stats_2_max_top").hide();
+					jQuery("#bloc_stats_2_max_hasard").show();
+				}
+				else {
+					jQuery("#bloc_stats_2_max_top").show();
+					jQuery("#bloc_stats_2_max_hasard").show();
+				}
+			}
+			else
+				jQuery("#bloc_stats_2_compo,#bloc_stats_2_max_hasard,#bloc_stats_2_max_top").hide();
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='composition_stats_2']").change(function() {
+			if (jQuery("input[name='composition_stats_2']:checked").val() == 1) {
+				jQuery("#bloc_stats_2_max_top").show();
+				jQuery("#bloc_stats_2_max_hasard").hide();
+			}
+			else if (jQuery("input[name='composition_stats_2']:checked").val() == 2) {
+				jQuery("#bloc_stats_2_max_top").hide();
+				jQuery("#bloc_stats_2_max_hasard").show();
+			}
+			else {
+				jQuery("#bloc_stats_2_max_top").show();
+				jQuery("#bloc_stats_2_max_hasard").show();
+			}
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='position_badges']").change(function() {
+			if (jQuery("input[name='position_badges']:checked").val() != 0)
+				jQuery("#bloc_badges_liste").show();
+			else
+				jQuery("#bloc_badges_liste").hide();
+			jQuery(this).blur();
+		});
+		jQuery("input[name='badge_perso']").change(function() {
+			if (jQuery("input[name='badge_perso']:checked").val() == 'on') {
+				jQuery("#bloc_badges_perso").show();
+			}
+			else {
+				jQuery("#bloc_badges_perso").hide();
+			}
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='position_annonce']").change(function() {
+			if (jQuery("input[name='position_annonce']:checked").val() != 0) {
+				jQuery("#bloc_annonce_id").show();
+			}
+			else {
+				jQuery("#bloc_annonce_id").hide();
+				jQuery("#select_article option:first").attr({selected: "selected"});
+			}
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='position_rainette']").change(function() {
+			if (jQuery("input[name='position_rainette']:checked").val() != 0)
+				jQuery("#bloc_rainette_ville").show();
+			else
+				jQuery("#bloc_rainette_ville").hide();
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

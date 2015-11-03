@@ -1,0 +1,47 @@
+[(#ENV{choix}=={sans_position}|non)
+<p><:sarkaspip:cfg_inf_pagination_1:></p>
+]
+[(#ENV{choix}=={sans_position}|oui)
+<p><:sarkaspip:cfg_inf_pagination_2:></p>
+]
+<label>
+	<input type="radio" name="modele_pagination#ENV{suffixe}" value="" [(#ENV{modele_pagination#ENV{suffixe}}|?{'',' '})checked="checked"] />
+	<:sarkaspip:cfg_lbl_pagination_1:>
+</label>
+<br />
+<label>
+	<input type="radio" name="modele_pagination#ENV{suffixe}" value="page" [(#ENV{modele_pagination#ENV{suffixe}}|=={page}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_pagination_2:>
+</label>
+<br />
+<label>
+	<input type="radio" name="modele_pagination#ENV{suffixe}" value="precedent_suivant" [(#ENV{modele_pagination#ENV{suffixe}}|=={precedent_suivant}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_pagination_3:>
+</label>
+<br />
+<label>
+	<input type="radio" name="modele_pagination#ENV{suffixe}" value="page_precedent_suivant" [(#ENV{modele_pagination#ENV{suffixe}}|=={page_precedent_suivant}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_pagination_4:>
+</label>
+<br /><br />
+<label><:sarkaspip:cfg_lbl_pas_pagination:></label>
+<input type="text" name="pas_pagination#ENV{suffixe}" value="#ENV{pas_pagination#ENV{suffixe}, #ENV{defaut_pas}}" size="3" class="fondl" />
+<br />
+[(#ENV{choix}=={sans_position}|non)
+<p><:sarkaspip:cfg_inf_pagination_bande:></p>
+<label>
+	<input type="radio" name="position_pagination#ENV{suffixe}" value="1" [(#ENV{position_pagination#ENV{suffixe}, #ENV{defaut_position}}|=={1}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_bande_pos_1:>
+</label>
+<br />
+<label>
+	<input type="radio" name="position_pagination#ENV{suffixe}" value="2" [(#ENV{position_pagination#ENV{suffixe}, #ENV{defaut_position}}|=={2}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_bande_pos_2:>
+</label>
+<br />
+<label>
+	<input type="radio" name="position_pagination#ENV{suffixe}" value="3" [(#ENV{position_pagination#ENV{suffixe}, #ENV{defaut_position}}|=={3}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_bande_pos_3:>
+</label>
+<br />
+]

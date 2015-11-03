@@ -1,0 +1,50 @@
+<B_menu_rubriques_h>
+<div id="menu_rubriques" class="noisette menu_horiz"> 
+	<ul>
+<BOUCLE_menu_rubriques_h(RUBRIQUES) {racine} {id_rubrique!==#RACINE_SPECIALISEE}{par num titre, titre}>
+		<li>
+		[(#SET{rang_secteur, [mh_n(#COMPTEUR_BOUCLE)]})]
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|!={2}|oui)[<a[ id="(#GET{rang_secteur})"] href="#URL_RUBRIQUE">(#TITRE|couper{80})</a>]]
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|oui)
+				[(#INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique}{rang=#GET{rang_secteur}})]
+			]
+		<B_menu_ss_rubriques_h>
+			<ul>
+		<BOUCLE_menu_ss_rubriques_h(RUBRIQUES) {id_parent} {par num titre, titre}>
+				[(#COMPTEUR_BOUCLE|=={1}|oui) #SET{rang_item, it_n1}]
+				[(#COMPTEUR_BOUCLE|=={1}|non) #SET{rang_item, ''}]
+				<li>
+				<BOUCLE_classe_ssrubrique(RUBRIQUES){id_parent}{0,1}>
+					[(#SET{class_a, [pere (#GET{rang_item})]})]
+				</BOUCLE_classe_ssrubrique>
+					[(#SET{class_a, [(#GET{rang_item})]})]
+				<//B_classe_ssrubrique>
+					[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|!={2}|oui)[<a class="[(#GET{class_a})]" href="#URL_RUBRIQUE">(#TITRE|couper{80})</a>]]
+					[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|oui)
+						[(#INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique}{classe=#GET{class_a}})]
+					]
+				<BOUCLE_fin_hierarchie_h(RUBRIQUES){id_parent}{0,1}> </BOUCLE_fin_hierarchie_h>
+					[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={1}|oui)
+						[(#INCLURE{fond=noisettes/navigation/inc_nav_articles_1}{id_rubrique}{avec_ul=oui}{avec_rang=oui})]
+					]
+				<//B_fin_hierarchie_h>
+					<BOUCLE_ssmenu_h(BOUCLE_menu_ss_rubriques_h)></BOUCLE_ssmenu_h>
+				</li>
+				[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={1}|oui)
+					[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)
+						[(#INCLURE{fond=noisettes/navigation/inc_nav_articles_1}{id_rubrique=#ID_PARENT}{avec_ul=non}{avec_rang=non})]
+					]
+				]
+		</BOUCLE_menu_ss_rubriques_h>
+			</ul>
+		</B_menu_ss_rubriques_h>
+		<BOUCLE_fin_secteur_h(RUBRIQUES){id_parent}{0,1}> </BOUCLE_fin_secteur_h>
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={1}|oui)
+				[(#INCLURE{fond=noisettes/navigation/inc_nav_articles_1}{id_rubrique=#ID_SECTEUR}{avec_ul=oui}{avec_rang=oui})]
+			]
+		<//B_fin_secteur_h>
+		</li>
+</BOUCLE_menu_rubriques_h>
+	</ul>
+</div>
+</B_menu_rubriques_h>

@@ -1,0 +1,58 @@
+[(#REM) 
+<!-- Affichage d'une sujet et de ses reponses
+	Recoit en argument :
+		- id_forum: id du sujet concerne
+		- statut_forum: indique si le forum est globalement ferme et donc qu'aucune action n'est possible
+		- verrou: indique si le sujet est verrouille ou pas
+		- resolu: indique si le sujet est resolu ou pas
+-->
+]
+<BOUCLE_sujet(FORUMS){id_forum}>
+[(#TITRE|strstr{_resolu_}|oui) #SET{resolu, oui}]
+[(#TITRE|strstr{_verrouille_}|oui) #SET{verrou, lock}]
+
+[(#ENV{verrou}|=={lock}|oui)#SET{verrou, lock}]
+
+[(#ENV{statut_forum}|=={ouvert}|oui)
+	[(#AUTORISER{webmestre}|ou{#ID_AUTEUR|=={#SESSION{id_auteur}}}|oui)
+		[(#GET{resolu}|?{
+			<a class="fonction" id="deresoudre"[ href="(#URL_ACTION_AUTEUR{instituer_forum_sujet,forum/#ID_FORUM/resolu_off,#SELF})"] title="<:sarkaspip:bulle_bouton_forum_marquer_non_resolu:>"></a>,
+			<a class="fonction" id="resoudre"[ href="(#URL_ACTION_AUTEUR{instituer_forum_sujet,forum/#ID_FORUM/resolu_on,#SELF})"] title="<:sarkaspip:bulle_bouton_forum_marquer_resolu:>"></a>
+		})]
+	]
+	[(#AUTORISER{webmestre}|oui)
+		[(#GET{verrou}|?{
+			<a class="fonction" id="deverrouiller"[ href="(#URL_ACTION_AUTEUR{instituer_forum_sujet,forum/#ID_FORUM/verrou_off,#SELF})"] title="<:sarkaspip:bulle_bouton_forum_deverrouiller:>"></a>,
+			<a class="fonction" id="verrouiller"[ href="(#URL_ACTION_AUTEUR{instituer_forum_sujet,forum/#ID_FORUM/verrou_on,#SELF})"] title="<:sarkaspip:bulle_bouton_forum_verrouiller:>"></a>
+		})]
+	]
+]
+
+[<div class="#EDIT{titre} titre"><h1>(#TITRE|nettoyer_titre_sujet{#GET{resolu}})</h1></div>]
+<div class="description">
+	<div class="cartouche">
+		[(#DATE|nom_jour)][&nbsp;(#DATE|affdate)] <:sarkaspip:agrave:>&nbsp;[(#DATE|affdate{'H\hi'})]
+		[<br />
+		<:sarkaspip:par_auteur:> <a href="#URL_AUTEUR">(#AUTEUR)</a>]
+		#SET{auteur, #AUTEUR}
+	</div>
+	<br class="nettoyeur" />
+	<div class="gravatar_pere">
+		<BOUCLE_auteur_pere(AUTEURS){id_auteur=#_sujet:ID_AUTEUR} {tout}>
+			[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar64.png}}||image_passe_partout{64}|image_recadre{64,64,center,FFFFFF}|inserer_attribut{class,spip_logos gravatar}|inserer_attribut{alt,[<:sarkaspip:logo_de:> (#NOM)]})]					
+		</BOUCLE_auteur_pere>
+			[(#PLUGIN{GRAVATAR}|oui)
+				[(#GRAVATAR{#EMAIL, 64, #CHEMIN{images/gravatar64.png}}||image_passe_partout{64}|image_recadre{64,64,center,FFFFFF}|inserer_attribut{class,spip_logos gravatar}|inserer_attribut{alt,[<:sarkaspip:logo_de:> (#NOM)]})]
+			]		
+		<//B_auteur_pere>
+	</div>
+	[<div class="#EDIT{texte} premier_message">
+		(#TEXTE|typo_couleur)
+		<INCLURE{fond=noisettes/forum/inc_forum_documents, id_forum}>
+	</div>]
+	<br class="nettoyeur" />
+	[(#GET{verrou}|oui)<div class="avertissement"><:sarkaspip:msg_sujet_verrouille:></div>]
+</div>
+</BOUCLE_sujet>
+
+

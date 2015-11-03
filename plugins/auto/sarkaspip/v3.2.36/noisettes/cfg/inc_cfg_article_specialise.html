@@ -1,0 +1,16 @@
+[<p>(#ENV{explication})</p>]
+<label><:sarkaspip:cfg_lbl_liste_articles:></label>[(#ENV{multiple}|oui)<br />]
+
+<select name="article_#ENV{article}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="select_article_#ENV{article}"[ (#ENV{multiple}|oui)multiple="multiple"]>
+[(#ENV{multiple}|non)
+	<option value="0"[ (#ENV{article_#ENV{article}, 0}|=={0}|oui)selected="selected"]>--</option>
+]
+<BOUCLE_articles(ARTICLES){id_secteur=#RACINE_SPECIALISEE{squelette}}{par num titre}{par titre}>
+[(#ENV{multiple}|oui)
+	[<option value="#ID_ARTICLE"[ (#ID_ARTICLE|in_array{#ENV{article_#ENV{article},#ARRAY}}|oui)selected="selected"]>(#TITRE)</option>]
+]
+[(#ENV{multiple}|non)
+	[<option value="#ID_ARTICLE"[ (#ID_ARTICLE|=={#ENV{article_#ENV{article}, 0}}|oui)selected="selected"]>(#TITRE)</option>]
+]
+</BOUCLE_articles>
+</select>

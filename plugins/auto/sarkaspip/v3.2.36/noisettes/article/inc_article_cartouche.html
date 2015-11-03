@@ -1,0 +1,54 @@
+[(#REM) 
+<!-- Affichage du cartouche d'un article
+	Recoit en argument :
+		- id_article: id de l'article concerne
+		- page: indique le type de page affichee (article - par defaut -, evenement, album, une)
+		- avec_popularite: indique si on doit afficher ou pas la popularite
+		- avec_notation: indique si on doit afficher ou pas le formulaire de notation (necessite plugin NOTATION)
+		- avec_socialtags: indique si on doit afficher ou pas les boutons de bookmark sur les reseaux sociaux
+		- id_evenement: id de l'evenement associe a l'article (page evenement avec plugin agenda)
+-->
+]
+<BOUCLE_cartouche(ARTICLES) {id_article}>
+	<div class="cartouche">
+		[(#REM) <!-- Date de l'article ou de l'evenement --> ]
+		[(#ENV{page}|=={galerie}|oui)
+			[(#SET{date, [(#DATE|nom_mois|ucfirst)][&nbsp;(#DATE|annee)]})]
+		]
+		[(#ENV{page}|=={evenement}|oui)
+			[(#CONFIG{sarkaspip_agenda/plugin, 1}|=={1}|oui)
+				[(#SET{date, [(#DATE_REDAC|nom_jour)][&nbsp;(#DATE_REDAC|affdate)][&nbsp;:&nbsp;(#DATE_REDAC|affdate{'H\hi'})]})]
+			]
+		]
+		[(#ENV{page}|match{evenement|galerie}|non)
+			[(#SET{date, [(#DATE|nom_jour)][&nbsp;(#DATE|affdate)]})]
+		]
+		[(#GET{date}) <br />]
+
+		[(#REM) <!-- Auteur de l'article --> ]
+		[<:sarkaspip:par_auteur:>&nbsp;(#LESAUTEURS) <br />]
+
+		[(#REM) <!-- Popularite de l'article --> ]
+		[(#ENV{avec_popularite, non}|=={oui}|oui)
+			[<:sarkaspip:popularite_article:>&nbsp;:&nbsp;(#POPULARITE)%]
+		]
+
+		[(#REM) <!-- Notation de l'article --> ]
+		[(#SET{plugin_en_cours, non})]
+		[(#PLUGIN{NOTATION}|oui)
+			[(#ENV{avec_notation, 0}|=={1}|oui)
+				<div class="plugin">[<div class="notation">(#FORMULAIRE_NOTATION)</div>]
+				[(#SET{plugin_en_cours, oui})]
+			]
+		]
+		[(#REM) <!-- Inclusion des boutons de bookmark sur les reseaux sociaux --> ]
+		[(#PLUGIN{SOCIALTAGS}|oui)
+			[(#ENV{avec_socialtags, 0}|=={1}|oui)
+				[(#GET{plugin_en_cours}|=={non}|oui)<div class="plugin">]
+				[(#INCLURE{fond=noisettes/socialtags})]
+				[(#SET{plugin_en_cours, oui})]
+			]
+		]
+		[(#GET{plugin_en_cours}|=={oui}|oui)</div>]
+	</div>
+</BOUCLE_cartouche>

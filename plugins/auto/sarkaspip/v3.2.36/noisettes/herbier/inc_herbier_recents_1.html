@@ -1,0 +1,12 @@
+[(#REM) <!-- affichage n derniers sites de l'herbier du secteur ou du site global --> ]
+<B_herbier>
+	<div id="noisette_herbier" class="noisette">
+		<h1><a class="intitule" href="[(#URL_PAGE{herbier}|parametre_url{type,liste})]"><:sarkaspip:herbier_sites|ucfirst:></a></h1>
+<BOUCLE_herbier(SITES) {id_secteur ?}{id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}}{par date}{inverse}{0,#CONFIG{sarkaspip_noisettes/max_herbier, 5}}>
+		<div class="contenu">
+			[<div class="logo gauche">(#LOGO_SITE||image_reduire{0,20}||inserer_attribut{alt,#NOM_SITE|texte_backend})</div>]
+			[<h2><a class="titre_bloc" href="#URL_SITE">(#NOM_SITE)</a></h2>]
+		</div>
+</BOUCLE_herbier>
+	</div>
+</B_herbier>

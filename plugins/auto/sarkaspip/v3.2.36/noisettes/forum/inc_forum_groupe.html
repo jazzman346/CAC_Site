@@ -1,0 +1,82 @@
+[(#REM) 
+<!-- Affichage d'un groupe de forum
+	Recoit en argument :
+		- id_rubrique: id de rubrique correspondant au groupe de forums ou vide si tous les groupes
+-->
+]
+<BOUCLE_groupe_forum(RUBRIQUES){id_parent=#RACINE_SPECIALISEE{forum}}{id_rubrique?}{par num titre}>
+<div class="groupe">
+	<h2 class="[(#EDIT{titre}) ]titre">
+		<a[ href="(#URL_PAGE{forum_groupe}|parametre_url{id_rubrique, #ID_RUBRIQUE})"]>
+			[(#TITRE)]
+		</a>
+	</h2>
+	<div class="bord">
+	<table>
+		<thead>
+			<tr>
+				<th colspan="2"><:sarkaspip:colonne_forum:></th>
+				<th class="centre"><:sarkaspip:colonne_nombre_sujets:></th>
+				<th class="centre"><:sarkaspip:colonne_nombre_reponses:></th>
+				<th><:sarkaspip:colonne_dernier_message:></th>	
+			</tr>
+		</thead>
+	
+	[(#REM) <!-- Afficher table par rubrique ou toute si racine --> ]
+	<B_forums>
+		<tbody>
+		<BOUCLE_forums(ARTICLES){id_rubrique}{par num titre}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]")]>
+				[(#REM) <!-- Etat et description du forum --> ]
+				[(#SET{statut_forum, [(#ID_ARTICLE|statut_forum)]})]
+				<td class="etat[ (#GET{statut_forum}|!={ouvert}|oui)forumferme]">
+				</td>
+				<td class="description">
+					[<h3 class="[(#EDIT{titre}) ]titre">
+						<a href="[(#URL_PAGE{forum_forum}|parametre_url{id_article,#ID_ARTICLE})]"[ title="(#GET{statut_forum}|!={ouvert}|oui)<:sarkaspip:bulle_forum_ferme:>"]>
+							(#TITRE)
+						</a>
+					</h3>]
+					[<div class="texte">(#INTRODUCTION|typo_couleur)</div>]
+				</td>
+
+				[(#REM) <!-- Nombre de sujets du forum --> ]
+				<BOUCLE_discussions(FORUMS){id_article}></BOUCLE_discussions>
+				<td class="sujets">#TOTAL_BOUCLE</td>
+				<//B_discussions>
+
+				[(#REM) <!-- Nombre de réponses du forum --> ]
+				<BOUCLE_messages(FORUMS){id_article}{plat}{id_parent!=0}></BOUCLE_messages>
+				<td class="messages">#TOTAL_BOUCLE</td>
+				<//B_messages>
+
+				[(#REM) <!-- Informations sur le dernier message du forum --> ]
+				<td class="dernier_message">
+				<BOUCLE_dernier_message(FORUMS){id_article}{plat}{!par date}{0,1}>
+					<BOUCLE_papa(FORUMS){id_thread}>
+						#SET{id_forum_sujet,#ID_FORUM}
+						#SET{titre_sujet,#TITRE}
+					</BOUCLE_papa>
+					[<a href="[(#URL_PAGE{forum_sujet}|parametre_url{id_article,#ID_ARTICLE}|parametre_url{id_forum,#GET{id_forum_sujet}}|ancre_url{forum#ID_FORUM})]" class="titre" title="<:sarkaspip:bulle_lien_dernier_message:>">
+					<span>(#GET{titre_sujet}|nettoyer_titre_sujet|couper{25,...})</span></a>
+					<br />]
+					[(#DATE|affdate)]&nbsp;<:sarkaspip:agrave:>&nbsp;[(#DATE|affdate{'H\hi'})]<br />
+					<:sarkaspip:par_auteur:>
+					<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+						<a href="#URL_AUTEUR">#NOM</a>
+					</BOUCLE_auteur>
+					</B_auteur>
+						[(#NOM|sinon{<:sarkaspip:auteur_anonyme:>})]
+					<//B_auteur>
+				</BOUCLE_dernier_message> 
+						- 
+				<//B_dernier_message>		
+				</td>
+			</tr>
+		</BOUCLE_forums>
+		</tbody>
+	</B_forums>	
+	</table>	
+	</div>
+</div>
+</BOUCLE_groupe_forum>

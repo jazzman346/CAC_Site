@@ -1,0 +1,25 @@
+[(#REM) <!-- Bandeau bas --> ]
+<div class="bandeau_bas">
+[(#PIPELINE{
+	bandeau_bas_debut,
+	[(#ARRAY{args, [(#ARRAY{id_rubrique, #ENV{id_rubrique}})], data, ''})]}
+)]
+
+[(#CONFIG{sarkaspip_menus/position_rubriques, 1}|=={5}|?{' '})
+  <INCLURE{fond=noisettes/navigation/inc_menu_rubriques_1h}{env}{id_rubrique}>
+]
+[(#CONFIG{sarkaspip_menus/position_secteurs, 0}|=={5}|?{' '})
+	<INCLURE{fond=noisettes/navigation/inc_menu_secteurs}{env}>
+]
+[(#CONFIG{sarkaspip_menus/position_pages, 1}|=={5}|?{' '})
+	<INCLURE{fond=noisettes/navigation/inc_menu_pages_speciales}{env}{position=bandeau_bas}>
+]
+[(#CONFIG{sarkaspip_menus/position_perso, 0}|=={5}|?{' '})
+	<INCLURE{fond=noisettes/navigation/inc_menu_perso}{env}>
+]
+
+[(#PIPELINE{
+	bandeau_bas_fin,
+	[(#ARRAY{args, [(#ARRAY{id_rubrique, #ENV{id_rubrique}})], data, ''})]}
+)]
+</div>

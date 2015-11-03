@@ -1,0 +1,146 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_sommaire:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_edito:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_article_specialise}
+				{explication=<:sarkaspip:cfg_inf_edito_id:>}
+				{article=edito}
+				{env}>
+
+			<div id="bloc_titre_edito">
+				<p><:sarkaspip:cfg_inf_titre_edito:></p>
+				<label>
+					<input type="radio" name="titre_edito" value="1" [(#ENV{titre_edito, 1}|=={1}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_oui:>
+				</label>
+				<label>
+					<input type="radio" name="titre_edito" value="0" [(#ENV{titre_edito, 1}|=={0}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_non:>
+				</label>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_sommaire_une:></legend>
+			<p><:sarkaspip:cfg_inf_sommaire_une:></p>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_sommaire_secteurs:></legend>
+			<p><:sarkaspip:cfg_inf_sommaire_secteurs:></p>
+			<label>
+				<input type="radio" name="position_secteurs" value="1" [(#ENV{position_secteurs, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="position_secteurs" value="0" [(#ENV{position_secteurs, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_sommaire_articles:></legend>
+			<p><:sarkaspip:cfg_inf_sommaire_articles:></p>
+			<label>
+				<input type="radio" name="position_articles_recents" value="1" [(#ENV{position_articles_recents, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="position_articles_recents" value="0" [(#ENV{position_articles_recents, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+			<div id="bloc_max_articles">
+				<br />
+				<label><:sarkaspip:cfg_lbl_max_articles_recents:></label>
+				<input type="text" name="max_articles_recents" value="#ENV{max_articles_recents, 5}" size="3" class="fondl" />
+				<br />
+				<INCLURE{fond=noisettes/cfg/inc_cfg_introduction}{env}>
+				<INCLURE{fond=noisettes/cfg/inc_cfg_logo}{explication=<:sarkaspip:cfg_inf_sommaire_sans_logo:>}{env}>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_sommaire_albums:></legend>
+			<p><:sarkaspip:cfg_inf_sommaire_albums:></p>
+			<label>
+				<input type="radio" name="position_albums_recents" value="1" [(#ENV{position_albums_recents, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="position_albums_recents" value="0" [(#ENV{position_albums_recents, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+			<div id="bloc_max_albums">
+				<br />
+				<label><:sarkaspip:cfg_lbl_max_albums_recents:></label>
+				<input type="text" name="max_albums_recents" value="#ENV{max_albums_recents, 5}" size="3" class="fondl" />
+				<p><:sarkaspip:cfg_inf_sommaire_albums_1_colonne:></p>
+				<label>
+					<input type="radio" name="album_1_colonne" value="1" [(#ENV{album_1_colonne, 0}|=={1}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_1_colonne:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="album_1_colonne" value="0" [(#ENV{album_1_colonne, 0}|=={0}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_2_colonnes:>
+				</label>
+				<br /><br />
+				<label><:sarkaspip:cfg_lbl_intro_album:></label>
+				<input type="text" name="intro_album" value="#ENV{intro_album, 200}" size="3" class="fondl" />
+			</div>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_sommaire}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{position_articles_recents, 1}|!={1}|?{' '})
+			jQuery("#bloc_max_articles").hide();
+		]
+		[(#ENV{position_albums_recents, 1}|!={1}|?{' '})
+			jQuery("#bloc_max_albums").hide();
+		]
+		[(#ENV{article_edito, 0}|=={0}|?{' '})
+			jQuery("#bloc_titre_edito").hide();
+		]
+		jQuery("input[name='position_articles_recents']").change(function() {
+			if (jQuery("input[name='position_articles_recents']:checked").val() == 1) {
+				jQuery("#bloc_max_articles").show();
+			}
+			else {
+				jQuery("#bloc_max_articles").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='position_albums_recents']").change(function() {
+			if (jQuery("input[name='position_albums_recents']:checked").val() == 1) {
+				jQuery("#bloc_max_albums").show();
+			}
+			else {
+				jQuery("#bloc_max_albums").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("#select_article").change(function() {
+			if (jQuery("#select_article option:selected").val() == 0) {
+				jQuery("#bloc_titre_edito").hide();
+			}
+			else {
+				jQuery("#bloc_titre_edito").show();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

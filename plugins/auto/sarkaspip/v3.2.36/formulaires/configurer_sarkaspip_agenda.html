@@ -1,0 +1,176 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_agenda:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_agenda_secteur:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_secteur_specialise}
+				{explication=<:sarkaspip:cfg_inf_agenda_id:>}
+				{secteur=agenda}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_agenda_page:></legend>
+			<p><:sarkaspip:cfg_inf_agenda_page:></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_information_page}
+				{choix=titre_descriptif}
+				{label_titre=<:sarkaspip:cfg_lbl_agenda_titre:>}
+				{label_descriptif=<:sarkaspip:cfg_lbl_agenda_descriptif:>}
+				{defaut_titre=<:sarkaspip:agenda:>}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_agenda_modele:></legend>
+			<p><:sarkaspip:cfg_inf_agenda_modele:></p>
+			<label>
+				<input type="radio" name="type" value="1" [(#ENV{type, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_agenda_modele_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="type" value="2" [(#ENV{type, 1}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_agenda_modele_2:>
+			</label>
+			<div id="bloc_saison">
+				<p><:sarkaspip:cfg_inf_agenda_mois1:></p>
+				<label><:sarkaspip:cfg_lbl_agenda_mois1:></label>
+				<select name="mois1" id="select_mois1">
+					<option value="2"[ (#ENV{mois1, 1}|=={2}|?{selected="selected"})]><:date_mois_2|ucfirst:></option>
+					<option value="3"[ (#ENV{mois1, 1}|=={3}|?{selected="selected"})]><:date_mois_3|ucfirst:></option>
+					<option value="4"[ (#ENV{mois1, 1}|=={4}|?{selected="selected"})]><:date_mois_4|ucfirst:></option>
+					<option value="5"[ (#ENV{mois1, 1}|=={5}|?{selected="selected"})]><:date_mois_5|ucfirst:></option>
+					<option value="6"[ (#ENV{mois1, 1}|=={6}|?{selected="selected"})]><:date_mois_6|ucfirst:></option>
+					<option value="7"[ (#ENV{mois1, 1}|=={7}|?{selected="selected"})]><:date_mois_7|ucfirst:></option>
+					<option value="8"[ (#ENV{mois1, 1}|=={8}|?{selected="selected"})]><:date_mois_8|ucfirst:></option>
+					<option value="9"[ (#ENV{mois1, 1}|=={9}|?{selected="selected"})]><:date_mois_9|ucfirst:></option>
+					<option value="10"[ (#ENV{mois1, 1}|=={10}|?{selected="selected"})]><:date_mois_10|ucfirst:></option>
+					<option value="11"[ (#ENV{mois1, 1}|=={11}|?{selected="selected"})]><:date_mois_11|ucfirst:></option>
+					<option value="12"[ (#ENV{mois1, 1}|=={12}|?{selected="selected"})]><:date_mois_12|ucfirst:></option>
+				</select>
+				<br /><br />
+				<label><:sarkaspip:cfg_lbl_pagination_format:></label>
+				<select name="format_pagination" id="select_pagination">
+					<option value="annee" [(#ENV{format_pagination, annee}|=={annee}|?{selected="selected"})]><:sarkaspip:cfg_itm_pagination_format_1:></option>
+					<option value="periode" [(#ENV{format_pagination, annee}|=={periode}|?{selected="selected"})]><:sarkaspip:cfg_itm_pagination_format_2:></option>
+					<option value="periode_abregee" [(#ENV{format_pagination, annee}|=={periode_abregee}|?{selected="selected"})]><:sarkaspip:cfg_itm_pagination_format_3:></option>
+				</select>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_agenda_tri:></legend>
+			<p><:sarkaspip:cfg_inf_agenda_sens_tri:></p>
+			<label>
+				<input type="radio" name="sens_tri" value="normal" [(#ENV{sens_tri, normal}|=={normal}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_tri_chrono:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="sens_tri" value="inverse" [(#ENV{sens_tri, normal}|=={inverse}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_tri_antichrono:>
+			</label>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_mini_agenda:></legend>
+			<p><:sarkaspip:cfg_inf_mini_agenda:></p>
+			<p><:sarkaspip:cfg_inf_mini_agenda_mois:></p>
+			<label>
+				<input type="radio" name="affichage_hors_mois" value="oui" [(#ENV{affichage_hors_mois, oui}|=={oui}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_horsmois_oui:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="affichage_hors_mois" value="non" [(#ENV{affichage_hors_mois, oui}|=={non}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_horsmois_non:>
+			</label>
+			<br /><br />
+			<label><:sarkaspip:cfg_lbl_mini_agenda_jour1:></label>
+			<select name="jour1">
+				<option value="0" [(#ENV{jour1, 1}|=={0}|?{selected="selected"})]><:date_jour_1|ucfirst:></option>
+				<option value="1" [(#ENV{jour1, 1}|=={1}|?{selected="selected"})]><:date_jour_2|ucfirst:></option>
+				<option value="2" [(#ENV{jour1, 1}|=={2}|?{selected="selected"})]><:date_jour_3|ucfirst:></option>
+				<option value="3" [(#ENV{jour1, 1}|=={3}|?{selected="selected"})]><:date_jour_4|ucfirst:></option>
+				<option value="4" [(#ENV{jour1, 1}|=={4}|?{selected="selected"})]><:date_jour_5|ucfirst:></option>
+				<option value="5" [(#ENV{jour1, 1}|=={5}|?{selected="selected"})]><:date_jour_6|ucfirst:></option>
+				<option value="6" [(#ENV{jour1, 1}|=={6}|?{selected="selected"})]><:date_jour_7|ucfirst:></option>
+			</select>
+			<br />
+			<p><:sarkaspip:cfg_inf_mini_agenda_resume_1:></p>
+			<p><:sarkaspip:cfg_inf_mini_agenda_resume_2:></p>
+			<label>
+				<input type="radio" name="type_resume" value="oui" [(#ENV{type_resume, oui}|=={oui}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="type_resume" value="non" [(#ENV{type_resume, oui}|=={non}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+			<div id="bloc_taille_resume">
+				<br />
+				<label><:sarkaspip:cfg_lbl_maxmois_resume:></label>
+				<input type="text" name="max_mois_resume" value="#ENV{max_mois_resume, 6}" size="2" class="fondl" />
+				<br />
+				<label><:sarkaspip:cfg_lbl_taille_resume:></label>
+				<input type="text" name="taille_resume" value="#ENV{taille_resume, 5}" size="4" class="fondl" />
+				<p><:sarkaspip:cfg_inf_mini_agenda_format:></p>
+				<label>
+					<input type="radio" name="format_resume" value="d-m H:i" [(#ENV{format_resume, d-m H:i}|=={d-m H:i}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_format_dmhi:>
+				</label>
+				<label>
+					<input type="radio" name="format_resume" value="d-m" [(#ENV{format_resume, d-m H:i}|=={d-m}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_format_dm:>
+				</label>
+			</div>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_agenda}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{type, 1}|!={2}|?{' '})
+			jQuery("#select_mois1").prepend('<option value=1><:date_mois_1|ucfirst:></option>');
+			jQuery("#select_mois1 option:first").attr({selected: "selected"});
+			jQuery("#bloc_saison").hide();
+		]
+		[(#ENV{type_resume, oui}|!={oui}|?{' '})
+			jQuery("#bloc_taille_resume").hide();
+		]
+		jQuery("input[name='type']").change(function() {
+			if (jQuery("input[name='type']:checked").val() == 2) {
+				jQuery("#bloc_saison").show();
+				jQuery("#select_mois1 option:first").remove();
+				jQuery("#select_mois1 option:first").attr({selected: "selected"});
+			}
+			else {
+				jQuery("#select_mois1").prepend('<option value=1><:date_mois_1|ucfirst:></option>');
+				jQuery("#select_mois1 option:first").attr({selected: "selected"});
+				jQuery("#bloc_saison").hide();
+			}
+			jQuery(this).blur();
+		});
+		jQuery("input[name='type_resume']").change(function() {
+			if (jQuery("input[name='type_resume']:checked").val() == 'oui') {
+				jQuery("#bloc_taille_resume").show();
+			}
+			else {
+				jQuery("#bloc_taille_resume").hide();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>
+

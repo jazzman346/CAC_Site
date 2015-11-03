@@ -1,0 +1,57 @@
+[(#REM) <!-- Calcul de la ligne des versions et liens des outils utilises --> ]
+[(#CONFIG{sarkaspip_pied/lien_plan, 1}|=={1}|?{' '})
+	[(#SET{ligne_2, <a[ href="(#URL_PAGE{plan,tri=par_rubrique})"]><:sarkaspip:plan_site:></a>})]
+]
+[(#CONFIG{sarkaspip_pied/version_spip, 1}|=={1}|?{' '})
+	[(#SET{item, <a href="http://www.spip.net" title="<:sarkaspip:kezako_spip:>">SPIP&nbsp;#SPIP_VERSION</a>})]
+	[(#GET{ligne_2}|?{' '})
+		[(#SET{ligne_2, [(#GET{ligne_2})&nbsp;|&nbsp;]})]
+	]
+	[(#SET{ligne_2, [(#GET{ligne_2}|concat{#GET{item}})]})]
+]
+[(#CONFIG{sarkaspip_pied/version_sarka, 1}|=={1}|?{' '})
+	[(#SET{item, <a href="http://www.sarka-spip.net" title="<:sarkaspip:kezako_sarkaspip:>">Sarka-SPIP&nbsp;#VERSION_SQUELETTE</a>})]
+	[(#GET{ligne_2}|?{' '})
+		[(#SET{ligne_2, [(#GET{ligne_2})&nbsp;|&nbsp;]})]
+	]
+	[(#SET{ligne_2, [(#GET{ligne_2}|concat{#GET{item}})]})]
+]
+[(#CONFIG{sarkaspip_pied/collectif_sarka, 1}|=={1}|?{' '})
+	[(#SET{item, <a href="http://www.sarka-spip.net" title="<:sarkaspip:kezako_collectif:>"><:sarkaspip:realisation_squelette:></a>})]
+	[(#GET{ligne_2}|?{' '})
+		[(#SET{ligne_2, [(#GET{ligne_2})&nbsp;|&nbsp;]})]
+	]
+	[(#SET{ligne_2, [(#GET{ligne_2}|concat{#GET{item}})]})]
+]
+[(#CONFIG{sarkaspip_pied/licence_squelette, 1}|=={1}|?{' '})
+	[(#SET{item, <a href="http://www.gnu.org/copyleft/gpl.html" title="<:sarkaspip:kezako_gpl:>"><:sarkaspip:licence_gpl:></a>})]
+	[(#GET{ligne_2}|?{' '})
+		[(#SET{ligne_2, [(#GET{ligne_2})&nbsp;|&nbsp;]})]
+	]
+	[(#SET{ligne_2, [(#GET{ligne_2}|concat{#GET{item}})]})]
+]
+[(#CONFIG{sarkaspip_pied/lien_squelette, 1}|=={1}|?{' '})
+	[(#SET{nom_fichier, [(#ENV{squelette}|basename)]})]
+	[(#SET{item, <a[ href="(#ENV{squelette})"][ title="<:sarkaspip:kezako_squelette:>&nbsp;(#GET{nom_fichier})"] rel="nofollow"><:sarkaspip:squelette|ucfirst:></a>})]
+	[(#GET{ligne_2}|?{' '})
+		[(#SET{ligne_2, [(#GET{ligne_2})&nbsp;|&nbsp;]})]
+	]
+	[(#SET{ligne_2, [(#GET{ligne_2}|concat{#GET{item}})]})]
+]
+[(#CONFIG{sarkaspip_pied/outils_perso}|oui)
+	[(#SET{item, [(#CONFIG{sarkaspip_pied/outils_perso}|propre|ptobr|trim)]})]
+	[(#GET{ligne_2}|?{' '})
+		[(#SET{ligne_2, [(#GET{ligne_2})&nbsp;|&nbsp;]})]
+	]
+	[(#SET{ligne_2, [(#GET{ligne_2}|concat{#GET{item}})]})]
+]
+[(#CONFIG{sarkaspip_pied/ancre_haut_page, 1}|=={1}|?{' '})
+	[(#SET{item, <a href="#header" title="<:sarkaspip:kezako_haut_page:>" rel="nofollow"><:sarkaspip:ancre_haut_page:></a>})]
+	[(#GET{ligne_2}|?{' '})
+		[(#SET{ligne_2, [(#GET{ligne_2})&nbsp;|&nbsp;]})]
+	]
+	[(#SET{ligne_2, [(#GET{ligne_2}|concat{#GET{item}})]})]
+]
+
+[(#REM) <!-- Affichage de la ligne construite --> ]
+[<div class="credits">(#GET{ligne_2})</div>]

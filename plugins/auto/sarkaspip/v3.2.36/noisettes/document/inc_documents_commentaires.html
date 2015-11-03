@@ -1,0 +1,15 @@
+[(#REM) 
+<!-- Liens vers les documents joints a un message de forum ou un commentaire
+		- id_forum: id du commentaire concerne
+-->
+]
+<B_document>
+	<div class="texte">
+		<:sarkaspip:docu_commentaire:>&nbsp;:&nbsp;
+<BOUCLE_document(DOCUMENTS){id_forum}{", "}>
+		#SET{classe, ''}
+		[(#EXTENSION|match{'^(gif|jpg|png)$'}|oui) #SET{classe, mediabox}]
+		<a href="#URL_DOCUMENT"[ class=(#GET{classe})]>[(#FICHIER|basename)]</a>
+</BOUCLE_document>
+	</div>
+</B_document>

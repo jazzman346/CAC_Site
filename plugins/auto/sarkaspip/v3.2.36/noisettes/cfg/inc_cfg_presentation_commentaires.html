@@ -1,0 +1,11 @@
+<p><:sarkaspip:cfg_inf_presentation_commentaires:></p>
+<label>
+	<input type="radio" name="mode_commentaires" value="2" [(#ENV{mode_commentaires, #ENV{defaut_presentation}}|=={2}|?{checked="checked"})] />
+	<:sarkaspip:cfg_inf_mode_commentaires_classique:>
+</label>
+<br />
+<label>
+	<input type="radio" name="mode_commentaires" value="1" [(#ENV{mode_commentaires, #ENV{defaut_presentation}}|=={1}|?{checked="checked"})] />
+	<:sarkaspip:cfg_inf_mode_commentaires_hierarchique:>
+</label>
+

@@ -1,0 +1,27 @@
+#SET{visible, #CONFIG{sarkaspip_noisettes/position_rechspip, 3}|plus{#CONFIG{sarkaspip_noisettes/moteur_externe, 1}}}
+
+[(#GET{visible}|!={3}|?{' '})
+	<div id="nav_recherche" class="noisette">
+		<h1 class="intitule"><:sarkaspip:rechercher:></h1>
+		[(#CONFIG{sarkaspip_noisettes/position_rechspip, 3}|=={4}|?{' '})
+			<INCLURE{fond=noisettes/recherche/inc_recherche_spip}>
+		]
+	
+		[(#REM) <!--  Champ de recherche moteur externe --> ]
+		[(#CONFIG{sarkaspip_noisettes/moteur_externe, 1}|=={1}|?{' '})
+			<INCLURE{fond=noisettes/recherche/inc_recherche_exalead}>
+		]
+		[(#CONFIG{sarkaspip_noisettes/moteur_externe, 1}|=={2}|?{' '})
+			<INCLURE{fond=noisettes/recherche/inc_recherche_google}>
+		]
+		[(#CONFIG{sarkaspip_noisettes/moteur_externe, 1}|=={3}|?{' '})
+			<INCLURE{fond=noisettes/recherche/inc_recherche_yahoo}>
+		]
+		[(#CONFIG{sarkaspip_noisettes/moteur_externe, 1}|=={4}|?{' '})
+			<INCLURE{fond=noisettes/recherche/inc_recherche_msn}>
+		]
+		[(#CONFIG{sarkaspip_noisettes/moteur_externe, 1}|=={5}|?{' '})
+			<INCLURE{fond=noisettes/recherche/inc_recherche_voila}>
+		]
+	</div>
+]

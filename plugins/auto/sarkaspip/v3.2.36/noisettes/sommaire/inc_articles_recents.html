@@ -1,0 +1,23 @@
+[(#REM)
+<!-- 
+	Noisette d'affichage des n derniers articles publies a l'exception de l'edito si il existe
+	Recoit en argument :
+		- doublons: permet d'exclure l'edito si il existe (doublons est utilise dans la boucle de l'edito page sommaire)
+		- lang: pas encore utilise
+ -->
+]
+<B_article>
+	<div id="articles_recents" class="portfolio">
+		<h2><:sarkaspip:articles_recents:></h2>
+<BOUCLE_article(ARTICLES){id_secteur!==#RACINE_SPECIALISEE}{doublons}{par date}{inverse}{0,#CONFIG{sarkaspip_sommaire/max_articles_recents, 5}}>
+		<INCLURE{fond=noisettes/article/inc_article_introduction}
+			{id_article}
+			{afficher_mere=oui}
+			{afficher_commentaires=oui}
+			{logo_rubrique=#CONFIG{sarkaspip_sommaire/logo_rubrique, oui}}
+			{avec_lire_suite=#CONFIG{sarkaspip_sommaire/avec_lire_suite, non}}
+			{taille_logo=#CONFIG{sarkaspip_sommaire/taille_logo, 150}}
+			{taille_introduction=#CONFIG{sarkaspip_sommaire/intro_article, 300}}>
+</BOUCLE_article>
+	</div>
+</B_article>

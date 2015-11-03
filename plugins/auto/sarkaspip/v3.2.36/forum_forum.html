@@ -1,0 +1,88 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{7200}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=#TITRE}
+		{meta_description=#INTRODUCTION{#EVAL{_SARKASPIP_CONFIG_INTRO_META}}|supprimer_tags}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=forum_forum}{id_rubrique}>
+	</div>
+		<div id="wrapper">
+			<div id="content">
+				<div id="forum" class="forum">
+					[(#SET{statut_forum, [(#ENV{id_article}|statut_forum)]})]
+
+					[(#REM) <!-- Titre, logo, texte de la page du forum --> ]
+					<INCLURE{fond=noisettes/article/inc_article_description}
+						{id_article}
+						{page=forum}
+						{afficher_commentaires=non}
+						{avec_popularite=non}
+						{avec_notation=non}
+						{avec_socialtags=non}
+						{logo_rubrique=oui}
+						{taille_logo=100}
+						{statut_forum=#GET{statut_forum}}>
+						
+					[(#GET{statut_forum}|=={ouvert}|oui)
+					<div class="outils">
+						<a class="fonction" id="commenter" href="#formulaire_sujet" title="<:sarkaspip:poster_sujet:>"></a>
+						<br class="nettoyeur">
+					</div>
+					]
+		
+					[(#REM) <!-- On traite d'abord les annonces --> ]
+					<INCLURE{fond=noisettes/forum/inc_forum_annonces}
+						{id_article}
+						{statut_forum=#GET{statut_forum}}>
+
+					[(#REM) <!-- On traite ensuite les sujets epingles --> ]
+					<INCLURE{fond=noisettes/forum/inc_forum_epingles}
+						{id_article}
+						{statut_forum=#GET{statut_forum}}>
+
+					[(#REM) <!-- On traite enfin les sujets non epingles --> ]
+					<INCLURE{fond=noisettes/forum/inc_forum_discussions}
+						{id_article}
+						{statut_forum=#GET{statut_forum}}
+						{ajax}>
+				</div>
+
+				[(#REM) <!-- Forumlaire de reponse --> ]
+				[(#GET{statut_forum}|=={ouvert}|oui)
+					<div class="formulaire" id="formulaire_sujet">#FORMULAIRE_FORUM{#URL_PAGE{forum_forum, #PARAMETRES_FORUM{#SELF}}}</div>
+				]
+			</div>
+		</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=forum_forum}{id_rubrique}{id_secteur}>
+	</div>
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=forum_forum}{id_secteur}{id_rubrique}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=forum_forum}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>
+<script type='text/javascript'>
+//<![CDATA[
+	jQuery(document).ready(function() {
+		jQuery("#formulaire_forum .saisie_titre input[name='titre']").val('<:sarkaspip:titre_forum_nouveau_sujet|texte_script:>');
+	});
+//]]>
+</script>
+</BOUCLE_article>

@@ -1,0 +1,11 @@
+[(#REM) 
+<!-- Affichage du cartouche d'une breve
+	Recoit en argument :
+		- id_breve: id de la breve concernee
+-->
+]
+<BOUCLE_cartouche(BREVES) {id_breve}>
+	<div class="cartouche">
+		[(#DATE|nom_jour)][&nbsp;(#DATE|affdate)]
+	</div>
+</BOUCLE_cartouche>

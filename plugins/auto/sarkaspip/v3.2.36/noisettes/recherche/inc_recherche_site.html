@@ -1,0 +1,36 @@
+[(#REM) 
+<!-- Affichage de la liste des sites trouvees lors d'une recherche
+	Recoit en argument :
+		- recherche : le(s) mot(s) recherches
+-->
+]
+<B_sites_recherche>
+	<div id="recherche_site" class="commentaires">
+		<a rel="nofollow" href="#header" title="<:sarkaspip:kezako_haut_page:>" class="fonction revenir_haut_page"></a>
+		<h2><:sarkaspip:recherche_sites_resultat:>&nbsp;&#40;#GRAND_TOTAL&#41;</h2>
+		#ANCRE_PAGINATION
+		[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_site, 3}|match{^(1|3)$}|?{' '})
+		  [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_site}})</div>]
+		]
+		<ul>
+<BOUCLE_sites_recherche(SITES) {recherche}{id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}}{par points}{inverse}{pagination #CONFIG{sarkaspip_recherche/pas_pagination_recherche_site, 5}}>
+		#SET{url, #URL_PAGE{site, id_syndic=#ID_SYNDIC}}
+		[(#SYNDICATION|=={oui}|non)
+			#SET{url, #URL_SITE}
+		]
+		[(#INCLURE{fond=noisettes/recherche/inc_recherche_extrait}
+			{titre=#NOM_SITE}
+			{afficher_date=non}
+			{url=#GET{url}}
+			{afficher_logo=oui}
+			{logo=#LOGO_SITE||inserer_attribut{alt,#NOM_SITE|texte_backend}}        
+			{afficher_auteur=non}
+			{ajax}
+		)]
+</BOUCLE_sites_recherche>
+		</ul>
+		[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_site, 3}|match{^(2|3)$}|?{' '})
+		  [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_site}})</div>]
+		]
+	</div>
+</B_sites_recherche>

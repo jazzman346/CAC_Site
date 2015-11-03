@@ -1,0 +1,14 @@
+[(#REM)
+<!-- 
+	Noisette d'affichage des secteurs (hors secteurs specialises)
+	Recoit en argument :
+		- lang: pas encore utilise
+ -->
+]
+<B_rubriques_global_0>
+<BOUCLE_rubriques_global_0(RUBRIQUES){racine}{id_rubrique!==#RACINE_SPECIALISEE}{par num titre}{par titre}>
+	<div class="rubrique">
+		[(#INCLURE{fond=noisettes/rubrique/inc_rubrique_description}{id_rubrique}{avec_filles=non})]
+	</div> <!-- Fin rubrique -->
+</BOUCLE_rubriques_global_0>
+</B_rubriques_global_0>

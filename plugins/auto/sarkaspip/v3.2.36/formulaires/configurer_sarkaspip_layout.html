@@ -1,0 +1,175 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_layout:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_layout:></legend>
+				<p><:sarkaspip:cfg_inf_layout:></p>
+			<table style="border: 0; width:100%;"><tr>
+			<td>
+				<fieldset style="border: 0">
+					<legend style="font-weight:bold;"><:sarkaspip:cfg_lgd_layout_fixe:></legend>
+					<label>
+						<input type="radio" name="numero_layout" value="7" [(#ENV{numero_layout, 13}|=={7}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_layout_07:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="numero_layout" value="8" [(#ENV{numero_layout, 13}|=={8}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_layout_08:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="numero_layout" value="9" [(#ENV{numero_layout, 13}|=={9}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_layout_09:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="numero_layout" value="10" [(#ENV{numero_layout, 13}|=={10}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_layout_10:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="numero_layout" value="11" [(#ENV{numero_layout, 13}|=={11}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_layout_11:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="numero_layout" value="12" [(#ENV{numero_layout, 13}|=={12}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_layout_12:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="numero_layout" value="34" [(#ENV{numero_layout, 13}|=={34}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_layout_34:>
+					</label>
+					<br />
+					<div id="bloc_largeur">
+						<br />
+						<label><:sarkaspip:cfg_lbl_largeur_site:>
+							<input type="text" name="largeur_site" value="#ENV{largeur_site, 700}" size="4" class="fondl" />
+							<:sarkaspip:cfg_lbl_pixel:>
+						</label>
+						<br />
+						<p><:sarkaspip:cfg_lbl_appliquer_padding:></p>
+						<label>
+							<input type="radio" name="appliquer_padding" value="1" [(#ENV{appliquer_padding, 0}|=={1}|?{checked="checked"})] />
+							<:sarkaspip:cfg_lbl_oui:>
+						</label>
+						<label>
+							<input type="radio" name="appliquer_padding" value="0" [(#ENV{appliquer_padding, 0}|=={0}|?{checked="checked"})] />
+							<:sarkaspip:cfg_lbl_non:>
+						</label>
+						<div id="bloc_marge">
+							<br />
+							<label><:sarkaspip:cfg_lbl_largeur_padding:>
+								<input type="text" name="largeur_padding" value="#ENV{largeur_padding, 20}" size="3" class="fondl" />
+								<:sarkaspip:cfg_lbl_pixel:>
+							</label>
+						</div>
+					</div>
+				</fieldset>
+
+				<br />
+
+				<fieldset style="border: 0;">
+				<legend style="font-weight:bold;"><:sarkaspip:cfg_lgd_layout_fluide:></legend>
+				<label>
+					<input type="radio" name="numero_layout" value="13" [(#ENV{numero_layout, 13}|=={13}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_layout_13:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="numero_layout" value="14" [(#ENV{numero_layout, 13}|=={14}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_layout_14:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="numero_layout" value="15" [(#ENV{numero_layout, 13}|=={15}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_layout_15:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="numero_layout" value="16" [(#ENV{numero_layout, 13}|=={16}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_layout_16:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="numero_layout" value="17" [(#ENV{numero_layout, 13}|=={17}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_layout_17:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="numero_layout" value="18" [(#ENV{numero_layout, 13}|=={18}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_layout_18:>
+				</label>
+				</fieldset>
+			</td>
+			<td>
+				<img id="bloc_layout_image" src="[(#CHEMIN{[prive/themes/spip/images/layout(#ENV{numero_layout, 13}).gif]})]" alt="Layout #ENV{numero_layout, 13}"/>
+			</td>
+			</tr></table>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_layout}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{appliquer_padding, 0}|!={1}|?{' '}) jQuery("#bloc_marge").hide();]
+		[(#ENV{numero_layout, 13}|match{^(13|14|15|16|17|18)$}|?{' '}) jQuery("#bloc_largeur").hide();]
+
+		jQuery("input[name='numero_layout']").click(function() {
+			switch(jQuery("input[name='numero_layout']:checked").val()){
+				case '7' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout7.gif})]"});break;
+				case '8' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout8.gif})]"});break;
+				case '9' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout9.gif})]"});break;
+				case '10' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout10.gif})]"});break;
+				case '11' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout11.gif})]"});break;
+				case '12' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout12.gif})]"});break;
+				case '13' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout13.gif})]"});break;
+				case '14' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout14.gif})]"});break;
+				case '15' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout15.gif})]"});break;
+				case '16' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout16.gif})]"});break;
+				case '17' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout17.gif})]"});break;
+				case '18' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout18.gif})]"});break;
+				case '34' :jQuery("#bloc_layout_image").attr({src: "[(#CHEMIN{prive/themes/spip/images/layout34.gif})]"});break;
+				default : jQuery("#bloc_largeur").hide();break;
+			}
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='appliquer_padding']").change(function() {
+			if (jQuery("input[name='appliquer_padding']:checked").val() == 1) {
+				jQuery("#bloc_marge").show();
+			}
+			else {
+				jQuery("#bloc_marge").hide();
+			}
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='numero_layout']").change(function() {
+			switch(jQuery("input[name='numero_layout']:checked").val()){
+				case '7' :
+				case '8' :
+				case '9' :
+				case '10' :
+				case '11' :
+				case '12' :
+				case '34' :jQuery("#bloc_largeur").show();break;
+				default : jQuery("#bloc_largeur").hide();break;
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

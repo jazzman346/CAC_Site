@@ -1,0 +1,10 @@
+<B_groupes>	
+ 	<label>#ENV{label}</label><br />
+	<select name="groupes#ENV{suffixe}[]" multiple="multiple" style="width: 100%;">
+<BOUCLE_groupes(GROUPES_MOTS){titre!=squelette_habillage}{id_groupe ?IN #ENV{id_groupe}}{par num titre, titre}>
+	<BOUCLE_mot_existe(MOTS){id_groupe}{0,1}>
+		[<option value="#_groupes:ID_GROUPE"[ (#_groupes:ID_GROUPE|in_array{#ENV{groupes#ENV{suffixe},#ARRAY}}|oui)selected="selected"]>(#_groupes:TITRE)</option>]
+	</BOUCLE_mot_existe>
+</BOUCLE_groupes>
+	</select> 	
+</B_groupes>

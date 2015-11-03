@@ -1,0 +1,41 @@
+<div class="formulaire_spip formulaire_multi_mots">
+	[<div class="avertissement">(#ENV{message_erreur})</div>]
+	<form method="post" action="#ENV{action}">
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="multi_critere">
+				<INCLURE{fond=noisettes/mot/inc_mot_select}
+					{groupes=#CONFIG{sarkaspip_recherche/groupes_recherche}}
+					{mot=#ENV{mot_1}}
+					{suffixe=1}
+					{label=<:sarkaspip:liste_mot_1:>}>
+			</li>
+			<li class="multi_critere">
+				<INCLURE{fond=noisettes/mot/inc_mot_select}
+					{groupes=#CONFIG{sarkaspip_recherche/groupes_recherche}}
+					{mot=#ENV{mot_2}}
+					{suffixe=2}
+					{label=<:sarkaspip:liste_mot_2:>}>
+			</li>
+			<li class="multi_critere">
+				<INCLURE{fond=noisettes/mot/inc_mot_select}
+					{groupes=#CONFIG{sarkaspip_recherche/groupes_recherche}}
+					{mot=#ENV{mot_3}}
+					{suffixe=3}
+					{label=<:sarkaspip:liste_mot_3:>}>
+			</li>
+		</ul>
+	
+		<p class="boutons"><input type="submit" value="<:sarkaspip:bouton_rechercher:>" /></p>
+	</form>
+</div>
+
+[(#REM) <!-- les resultats de la recherche multi-mots -->]
+[(#ENV{message_ok}|oui)
+<INCLURE{fond=noisettes/mot/inc_mot_article}{ajax}{id1=#ENV{mot_1}}{id2=#ENV{mot_2}}{id3=#ENV{mot_3}}>
+<INCLURE{fond=noisettes/mot/inc_mot_album}{ajax}{id1=#ENV{mot_1}}{id2=#ENV{mot_2}}{id3=#ENV{mot_3}}>
+<INCLURE{fond=noisettes/mot/inc_mot_evenement}{ajax}{id1=#ENV{mot_1}}{id2=#ENV{mot_2}}{id3=#ENV{mot_3}}>
+<INCLURE{fond=noisettes/mot/inc_mot_breve}{ajax}{id1=#ENV{mot_1}}{id2=#ENV{mot_2}}{id3=#ENV{mot_3}}>
+<INCLURE{fond=noisettes/mot/inc_mot_rubrique}{ajax}{id1=#ENV{mot_1}}{id2=#ENV{mot_2}}{id3=#ENV{mot_3}}>
+<INCLURE{fond=noisettes/mot/inc_mot_site}{ajax}{id1=#ENV{mot_1}}{id2=#ENV{mot_2}}{id3=#ENV{mot_3}}>
+]

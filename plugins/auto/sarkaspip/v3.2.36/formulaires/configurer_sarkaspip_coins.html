@@ -1,0 +1,342 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_coins:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_coins:></legend>
+			<p><:sarkaspip:cfg_inf_coins:></p>
+			<label>
+				<input type="radio" name="avec_arrondis" value="1" [(#ENV{avec_arrondis, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="avec_arrondis" value="0" [(#ENV{avec_arrondis, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+		</fieldset>
+
+		<div id="bloc_coins">
+			<!-- Configuration du bandeau -->
+			<fieldset>
+				<legend><:sarkaspip:cfg_lgd_coins_bandeau:></legend>
+				<table style="border: 0; width:100%;"><tr>
+				<td>
+					<label>
+						<input type="radio" name="modele_bandeau" value="0" [(#ENV{modele_bandeau, 0}|=={0}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_bandeau_0:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_bandeau" value="1" [(#ENV{modele_bandeau, 0}|=={1}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_bandeau_1:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_bandeau" value="2" [(#ENV{modele_bandeau, 0}|=={2}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_bandeau_2:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_bandeau" value="3" [(#ENV{modele_bandeau, 0}|=={3}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_bandeau_3:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_bandeau" value="4" [(#ENV{modele_bandeau, 0}|=={4}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_bandeau_4:>
+					</label>
+				</td>
+				<td style="text-align: center;">
+					<img id="bloc_image_bandeau" src="[(#CHEMIN{[prive/themes/spip/images/coins_bandeau(#ENV{modele_bandeau, 0}).png]})]" alt="Coins bandeau #ENV{modele_bandeau, 0}"/>
+				</td>
+				</tr></table>
+				<br />
+				<label><:sarkaspip:cfg_lbl_taille_arrondi:>
+					<input type="text" name="taille_bandeau" value="#ENV{taille_bandeau, 10}" size="3" class="fondl" />
+					<:sarkaspip:cfg_lbl_pixel:>
+				</label>
+			</fieldset>
+
+			<!-- Configuration du pied -->
+			<fieldset>
+				<legend><:sarkaspip:cfg_lgd_coins_pied:></legend>
+				<table style="border: 0; width:100%;"><tr>
+				<td>
+					<label>
+						<input type="radio" name="modele_pied" value="0" [(#ENV{modele_pied, 0}|=={0}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_pied_0:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_pied" value="1" [(#ENV{modele_pied, 0}|=={1}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_pied_1:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_pied" value="2" [(#ENV{modele_pied, 0}|=={2}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_pied_2:>
+					</label>
+				</td>
+				<td style="text-align: center;">
+					<img id="bloc_image_pied" src="[(#CHEMIN{[prive/themes/spip/images/coins_pied(#ENV{modele_pied, 0}).png]})]" alt="Coins pied #ENV{modele_pied, 0}"/>
+				</td>
+				</tr></table>
+				<br />
+				<label><:sarkaspip:cfg_lbl_taille_arrondi:>
+					<input type="text" name="taille_pied" value="#ENV{taille_pied, 10}" size="3" class="fondl" />
+					<:sarkaspip:cfg_lbl_pixel:>
+				</label>
+			</fieldset>
+
+			<!-- Configuration des menus formulaires et pages speciales -->
+			<fieldset>
+				<legend><:sarkaspip:cfg_lgd_coins_nav:></legend>
+				<table style="border: 0; width:100%;"><tr>
+				<td>
+					<label>
+						<input type="radio" name="modele_nav" value="0" [(#ENV{modele_nav, 0}|=={0}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_nav_0:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_nav" value="1" [(#ENV{modele_nav, 0}|=={1}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_nav_1:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_nav" value="2" [(#ENV{modele_nav, 0}|=={2}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_nav_2:>
+					</label>
+				</td>
+				<td style="text-align: center;">
+					<img id="bloc_image_nav" src="[(#CHEMIN{[prive/themes/spip/images/coins_nav(#ENV{modele_nav, 0}).png]})]" alt="Coins menus formulaires et pages speciales #ENV{modele_nav, 0}"/>
+				</td>
+				</tr></table>
+				<br />
+				<label><:sarkaspip:cfg_lbl_taille_arrondi:>
+					<input type="text" name="taille_nav_cadre" value="#ENV{taille_nav_cadre, 10}" size="3" class="fondl" />
+					<:sarkaspip:cfg_lbl_pixel:>
+				</label>
+			</fieldset>
+
+			<!-- Configuration du formulaire de recherche -->
+			<fieldset>
+				<legend><:sarkaspip:cfg_lgd_coins_recherche:></legend>
+				<table style="border: 0; width:100%;"><tr>
+				<td>
+					<label>
+						<input type="radio" name="modele_recherche" value="0" [(#ENV{modele_recherche, 0}|=={0}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_recherche_0:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_recherche" value="1" [(#ENV{modele_recherche, 0}|=={1}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_recherche_1:>
+					</label>
+				</td>
+				<td style="text-align: center;">
+					<img id="bloc_image_recherche" src="[(#CHEMIN{[prive/themes/spip/images/coins_recherche(#ENV{modele_recherche, 0}).png]})]" alt="Coins formulaire de recherche #ENV{modele_recherche, 0}"/>
+				</td>
+				</tr></table>
+				<br />
+				<label><:sarkaspip:cfg_lbl_taille_arrondi:>
+					<input type="text" name="taille_recherche" value="#ENV{taille_recherche, 10}" size="3" class="fondl" />
+					<:sarkaspip:cfg_lbl_pixel:>
+				</label>
+			</fieldset>
+
+			<!-- Configuration des noisettes des colonnes -->
+			<fieldset>
+				<legend><:sarkaspip:cfg_lgd_coins_noisettes:></legend>
+				<table style="border: 0; width:100%;"><tr>
+				<td>
+					<label>
+						<input type="radio" name="modele_noisette" value="0" [(#ENV{modele_noisette, 0}|=={0}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_noisette_0:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_noisette" value="1" [(#ENV{modele_noisette, 0}|=={1}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_noisette_1:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_noisette" value="2" [(#ENV{modele_noisette, 0}|=={2}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_noisette_2:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_noisette" value="3" [(#ENV{modele_noisette, 0}|=={3}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_noisette_3:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_noisette" value="4" [(#ENV{modele_noisette, 0}|=={4}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_noisette_4:>
+					</label>
+				</td>
+				<td style="text-align: center;">
+					<img id="bloc_image_noisette" src="[(#CHEMIN{[prive/themes/spip/images/coins_noisette(#ENV{modele_noisette, 0}).png]})]" alt="Coins des noisettes #ENV{modele_noisette, 0}"/>
+				</td>
+				</tr></table>
+				<br />
+				<label><:sarkaspip:cfg_lbl_taille_arrondi:>
+					<input type="text" name="taille_noisette" value="#ENV{taille_noisette, 10}" size="3" class="fondl" />
+					<:sarkaspip:cfg_lbl_pixel:>
+				</label>
+			</fieldset>
+
+			<!-- Configuration de l'edito et de la une -->
+			<fieldset>
+				<legend><:sarkaspip:cfg_lgd_coins_edito:></legend>
+				<table style="border: 0; width:100%;"><tr>
+				<td>
+					<label>
+						<input type="radio" name="modele_edito" value="0" [(#ENV{modele_edito, 0}|=={0}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_edito_0:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_edito" value="1" [(#ENV{modele_edito, 0}|=={1}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_edito_1:>
+					</label>
+				</td>
+				<td style="text-align: center;">
+					<img id="bloc_image_edito" src="[(#CHEMIN{[prive/themes/spip/images/coins_edito(#ENV{modele_edito, 0}).png]})]" alt="Coins edito #ENV{modele_edito, 0}"/>
+				</td>
+				</tr></table>
+				<br />
+				<label><:sarkaspip:cfg_lbl_taille_arrondi:>
+					<input type="text" name="taille_edito" value="#ENV{taille_edito, 10}" size="3" class="fondl" />
+					<:sarkaspip:cfg_lbl_pixel:>
+				</label>
+			</fieldset>
+
+			<!-- Configuration des extraits -->
+			<fieldset>
+				<legend><:sarkaspip:cfg_lgd_coins_extrait:></legend>
+				<table style="border: 0; width:100%;"><tr>
+				<td>
+					<label>
+						<input type="radio" name="modele_extrait" value="0" [(#ENV{modele_extrait, 0}|=={0}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_extrait_0:>
+					</label>
+					<br />
+					<label>
+						<input type="radio" name="modele_extrait" value="1" [(#ENV{modele_extrait, 0}|=={1}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_coins_extrait_1:>
+					</label>
+				</td>
+				<td style="text-align: center;">
+					<img id="bloc_image_extrait" src="[(#CHEMIN{[prive/themes/spip/images/coins_extrait(#ENV{modele_extrait, 0}).png]})]" alt="Coins extrait #ENV{modele_extrait, 0}"/>
+				</td>
+				</tr></table>
+				<br />
+				<label><:sarkaspip:cfg_lbl_taille_arrondi:>
+					<input type="text" name="taille_extrait" value="#ENV{taille_extrait, 10}" size="3" class="fondl" />
+					<:sarkaspip:cfg_lbl_pixel:>
+				</label>
+			</fieldset>
+		</div>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_coins}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{avec_arrondis, 0}|!={1}|?{' '}) jQuery("#bloc_coins").hide();]
+
+		// Traitement du choix arrondi ou pas
+		jQuery("input[name='avec_arrondis']").change(function() {
+			if (jQuery("input[name='avec_arrondis']:checked").val() == 1) {
+				jQuery("#bloc_coins").show();
+			}
+			else {
+				jQuery("#bloc_coins").hide();
+			}
+			jQuery(this).blur();
+		});
+
+		// Traitement des vignettes du bandeau
+		jQuery("input[name='modele_bandeau']").click(function() {
+			switch(jQuery("input[name='modele_bandeau']:checked").val()){
+				case '0' :jQuery("#bloc_image_bandeau").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_bandeau0.png})]"});break;
+				case '1' :jQuery("#bloc_image_bandeau").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_bandeau1.png})]"});break;
+				case '2' :jQuery("#bloc_image_bandeau").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_bandeau2.png})]"});break;
+				case '3' :jQuery("#bloc_image_bandeau").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_bandeau3.png})]"});break;
+				case '4' :jQuery("#bloc_image_bandeau").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_bandeau4.png})]"});break;
+			}
+			jQuery(this).blur();
+		});
+
+		// Traitement des vignettes du pied
+		jQuery("input[name='modele_pied']").click(function() {
+			switch(jQuery("input[name='modele_pied']:checked").val()){
+				case '0' :jQuery("#bloc_image_pied").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_pied0.png})]"});break;
+				case '1' :jQuery("#bloc_image_pied").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_pied1.png})]"});break;
+				case '2' :jQuery("#bloc_image_pied").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_pied2.png})]"});break;
+			}
+			jQuery(this).blur();
+		});
+
+		// Traitement des vignettes des menus des pages speciales et formulaires
+		jQuery("input[name='modele_nav']").click(function() {
+			switch(jQuery("input[name='modele_nav']:checked").val()){
+				case '0' :jQuery("#bloc_image_nav").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_nav0.png})]"});break;
+				case '1' :jQuery("#bloc_image_nav").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_nav1.png})]"});break;
+				case '2' :jQuery("#bloc_image_nav").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_nav2.png})]"});break;
+			}
+			jQuery(this).blur();
+		});
+
+		// Traitement des vignettes du formulaire de recherche
+		jQuery("input[name='modele_recherche']").click(function() {
+			switch(jQuery("input[name='modele_recherche']:checked").val()){
+				case '0' :jQuery("#bloc_image_recherche").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_recherche0.png})]"});break;
+				case '1' :jQuery("#bloc_image_recherche").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_recherche1.png})]"});break;
+			}
+			jQuery(this).blur();
+		});
+
+		// Traitement des vignettes des colonnes
+		jQuery("input[name='modele_noisette']").click(function() {
+			switch(jQuery("input[name='modele_noisette']:checked").val()){
+				case '0' :jQuery("#bloc_image_noisette").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_noisette0.png})]"});break;
+				case '1' :jQuery("#bloc_image_noisette").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_noisette1.png})]"});break;
+				case '2' :jQuery("#bloc_image_noisette").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_noisette2.png})]"});break;
+				case '3' :jQuery("#bloc_image_noisette").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_noisette3.png})]"});break;
+				case '4' :jQuery("#bloc_image_noisette").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_noisette4.png})]"});break;
+			}
+			jQuery(this).blur();
+		});
+
+		// Traitement des vignettes de l'edito
+		jQuery("input[name='modele_edito']").click(function() {
+			switch(jQuery("input[name='modele_edito']:checked").val()){
+				case '0' :jQuery("#bloc_image_edito").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_edito0.png})]"});break;
+				case '1' :jQuery("#bloc_image_edito").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_edito1.png})]"});break;
+			}
+			jQuery(this).blur();
+		});
+
+		// Traitement des vignettes des extraits
+		jQuery("input[name='modele_extrait']").click(function() {
+			switch(jQuery("input[name='modele_extrait']:checked").val()){
+				case '0' :jQuery("#bloc_image_extrait").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_extrait0.png})]"});break;
+				case '1' :jQuery("#bloc_image_extrait").attr({src: "[(#CHEMIN{prive/themes/spip/images/coins_extrait1.png})]"});break;
+			}
+			jQuery(this).blur();
+		});
+
+	});
+//]]>
+</script>

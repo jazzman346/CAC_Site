@@ -1,0 +1,66 @@
+<paquet
+	prefix="sarkaspip"
+	categorie="squelette"
+	version="3.2.36"
+	etat="stable"
+	compatibilite="[3.0.0;3.0.*]"
+	logo="prive/themes/spip/images/sarka-spip.png"
+	documentation="http://www.sarka-spip.net/spip.php?rubrique136"
+	developpement="http://www.sarka-spip.net/spip.php?rubrique156"
+>	
+
+	<nom>Sarka-SPIP</nom>
+	<!-- Squelette généraliste et hautement configurable -->
+
+	<auteur lien="http://blog.smellup.net">Eric Lupinacci</auteur>
+	<auteur>Xavier</auteur>
+	<auteur>Toufik</auteur>
+	<auteur>Sylvain</auteur>
+	<auteur>Pascal</auteur>
+	<credit>Franck (logo)</credit>
+
+	<copyright>2005-2013</copyright>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
+	<pipeline nom="colonne_extra_debut" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="colonne_extra_fin" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="colonne_navigation_debut" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="colonne_navigation_fin" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="menu_pages_speciales_fin" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="bandeau_haut_debut" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="bandeau_haut_fin" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="bandeau_bas_debut" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="bandeau_bas_fin" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="pied_debut" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="pied_fin" inclure="sarkaspip_pipelines.php" />
+
+	<pipeline nom="insert_head" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="mes_fichiers_a_sauver" inclure="sarkaspip_pipelines.php" />
+	<pipeline nom="zengarden_activer_theme" inclure="sarkaspip_pipelines.php" />
+
+	<utilise nom="a2a" compatibilite="[2.0.0;[" />
+	<utilise nom="accesrestreint" compatibilite="[3.5.0;[" />
+	<utilise nom="ancresdouces" compatibilite="[1.4.2;[" />
+	<utilise nom="article_pdf" compatibilite="[0.4.5;[" />
+	<utilise nom="boutonstexte" compatibilite="[2.0.0;[" />
+	<utilise nom="contact" />
+	<utilise nom="crayons" />
+	<utilise nom="gravatar" />
+	<utilise nom="mailsubscribers" compatibilite="[1.0.1;[" />
+	<utilise nom="notation" compatibilite="[2.0.4;[" />
+	<utilise nom="nuage" />
+	<utilise nom="palette" compatibilite="[3.0.1;[" />
+	<utilise nom="photo_infos" />
+	<utilise nom="rainette" />
+	<utilise nom="recommander" compatibilite="[1.0.3;[" />
+	<utilise nom="shoutbox" />
+	<utilise nom="socialtags" compatibilite="[1.0.2;[" />
+	<utilise nom="spiplistes" compatibilite="[3.0.11;[" />
+	<utilise nom="splickr" compatibilite="[0.4.5;[" />
+	<utilise nom="thumbsites" compatibilite="[1.0.0;[" />
+	<utilise nom="tickets" />
+	<utilise nom="zengarden" compatibilite="[2.5.1;[" />
+
+	<menu nom="sarkaspip_cfg" titre="sarkaspip:bouton_configurer" parent="menu_squelette" icone="images/sarka-spip-24.png" action="configurer_sarkaspip" parametres="cfg=accueil" />
+</paquet>

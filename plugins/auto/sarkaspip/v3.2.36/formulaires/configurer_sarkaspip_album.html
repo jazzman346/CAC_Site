@@ -1,0 +1,189 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_album:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_description:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_logo}
+				{explication=<:sarkaspip:cfg_inf_album_sans_logo:>}
+				{env}>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_cartouche}
+				{explication_popularite=<:sarkaspip:cfg_inf_album_popularite:>}
+				{explication_notation=<:sarkaspip:cfg_inf_album_notation:>}
+				{explication_socialtags=<:sarkaspip:cfg_inf_album_socialtags:>}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_documents_joints:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_descriptif_document}{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_album_carrousel:></legend>
+			<p><:sarkaspip:cfg_inf_album_carrousel_position:></p>
+			<label>
+				<input type="radio" name="position_carrousel" value="0" [(#ENV{position_carrousel, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_carrousel_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_carrousel" value="1" [(#ENV{position_carrousel, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_carrousel_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_carrousel" value="2" [(#ENV{position_carrousel, 1}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_carrousel_position_2:>
+			</label>
+			<br />
+			<div id="bloc_modele_1">
+				<p><:sarkaspip:cfg_inf_album_carrousel_modele:></p>
+				<label>
+					<input type="radio" name="modele_carrousel" value="1" [(#ENV{modele_carrousel, 1}|=={1}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_carrousel_modele_1:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="modele_carrousel" value="2" [(#ENV{modele_carrousel, 1}|=={2}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_carrousel_modele_2:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="modele_carrousel" value="3" [(#ENV{modele_carrousel, 1}|=={3}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_carrousel_modele_3:>
+				</label>
+				<div id="bloc_modele_2">
+					<br />
+					<label><:sarkaspip:cfg_lbl_carrousel_taille:></label>
+					<input type="text" name="taille_carrousel" value="#ENV{taille_carrousel, 10}" size="2" class="fondl" />
+				</div>
+				<div id="bloc_modele_3">
+					<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+						{suffixe=_carrousel}
+						{defaut_pas=20}
+						{choix=sans_position}
+						{env}>
+					<p><:sarkaspip:cfg_inf_album_carrousel_hover:></p>
+					<label>
+						<input type="radio" name="survol_carrousel" value="oui" [(#ENV{survol_carrousel, non}|=={oui}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_oui:>
+					</label>
+					<label>
+						<input type="radio" name="survol_carrousel" value="non" [(#ENV{survol_carrousel, non}|=={non}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_non:>
+					</label>
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_album_zoom:></legend>
+			<p><:sarkaspip:cfg_inf_album_zoom:></p>
+			<label>
+				<input type="radio" name="afficher_zoom" value="oui" [(#ENV{afficher_zoom, oui}|=={oui}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="afficher_zoom" value="non" [(#ENV{afficher_zoom, oui}|=={non}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_effet_image}
+				{explication=<:sarkaspip:cfg_inf_album_zoom_effet:>}
+				{choix=album}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_album_exif:></legend>
+	[(#PLUGIN{PHOTO_INFOS}|oui)
+			<p><:sarkaspip:cfg_inf_album_zoom_exif:></p>
+			<label>
+				<input type="radio" name="afficher_exif" value="oui" [(#ENV{afficher_exif, non}|=={oui}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="afficher_exif" value="non" [(#ENV{afficher_exif, non}|=={non}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+	]
+	[(#PLUGIN{PHOTO_INFOS}|non)
+			#SET{plugin, Metadonn&eacute;es photo}
+			<p class="avertissement"><:sarkaspip:cfg_inf_plugin_inactif{lbl_plugin=#GET{plugin}}:></p>
+	]
+		</fieldset>
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_commentaires:></legend>
+			<p><:sarkaspip:cfg_inf_album_commentaires:></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_presentation_commentaires}
+				{defaut_presentation=2}
+				{defaut_tri=2}
+				{defaut_auteur=1}
+				{defaut_mail=2}
+				{env}>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_sens_tri}
+				{explication=<:sarkaspip:cfg_inf_commentaires_sens_tri:>}
+				{suffixe=_commentaires}
+				{label_sens_normal=<:sarkaspip:cfg_lbl_tri_chrono:>}
+				{label_sens_inverse=<:sarkaspip:cfg_lbl_tri_antichrono:>}
+				{defaut_sens=1}
+				{env}>
+			<p><:sarkaspip:cfg_inf_commentaires_lien_auteur:></p>
+			<label>
+				<input type="radio" name="auteur_commentaires" value="1" [(#ENV{auteur_commentaires, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_inf_lien_auteur_oui:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="auteur_commentaires" value="2" [(#ENV{auteur_commentaires, 1}|=={2}|?{checked="checked"})] />
+				<:sarkaspip:cfg_inf_lien_auteur_non:>
+			</label>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{defaut_pas=20}
+				{defaut_position=2}
+				{suffixe=_commentaires}
+				{env}>
+		</fieldset>
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_album}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{modele_carrousel, 1}|=={1}|?{jQuery("#bloc_modele_3").hide();})]
+		[(#ENV{modele_carrousel, 1}|!={1}|?{jQuery("#bloc_modele_2").hide();})]
+		[(#ENV{position_carrousel, 1}|=={0}|?{jQuery("#bloc_modele_1").hide();})]
+		[(#ENV{afficher_zoom, oui}|=={oui}|?{jQuery("#effet_mediabox_diapo").hide();})]
+
+		jQuery("input[name='position_carrousel']").change(function() {
+			if (jQuery("input[name='position_carrousel']:checked").val() == 0) {
+				jQuery("#bloc_modele_1").hide();
+			}
+			else {
+				jQuery("#bloc_modele_1").show();
+			}
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='modele_carrousel']").change(function() {
+			if (jQuery("input[name='modele_carrousel']:checked").val() == 1) {
+				jQuery("#bloc_modele_3").hide();
+				jQuery("#bloc_modele_2").show();
+			}
+			else {
+				jQuery("#bloc_modele_2").hide();
+				jQuery("#bloc_modele_3").show();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>
+

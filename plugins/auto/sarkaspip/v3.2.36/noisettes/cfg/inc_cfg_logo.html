@@ -1,0 +1,14 @@
+[<p>(#ENV{explication})</p>]
+[(#ENV{choix}|!={taille_uniquement}|?{' '})
+<label>
+	<input type="radio" name="logo_rubrique#ENV{suffixe}" value="oui" [(#ENV{logo_rubrique#ENV{suffixe}, oui}|=={oui}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_oui:>
+</label>
+<label>
+	<input type="radio" name="logo_rubrique#ENV{suffixe}" value="non" [(#ENV{logo_rubrique#ENV{suffixe}, oui}|=={non}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_non:>
+</label>
+<br /><br />
+]
+<label><:sarkaspip:cfg_lbl_taille_logo:></label>
+<input type="text" name="taille_logo#ENV{suffixe}" value="#ENV{taille_logo#ENV{suffixe}, 150}" size="3" class="fondl" />

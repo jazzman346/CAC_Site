@@ -1,0 +1,75 @@
+<BOUCLE_evenement_principal(ARTICLES) {id_article}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{86400}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=#TITRE*}
+		{meta_description=#INTRODUCTION{#EVAL{_SARKASPIP_CONFIG_INTRO_META}}|supprimer_tags}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=evenement}{id_rubrique}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			[(#REM) <!-- Contenu de l'evenement --> ]
+			<div id="evenement" class="article">
+				[(#REM) <!-- Titre, logo, texte de l'article 
+				id_evenement n'est necessaire que si on utilise le plugin agenda et est passe dans l'url
+				sinon, n'a pas de valeur
+				--> ]
+				
+				[(#INCLURE{fond=noisettes/article/inc_article_description}
+					{id_article}
+					{id_evenement}
+					{avec_popularite=non}
+					{taille_logo=#CONFIG{sarkaspip_article/taille_logo, 150}}
+					{page=evenement})]
+				
+				
+				[(#REM) <!-- Documents (sauf images) du portfolio de l'article --> ]
+				[(#INCLURE{fond=noisettes/document/inc_documents_joints}
+					{id_article}
+					{avec_descriptif=#CONFIG{sarkaspip_article/avec_descriptif, non}})]
+	
+				[(#REM) <!-- Images du portfolio de l'article --> ]
+				#SET{plugin, aucun}
+				#SET{diaporama, non}
+				[(#CONFIG{sarkaspip_article/mode_galerie, 0}|!={0}|oui)
+					[(#SET{plugin, mediabox})]
+				]
+				[(#CONFIG{sarkaspip_article/mode_galerie, 0}|=={2}|oui)
+					[(#SET{diaporama, oui})]
+				]
+				[(#INCLURE{fond=noisettes/document/inc_images_jointes}
+					{id_article}
+					{effet_galerie=#GET{plugin}}
+					{avec_diaporama=#GET{diaporama}})]
+			</div>
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=evenement}{id_rubrique}{id_secteur}>
+	</div> 
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=evenement}{id_rubrique}{id_secteur}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=evenement}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>
+[(#REM) <!-- ================================== ERREUR BOUCLE VIDE  ================================== --> ]
+</BOUCLE_evenement_principal>

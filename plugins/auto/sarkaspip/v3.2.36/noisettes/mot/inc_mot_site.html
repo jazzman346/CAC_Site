@@ -1,0 +1,35 @@
+<B_site>
+<div id="recherche_site" class="commentaires">
+	<a rel="nofollow" href="#header" title="<:sarkaspip:kezako_haut_page:>" class="fonction revenir_haut_page"></a>
+    <h2><:sarkaspip:recherche_sites_resultat:>&nbsp;&#40;#GRAND_TOTAL&#41;</h2>
+	#ANCRE_PAGINATION
+    [(#CONFIG{sarkaspip_recherche/position_pagination_recherche_article, 3}|match{^(1|3)$}|?{' '})
+      [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_article}})</div>]
+    ]
+    <ul>
+<BOUCLE_site(SYNDIC){pagination #CONFIG{sarkaspip_recherche/pas_pagination_recherche_article, 5}}
+	{id_mot=#ENV{id1,#ENV{id2,#ENV{id3}}}}
+	{id_mot=#ENV{id2,#ENV{id3,#ENV{id1}}}}
+	{id_mot=#ENV{id3,#ENV{id1,#ENV{id2}}}}
+>
+#SET{url, #URL_PAGE{site, id_syndic=#ID_SYNDIC}}
+[(#SYNDICATION|=={oui}|non)
+	#SET{url, #URL_SITE}
+]
+  	[(#INCLURE{fond=noisettes/recherche/inc_recherche_extrait}
+        {titre=#NOM_SITE}
+        {afficher_date=non}
+        {date=#DATE}
+        {url=#GET{url}}
+        {afficher_logo=oui}
+        {logo=#LOGO_SITE||inserer_attribut{alt,#NOM_SITE|texte_backend}}        
+        {afficher_auteur=non}
+        {ajax}
+	)]
+</BOUCLE_site>
+	</ul>
+	[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_article, 3}|match{^(2|3)$}|?{' '})
+      [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_article}})</div>]
+    ]
+</div>
+</B_site>

@@ -1,0 +1,37 @@
+[(#REM) <!-- Modele pour l'affichage des mots cles dans la page agenda
+Recoit en argument :
+- id_rubrique : l'id de la rubrique specialisee
+- annee, mois, categorie suivant le contexte
+--> ]
+<B_filtre_motscles>
+#ANCRE_PAGINATION
+<div id="noisette_filtre" class="noisette">
+	<h1 class="intitule"><:sarkaspip:filtre_titre:></h1>
+	<div class="contenu">
+		[(#ENV{categorie,-1}|=={-1}|?{
+			<h2 class="titre_bloc bouton"><:sarkaspip:filtre_soustitre_evenement_tout:></h2>,
+			<h2><a class="titre_bloc bouton" href="[(#URL_PAGE{agenda}|parametre_url{id_rubrique,#ENV{id_rubrique}}|parametre_url{annee,#ENV{annee}}|parametre_url{mois,#ENV{mois}})]" title="<:sarkaspip:filtre_bulle_evenement_tout:>"><:sarkaspip:filtre_soustitre_evenement_tout:></a></h2>
+		})]
+	</div>
+	<div class="contenu">
+		[(#ENV{categorie,-1}|=={0}|?{
+			<h2 class="titre_bloc bouton"><:sarkaspip:filtre_soustitre_evenement_0_motcle:></h2>,
+			<h2><a class="titre_bloc bouton" href="[(#URL_PAGE{agenda, categorie=0}|parametre_url{id_rubrique,#ENV{id_rubrique}}|parametre_url{annee,#ENV{annee}}|parametre_url{mois,#ENV{mois}})]" title="<:sarkaspip:filtre_bulle_evenement_0_motcle:>"><:sarkaspip:filtre_soustitre_evenement_0_motcle:></a></h2>
+		})]
+	</div>
+	<div class="contenu">
+		<h2 class="titre_bloc"><:sarkaspip:filtre_soustitre_motcle:></h2>
+		<div class="liste"><ul>
+<BOUCLE_filtre_motscles(MOTS articles){type != squelette_habillage}{articles.id_article > 0}{articles.id_rubrique==#BRANCHE_SPECIALISEE{agenda}}{fusion mots.titre}{par mots.titre}{pagination #CONFIG{sarkaspip_noisettes/pas_pagination_filtre, 10}}>
+			[(#ID_MOT|=={#ENV{categorie}}|?{
+				<li><span class="titre">#TITRE</span></li>,
+				<li><a class="titre" href="[(#URL_PAGE{agenda}|parametre_url{categorie,#ID_MOT}|parametre_url{id_rubrique,#ENV{id_rubrique}}|parametre_url{annee,#ENV{annee}}|parametre_url{mois,#ENV{mois}})]" title="<:sarkaspip:filtre_bulle_evenement_1_motcle:>">
+					#TITRE
+				</a></li>}
+			)]
+</BOUCLE_filtre_motscles>
+		</ul></div>
+		[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_noisettes/modele_pagination_filtre}})</div>]
+	</div>
+</div>
+</B_filtre_motscles>

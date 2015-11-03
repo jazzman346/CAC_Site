@@ -1,0 +1,17 @@
+[(#ENV{choix}|match{(titre)}|?{' '})
+<label>#ENV{label_titre}</label><br />
+<input type="text" name="titre#ENV{suffixe}" [value="(#ENV{titre#ENV{suffixe}, #ENV{defaut_titre}|ucfirst})" ]size="50" class="fondl" />
+<br />
+]
+[(#ENV{choix}|match{(descriptif)}|?{' '})
+<p>#ENV{label_descriptif}</p>
+[(#ENV{descriptif#ENV{suffixe}}|?{' '})	
+	[(#SET{description, #ENV{descriptif#ENV{suffixe}}})]
+]
+[(#ENV{descriptif#ENV{suffixe}}|?{'', ' '})
+	[(#SET{description, #ENV{defaut_descriptif}})]
+]
+<label>
+	<textarea name="descriptif#ENV{suffixe}" rows="4" cols="40" style="width:100%;">[(#GET{description})]</textarea>
+</label>
+]

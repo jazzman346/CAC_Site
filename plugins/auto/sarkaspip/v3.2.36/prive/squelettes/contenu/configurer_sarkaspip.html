@@ -1,0 +1,26 @@
+[(#AUTORISER{webmestre}|sinon_interdire_acces)]
+[<h1 class="grostitre">(#VAL{sarkaspip:cfg_titre_}|concat{#ENV{cfg, accueil}}|_T)</h1>]
+
+[(#REM) <!-- Boite d'information sur la page de configuration affichee --> ]
+#BOITE_OUVRIR{#CHEMIN_IMAGE{sarka-spip-24.gif}|balise_img{'',cadre-icone}, info}
+	[<p>(#VAL{sarkaspip:cfg_descr_}|concat{#ENV{cfg, accueil}}|_T)</p>]
+	[(#ENV{cfg, accueil}|=={accueil}|oui)
+	<div class="liste">
+		<p><:sarkaspip:cfg_inf_versions:></p>
+		<ul>
+			<li>Sarka-SPIP #VERSION_SQUELETTE</li>
+			<li>SPIP #SPIP_VERSION</li>
+			<li>PHP #VERSION_PHP</li>
+		</ul>
+	</div>]
+#BOITE_FERMER
+
+[(#SET{configurer, [(#ENV{type-page})_[(#ENV{cfg, accueil})]]})]
+[(#ENV{cfg, accueil}|=={maintenance}|non)
+	[<div class='ajax'>(#FORMULAIRE_{#GET{configurer}})</div>]
+]
+
+[(#ENV{cfg, accueil}|=={maintenance}|oui)
+	[<div class='ajax'>(#FORMULAIRE_SAUVEGARDE_CFG)</div>]
+	[<div class='ajax'>(#FORMULAIRE_RESTAURATION_CFG)</div>]
+]

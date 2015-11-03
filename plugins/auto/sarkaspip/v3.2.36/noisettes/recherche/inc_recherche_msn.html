@@ -1,0 +1,16 @@
+<div class="nav_recherche contenu ">
+	<h2 class="titre_bloc"><:sarkaspip:sstitre_recherche_web:></h2>
+	<a href="http://search.msn.fr/"><img class="moteur" src="#CHEMIN{images/logo-msn.gif}" alt="MSN Search" /></a>
+	<div class="formulaire_spip formulaire_recherche" id="msn">
+		[(#REM) <!-- MSN Search --> ]
+		<form method="get" action="http://search.msn.fr/results.aspx">
+			<div>
+				<label for="q"><:info_rechercher_02:></label>
+				<input type="hidden" name="cp" value="1252" />
+				<input type="hidden" name="FORM" value="FREEWS" />
+				<input type="text" name="q" id="q"  class="text" size="10" maxlength="255" value="<:sarkaspip:requete:>" onfocus="this.value='';" />
+				<input type="image" src="[(#CHEMIN{rechercher.gif})]" class="submit" value="" />
+			</div>
+		</form>
+	</div>
+</div>

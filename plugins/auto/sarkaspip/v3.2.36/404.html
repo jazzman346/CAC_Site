@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{86400}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}{meta_titre=<:sarkaspip:erreur|ucfirst:>&nbsp;-&nbsp;404}>
+	
+<body dir="#LANG_DIR">
+<div id="container">
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=404}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			<div id="http_404">
+				<div class="titre"><h1><:sarkaspip:erreur|ucfirst:>&nbsp;-&nbsp;404</h1></div>
+				<div class="description avertissement">
+					<div class="texte">
+						<:sarkaspip:url_fausse_1:>
+						<a class="spip_in" href="#URL_PAGE{plan,tri=par_rubrique}"><:sarkaspip:plan_site:></a> 
+						<:sarkaspip:url_fausse_2:>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=404}>
+	</div>
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=404}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>
+
+

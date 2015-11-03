@@ -1,0 +1,60 @@
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{0}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=<:sarkaspip:recommander_article:>}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+<div id="header">
+	[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+	<INCLURE{fond=noisettes/bandeau}{env}{page=suggestion}>
+</div>
+
+<div id="wrapper">
+	<div id="content">
+		<div class="titre"><h1><:sarkaspip:recommander_article:></h1></div>
+        [(#REM) <!-- Resume du texte de l'article auquel le commentaire s'adresse --> ]
+		[(#CONFIG{sarkaspip_article/position_extrait, 1}|=={1}|?{' '})
+		<div id="article_commentaire" class="portfolio">
+			<INCLURE{fond=noisettes/article/inc_article_introduction}
+				{id_article}
+				{afficher_mere=non}
+				{afficher_commentaires=non}
+				{logo_rubrique=non}
+				{avec_lire_suite=non}
+				{taille_logo=#CONFIG{sarkaspip_article/taille_logo_extrait, 150}}
+				{taille_introduction=#CONFIG{sarkaspip_article/intro_article, 300}}>
+		</div>
+		]
+		
+		[(#REM) <!-- Formulaire de recommandation --> ]
+		<div class="formulaire">
+			<div class="ajax">
+				#FORMULAIRE_RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}
+			</div>
+		</div>
+	</div> <!--content-->
+</div> <!--wrapper-->
+
+<div id="navigation">
+	[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+	<INCLURE{fond=noisettes/navigation}{env}{page=suggestion}>
+</div> <!--navigation-->
+
+<div id="extra">
+	[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+</div> <!--extra-->
+
+<div id="footer">
+	[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+	<INCLURE{fond=noisettes/pied}{env}{page=suggestion}{squelette=#SQUELETTE}>
+</div> <!--footer-->
+
+</div>
+</body>
+</html>
+
+</BOUCLE_article_principal>

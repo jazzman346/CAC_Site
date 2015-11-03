@@ -1,0 +1,11 @@
+[(#REM) 
+<!-- Affichage des documents joints aux messages de forum
+	Recoit en argument :
+		- id_forum: id du sujet concerne
+-->
+]
+<BOUCLE_doc(DOCUMENTS){id_forum}>
+	#SET{classe, ''}
+	[(#EXTENSION|match{'^(gif|jpg|png)$'}|oui) #SET{classe, mediabox}]
+	<a href="#URL_DOCUMENT"[ class=(#GET{classe})]>[(#FICHIER|basename)]</a>
+</BOUCLE_doc>

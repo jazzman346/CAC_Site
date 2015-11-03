@@ -1,0 +1,16 @@
+#CACHE{3600*24*7}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+[(#REM) <!-- CSS de base --> ]
+<INCLURE{fond=css/base.css}>
+<INCLURE{fond=css/layout.css}>
+<INCLURE{fond=css/bandeau.css}>
+<INCLURE{fond=css/noisettes.css}>
+<INCLURE{fond=css/elements.css}>
+[(#REM) <!-- hack IE --> ]
+<INCLURE{fond=css/ie.css}>
+[(#REM) <!-- CSS personnalises --> ]
+[(#CHEMIN{css/perso.css.html}|oui)
+  <INCLURE{fond=css/perso.css}>
+]

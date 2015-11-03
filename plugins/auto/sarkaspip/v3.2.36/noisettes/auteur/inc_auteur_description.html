@@ -1,0 +1,27 @@
+[(#REM) 
+<!-- Affichage de l'auteur: logo, nom, biographie...
+	Recoit en argument :
+		- id_auteur: id de l'auteur concerne
+-->
+]
+<BOUCLE_description (AUTEURS) {tout}{id_auteur}>
+<div class="vcard">
+	[<div class="titre"><h1 class="#EDIT{nom} fn nickname">(#NOM)</h1></div>]
+	<div class="description">
+	[(#LOGO_AUTEUR||?{' '})
+		[(#SET{classe_logo, [(#LOGO_AUTEUR||extraire_attribut{class}) photo]})]
+		[(#SET{alternative_logo, [<:sarkaspip:logo_de:> (#NOM)]})]
+	]
+	[(#LOGO_AUTEUR||?{'', ' '})
+		[(#SET{classe_logo, spip_logos photo})]
+		[(#SET{alternative_logo, [<:sarkaspip:gravatar_de:> (#NOM)]})]
+	]
+		[<div class="logo droite">
+			(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar80.png}}|image_passe_partout{80}|image_recadre{80,80,center}|inserer_attribut{alt,#GET{alternative_logo}}|inserer_attribut{class,#GET{classe_logo}})
+		</div>]
+		[<div class="#EDIT{bio} texte note">(#BIO|typo_couleur)</div>]
+		[<br class="nettoyeur" /><div class="#EDIT{hyperlien} lien_site"><a class="url org" href="#URL_SITE">(#NOM_SITE)</a></div>]
+		<br class="nettoyeur" />
+	</div>
+</div>
+</BOUCLE_description>

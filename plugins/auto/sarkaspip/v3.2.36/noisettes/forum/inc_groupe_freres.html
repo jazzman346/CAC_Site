@@ -1,0 +1,24 @@
+[(#REM) <!-- affichage de la noisette de navigation des groupes de forums
+Recoit en argument:
+- id_rubrique : id de la rubrique/groupe en cours d'affichage
+-->]
+[(#SET{bulle, <:sarkaspip:navigation_bulle_vers_groupe:>})]
+<B_groupes_freres>
+<div class="contenu">
+	<h2 class="titre_bloc"><:sarkaspip:titre_forum_groupes:></h2>
+	<div class="liste"><ul>
+<BOUCLE_groupes_freres(RUBRIQUES){id_parent=#ENV{id_secteur}}{par num titre}{par titre}>
+	[(#ENV{exposer_groupe}|=={oui}|oui)
+		[<li><[(#EXPOSE{span class="titre",a class="titre"[ href="(#URL_PAGE{forum_groupe}|parametre_url{id_rubrique,#ID_RUBRIQUE})"][ title="(#GET{bulle})"]})]>
+			(#TITRE)
+		</[(#EXPOSE{span,a})]></li>]
+	]
+	[(#ENV{exposer_groupe}|=={oui}|non)
+		[<li><a class="titre"[ href="(#URL_PAGE{forum_groupe}|parametre_url{id_rubrique,#ID_RUBRIQUE})"][ title="(#GET{bulle})"]>
+			(#TITRE)
+		</a></li>]
+	]
+</BOUCLE_groupes_freres>
+	</ul></div>
+</div>
+</B_groupes_freres>

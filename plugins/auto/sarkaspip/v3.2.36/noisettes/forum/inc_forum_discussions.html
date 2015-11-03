@@ -1,0 +1,44 @@
+[(#REM) 
+<!-- Affichage des sujets non epingles d'un forum
+	Recoit en argument :
+		- id_article: id de l'article concerne
+		- statut_forum: si ferme, permet de verrouiller tous les fils 
+-->
+]
+#SET{regexp, ^\\[(annonce|epingle)\\]}
+<B_forum_sujets>
+#ANCRE_PAGINATION
+[(#CONFIG{sarkaspip_forum/position_pagination_1, 3}|match{^(1|3)$}|?{' '})
+	[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_forum/modele_pagination_1}})</div>]
+]
+<div class="groupe">
+	<h2 class="titre"><:sarkaspip:titre_discussions_forum:></h2>
+	<div class="bord">
+		<table summary="<:sarkaspip:resume_discussions_forum:>">
+			<thead>
+				<tr>
+					<th colspan="2"><:sarkaspip:colonne_sujet:></th>
+					<th class="centre"><:sarkaspip:colonne_resolu:></th>
+					<th class="centre"><:sarkaspip:colonne_nombre_reponses:></th>
+					<th><:sarkaspip:colonne_dernier_message:></th>
+				</tr>
+			</thead>
+			<tbody>
+<BOUCLE_forum_sujets(FORUMS){id_article}{plat}{id_parent=0}{!par date_thread}{titre!==#GET{regexp}}{pagination #CONFIG{sarkaspip_forum/pas_pagination_1, 5}}>
+		<INCLURE{fond=noisettes/forum/inc_forum_sujet_ligne}
+			{id_article}
+			{id_forum}
+			{id_thread}
+			{titre}
+			{compteur_boucle=#COMPTEUR_BOUCLE}
+			{statut_forum=#ENV{statut_forum}}
+			{sujet=discussion}>
+</BOUCLE_forum_sujets>
+			</tbody>
+		</table>
+	</div>
+</div>
+[(#CONFIG{sarkaspip_forum/position_pagination_1, 3}|match{^(2|3)$}|?{' '})
+	[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_forum/modele_pagination_1}})</div>]
+]
+</B_forum_sujets>

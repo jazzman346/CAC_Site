@@ -1,0 +1,25 @@
+[(#REM) 
+<!-- Affichage du portfolio de l'article ou de la rubrique (images jointes non deja incluses dans le texte). 
+Utilise Mediabox uniquement ou aucun effet.
+	Recoit en argument :
+		- id_article: id de l'article concerne
+		- id_rubrique: id de la rubrique concernee 
+		- effet_galerie: precise le type de plugin utilise pour l'effet galerie: mediabox, aucun
+		- avec_diaporama: indique si le portfolio des image doit etre affiche sous forme de diaporama mediabox ou image par image
+-->
+]
+<B_images_article>
+	<div id="images_jointes" class="portfolio[ (#ENV{avec_diaporama}|=={oui}|?{galerie})]">
+		<h2><:sarkaspip:portfolio|ucfirst:></h2>
+<BOUCLE_images_article(DOCUMENTS){id_article ?}{id_rubrique ?}{extension IN gif,jpg,png}{mode=document}{vu=non}{par num titre, id_document}>
+		#SET{ratio_x,#LARGEUR|div{#EVAL{_SARKASPIP_CONFIG_LARGEUR_IMAGE}}}
+		#SET{ratio_y,#HAUTEUR|div{#EVAL{_SARKASPIP_CONFIG_LARGEUR_IMAGE}}}
+		#SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
+		[(#SET{titre, [(#TITRE|texte_backend|couper{#EVAL{_SARKASPIP_CONFIG_TAILLE_TITRE_IMAGE}}|sinon{[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]})]
+		[<a href="#FICHIER"[ class="(#ENV{effet_galerie})"][ title="(#GET{titre})"]>
+			(#FICHIER|copie_locale|image_reduire_par{#GET{ratio}}|image_recadre{#EVAL{_SARKASPIP_CONFIG_LARGEUR_IMAGE},#EVAL{_SARKASPIP_CONFIG_LARGEUR_IMAGE},center}|inserer_attribut{alt, #GET{titre}})
+		</a>]
+</BOUCLE_images_article>
+	</div> <!-- Fin portfolio -->
+</B_images_article>
+

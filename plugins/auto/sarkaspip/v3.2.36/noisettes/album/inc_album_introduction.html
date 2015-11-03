@@ -1,0 +1,60 @@
+[(#REM) 
+<!-- Introduction d'un article affiche dans la liste des articles recents, des articles publies dans une rubrique...
+	Recoit en argument :
+		- id_article: id de l'album concerne
+		- 1_colonne: indicateur d'affichage une (1) ou deux colonnes (0)
+		- taille_introduction: taille maximale de l'intro de l'album
+		- pas_pagination: le pas de pagination des albums
+		- compteur_boucle: compteur de boucle
+-->
+]
+[(#ENV{1_colonne, 0}|non)
+	[(#SET{compteur_page, #ENV{compteur_boucle}|div{#ENV{pas_pagination}|plus{1}}|floor})]
+	[(#SET{compteur_local, #ENV{compteur_boucle}|moins{#GET{compteur_page}|mult{#ENV{pas_pagination}}}})]
+	[(#GET{compteur_local}|modulo{2}|=={1}|?{' '}) [(#SET{classe_li, gauche})] ]
+	[(#GET{compteur_local}|modulo{2}|=={0}|?{' '}) [(#SET{classe_li, droite})] ]
+	[(#GET{compteur_local}|<={2}|?{' '})
+		[(#SET{classe_li, [(#GET{classe_li}) n1]})]
+	]
+]
+[(#ENV{1_colonne, 0}|oui)
+	[(#SET{classe_li, gauche})]
+	[(#ENV{compteur_boucle}|=={1}|?{' '})
+		[(#SET{classe_li, [(#GET{classe_li}) n1]})]
+	]
+]
+<BOUCLE_galerie_intro(ARTICLES) {id_article}>
+	<li class="[(#GET{classe_li})]">
+			<a href="[(#URL_PAGE{album}|parametre_url{id_article,#ID_ARTICLE})]" title="<:sarkaspip:info_afficher_album:>">
+			[(#LOGO_ARTICLE||?{' '})
+				#SET{ratio_x,#LOGO_ARTICLE||largeur|div{#EVAL{_SARKASPIP_CONFIG_LARGEUR_GALERIE}}}
+				#SET{ratio_y,#LOGO_ARTICLE||hauteur|div{#EVAL{_SARKASPIP_CONFIG_LARGEUR_GALERIE}}}
+				#SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
+				[(#LOGO_ARTICLE||image_reduire_par{#GET{ratio}}||image_recadre{#EVAL{_SARKASPIP_CONFIG_LARGEUR_GALERIE},#EVAL{_SARKASPIP_CONFIG_LARGEUR_GALERIE},center}||inserer_attribut{alt, <:sarkaspip:info_afficher_album:>})]
+			]
+	<BOUCLE_vignette_album(DOCUMENTS){id_article}{extension == jpg|png|gif}{mode=document}{vu=non}{0,1}{par num titre, id_document}>
+			[(#LOGO_ARTICLE||?{'',' '})
+				#SET{ratio_x,#LARGEUR|div{#EVAL{_SARKASPIP_CONFIG_LARGEUR_GALERIE}}}
+				#SET{ratio_y,#HAUTEUR|div{#EVAL{_SARKASPIP_CONFIG_LARGEUR_GALERIE}}}
+				#SET{ratio,#GET{ratio_x}|<={#GET{ratio_y}}|?{#GET{ratio_x},#GET{ratio_y}}}
+				[(#FICHIER|copie_locale|image_reduire_par{#GET{ratio}}|image_recadre{#EVAL{_SARKASPIP_CONFIG_LARGEUR_GALERIE},#EVAL{_SARKASPIP_CONFIG_LARGEUR_GALERIE},center}|inserer_attribut{alt, <:sarkaspip:info_afficher_album:>})]
+			]
+	</BOUCLE_vignette_album>
+			</a>
+		[<h3><a class="titre" href="[(#URL_PAGE{album}|parametre_url{id_article,#ID_ARTICLE})]" title="<:sarkaspip:info_afficher_album:>">(#TITRE)</a></h3>]
+		<INCLURE{fond=noisettes/article/inc_article_cartouche}{id_article}{page=galerie}{avec_popularite=non}{avec_notation=non}>
+		<div class="complements">
+			<INCLURE{fond=noisettes/album/inc_album_total_photos}{id_article}{ancre_meme_page=non}>
+		[(#SET{statut, [(#ENV{id_article}|statut_forum)]})]
+		[(#GET{statut}|!={non_autorise}|oui)
+			&nbsp;-&nbsp;
+			<INCLURE{fond=noisettes/article/inc_article_total_commentaires}
+				{id_article}
+				{statut=#GET{statut}}
+				{ancre_meme_page=non}
+				{page=album}>
+		]
+		</div> <!-- Fin complements -->
+	[<div class="introduction">(#INTRODUCTION{#ENV{taille_introduction, 200}}|typo_couleur)</div>]
+	</li>
+</BOUCLE_galerie_intro>

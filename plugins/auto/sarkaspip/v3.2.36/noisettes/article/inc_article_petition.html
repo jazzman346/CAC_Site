@@ -1,0 +1,49 @@
+[(#REM) 
+<!-- Petition de l'article
+	Recoit en argument :
+		- id_article: id de l'article concernee
+-->
+]
+<div id="signatures_article" class="commentaires">
+	<a id="signatures" name="signatures" href="#signatures"></a>
+	<a class="fonction" id="signer"[ href="(#URL_PAGE{petition,id_article=#ID_ARTICLE})"] title="<:sarkaspip:signer_petition:>"></a>
+	<h2>
+		<BOUCLE_signatures_decompte(SIGNATURES) {id_article}></BOUCLE_signatures_decompte>  
+			[ [(#TOTAL_BOUCLE|>{1}|?{<:sarkaspip:signatures_petition|ucfirst:>,<:sarkaspip:signature_petition|ucfirst:>}) :&nbsp;] (#TOTAL_BOUCLE)]    		
+		<//B_signatures_decompte>
+	</h2>
+		
+<B_signatures>
+	[(#ANCRE_PAGINATION)]
+	[(#CONFIG{sarkaspip_article/position_pagination_signatures, 3}|match{^(1|3)$}|?{' '})
+		[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_article/modele_pagination_signatures}})</div>]
+	]
+	<div class="description">
+		<table class="spip">
+			<thead>
+				<tr class="row_first">
+					<td><:sarkaspip:date:></td>
+					<td><:sarkaspip:nom:></td>
+					<td><:sarkaspip:sites_web:></td>
+					<td><:sarkaspip:message:></td>
+				</tr>
+			</thead>
+			<tbody>
+			<BOUCLE_signatures(SIGNATURES) {id_article} {par date} {inverse} {pagination #CONFIG{sarkaspip_article/pas_pagination_signatures, 5}}>
+				<tr [class="(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})"]>		
+					<td>[(#DATE|affdate_court)]</td>
+					<td>#NOM</td>
+					<td><a href="#URL_SITE">[(#NOM_SITE)]</a></td>
+					<td class="#EDIT{message}">[(#MESSAGE)]</td>
+				</tr>
+			</BOUCLE_signatures>
+			</tbody>
+		</table>
+	</div>
+	
+	[(#CONFIG{sarkaspip_article/position_pagination_signatures, 3}|match{^(2|3)$}|?{' '})
+		[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_article/modele_pagination_signatures}})</div>]
+	]
+	
+</B_signatures>
+</div>

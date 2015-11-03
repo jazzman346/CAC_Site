@@ -1,0 +1,9 @@
+[<p>(#ENV{explication})</p>]
+<label>
+	<input type="radio" name="exclusif#ENV{suffixe}" value="oui" [(#ENV{exclusif#ENV{suffixe}, non}|=={oui}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_oui:>
+</label>
+<label>
+	<input type="radio" name="exclusif#ENV{suffixe}" value="non" [(#ENV{exclusif#ENV{suffixe}, non}|=={non}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_non:>
+</label>

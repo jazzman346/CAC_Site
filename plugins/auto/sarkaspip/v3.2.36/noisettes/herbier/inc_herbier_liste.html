@@ -1,0 +1,12 @@
+<div class="titre"><h1>[(#CONFIG{sarkaspip_herbier/titre, <:sarkaspip:herbier_sites|ucfirst:>}|entites_html)]</h1></div>
+[<div class="description">(#CONFIG{sarkaspip_herbier/descriptif}|propre)</div>]
+
+[(#ENV{categorie,-1}|=={-1}|?{' '})
+	<INCLURE{fond=noisettes/herbier/inc_herbier_liste_tout}{ajax}>
+]
+[(#ENV{categorie,-1}|=={0}|?{' '})
+	<INCLURE{fond=noisettes/herbier/inc_herbier_liste_sans_categorie}{ajax}>
+]
+[(#ENV{categorie,-1}|>={1}|?{' '})
+	<INCLURE{fond=noisettes/herbier/inc_herbier_liste_categorie}{ajax}{categorie}>
+]

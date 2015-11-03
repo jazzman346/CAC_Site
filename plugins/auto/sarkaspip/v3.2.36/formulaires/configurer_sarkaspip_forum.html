@@ -1,0 +1,48 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_forum:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_forum_secteur:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_secteur_specialise}
+				{explication=<:sarkaspip:cfg_inf_forum_id:>}
+				{secteur=forum}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_forum_forum:></legend>
+			<p><:sarkaspip:cfg_inf_forum_forum:></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{defaut_pas=20}
+				{defaut_position=2}
+				{suffixe=_1}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_forum_sujet:></legend>
+			<p><:sarkaspip:cfg_inf_forum_sujet:></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}
+				{defaut_pas=30}
+				{defaut_position=2}
+				{suffixe=_2}
+				{env}>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_sens_tri}
+				{explication=<:sarkaspip:cfg_inf_forum_reponses_sens_tri:>}
+				{suffixe=_reponses}
+				{label_sens_normal=<:sarkaspip:cfg_lbl_tri_chrono:>}
+				{label_sens_inverse=<:sarkaspip:cfg_lbl_tri_antichrono:>}
+				{defaut_sens=0}
+				{env}>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_forum}|afficher_config)]
+</div>

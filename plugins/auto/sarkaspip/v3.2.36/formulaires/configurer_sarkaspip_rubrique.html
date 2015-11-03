@@ -1,0 +1,90 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_rubrique:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_description:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_logo}
+				{explication=<:sarkaspip:cfg_inf_rubrique_logo:>}
+				{choix=taille_uniquement}
+				{suffixe=_rubrique}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_documents_joints:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_descriptif_document}{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_images_jointes:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_effet_image}
+				{explication=<:sarkaspip:cfg_inf_effet_image:>}
+				{choix=portfolio}
+				{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_rubriques_filles:></legend>
+			<p><:sarkaspip:cfg_inf_rubrique_filles:></p>
+			<label>
+				<input type="radio" name="avec_filles" value="oui" [(#ENV{avec_filles, non}|=={oui}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="avec_filles" value="non" [(#ENV{avec_filles, non}|=={non}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_articles_publies:></legend>
+			<p><:sarkaspip:cfg_inf_rubrique_articles:></p>
+			<label>
+				<input type="radio" name="position_articles" value="1" [(#ENV{position_articles, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="position_articles" value="0" [(#ENV{position_articles, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+			<div id="bloc_pas_articles">
+				<br />
+				<INCLURE{fond=noisettes/cfg/inc_cfg_introduction}{env}>
+				<br /><br />
+				<INCLURE{fond=noisettes/cfg/inc_cfg_logo}
+					{choix=taille_uniquement}
+					{suffixe=_articles}
+					{env}>
+				<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}{defaut_pas=5}{defaut_position=3}{env}>
+			</div>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_rubrique}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{position_articles, 1}|!={1}|?{' '})
+			jQuery("#bloc_pas_articles").hide();
+		]
+		jQuery("input[name='position_articles']").change(function() {
+			if (jQuery("input[name='position_articles']:checked").val() == 1) {
+				jQuery("#bloc_pas_articles").show();
+			}
+			else {
+				jQuery("#bloc_pas_articles").hide();
+			}
+			jQuery(this).blur();
+		});
+	});
+//]]>
+</script>

@@ -1,0 +1,53 @@
+<BOUCLE_rubrique_agenda(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{7200}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=(#CONFIG{sarkaspip_agenda/titre, <:sarkaspip:agenda:>})}
+		{meta_description=#INTRODUCTION{#EVAL{_SARKASPIP_CONFIG_INTRO_META}}|supprimer_tags}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=agenda}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			[(#CONFIG{sarkaspip_agenda/plugin, 1}|=={1}|?{' '})
+				<INCLURE{fond=noisettes/agenda/inc_agenda_annee_1}{id_rubrique}{annee}{mois}{categorie}>
+			]
+			[(#CONFIG{sarkaspip_agenda/plugin, 1}|=={2}|?{' '})
+				[(#ENV{type}|?{'',' '})
+					<INCLURE{fond=noisettes/agenda/inc_agenda_annee_2}{ajax}{id_rubrique}{annee}{mois}{categorie}>
+				]
+				[(#ENV{type}|?{' '})
+					[(#SET{format_agenda, [(#ENV{type,mois})_2]})]
+					[(#ENV{type, mois}|in_any{#LISTE{jour,mois,periode,semaine,trimestre}}|oui)<INCLURE{fond=noisettes/agenda/inc_agenda_#GET{format_agenda}}{type}{delais=900}{annee}{mois}{jour}{echelle}{partie_cal}{theme}>]
+				]
+			]
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=agenda}{id_secteur}>
+	</div>
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=agenda}{id_secteur}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=agenda}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>
+[(#REM) <!-- ================================== ERREUR BOUCLE VIDE  ================================== --> ]
+</BOUCLE_rubrique_agenda>

@@ -1,0 +1,64 @@
+[(#REM) 
+<!-- Presentation des photos de l'album
+	Recoit en argument :
+		- id_article: id de l'album concerne
+-->
+]
+<div class="album">
+<BOUCLE_nb_photos(DOCUMENTS){id_article}{mode=document}{extension IN png,jpg,gif}></BOUCLE_nb_photos>
+	#SET{nb_photos, #TOTAL_BOUCLE}
+<//B_nb_photos>
+
+<BOUCLE_test_photos(DOCUMENTS){id_article}{mode=document}{extension IN png,jpg,gif}{par num titre, id_document}{0,1}>
+	[(#REM) <!-- Affichage de la photo agrandie -->]
+	#SET{plugin, aucun}
+	#SET{diaporama, non}
+	[(#CONFIG{sarkaspip_album/mode_galerie, 0}|!={0}|oui)
+		[(#SET{plugin, mediabox})]
+	]
+	[(#CONFIG{sarkaspip_album/mode_galerie, 0}|=={2}|oui)
+		[(#SET{diaporama, oui})]
+	]
+
+	[(#REM) <!-- Affichage du carrousel des vignettes (au dessus de l'image) -->]
+	[(#CONFIG{sarkaspip_album/position_carrousel, 1}|=={1}|oui)
+		<INCLURE{fond=noisettes/album/inc_album_carrousel_#CONFIG{sarkaspip_album/modele_carrousel, 1}}
+			{ajax}
+			{id_article}
+			{nb_photos=#GET{nb_photos}}
+			{taille_carrousel=#CONFIG{sarkaspip_album/taille_carrousel, 10}}
+			{effet_galerie=#GET{plugin}}
+			{avec_diaporama=#GET{diaporama}}
+			{avec_zoom=#CONFIG{sarkaspip_album/afficher_zoom, oui}}
+			{avec_exif=#CONFIG{sarkaspip_album/afficher_exif, non}}>
+	]
+	
+	[(#REM) <!-- Affichage de l'image agrandie et de ses informations -->]
+	[(#CONFIG{sarkaspip_album/afficher_zoom, oui}|=={oui}|oui)
+		<INCLURE{fond=album_zoom_#CONFIG{sarkaspip_album/modele_zoom, 1}}
+			{id_document=#ID_DOCUMENT}
+			{effet_galerie=#GET{plugin}}
+			{avec_exif=#CONFIG{sarkaspip_album/afficher_exif, non}}>
+	]
+
+	[(#REM) <!-- Affichage du carrousel des vignettes (au dessous de l'image) -->]
+	[(#CONFIG{sarkaspip_album/position_carrousel, 1}|=={2}|oui)
+		<INCLURE{fond=noisettes/album/inc_album_carrousel_#CONFIG{sarkaspip_album/modele_carrousel, 1}}
+			{ajax}
+			{id_article}
+			{nb_photos=#GET{nb_photos}}
+			{taille_carrousel=#CONFIG{sarkaspip_album/taille_carrousel, 10}}
+			{effet_galerie=#GET{plugin}}
+			{avec_diaporama=#GET{diaporama}}
+			{avec_zoom=#CONFIG{sarkaspip_album/afficher_zoom, oui}}
+			{avec_exif=#CONFIG{sarkaspip_album/afficher_exif, non}}>
+	]
+</BOUCLE_test_photos>
+	[(#REM) <!-- Album vide -->]
+	<div id="album_vide">
+		<div class="description avertissement">
+			<div class="texte"><:sarkaspip:msg_album_vide:></div>
+		</div>
+	</div>
+<//B_test_photos>
+</div>

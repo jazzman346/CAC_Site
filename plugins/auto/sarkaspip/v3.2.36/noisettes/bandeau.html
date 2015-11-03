@@ -1,0 +1,14 @@
+[(#REM) <!-- Bandeau Haut --> ]
+[(#CONFIG{sarkaspip_bandeau/haut, 1}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/bandeau/inc_bandeau_haut}{env}{id_rubrique}{lang}>
+]
+
+[(#REM) <!-- Bandeau bas --> ]
+[(#CONFIG{sarkaspip_bandeau/bas, 0}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/bandeau/inc_bandeau_bas}{env}{id_rubrique}{lang}>
+]
+
+[(#REM) <!-- Bandeau chemin --> ]
+[(#CONFIG{sarkaspip_bandeau/chemin, 1}|=={1}|?{' '})
+	<INCLURE{fond=noisettes/bandeau/inc_bandeau_chemin}{env}{id_rubrique}{id_article}{lang}>
+]

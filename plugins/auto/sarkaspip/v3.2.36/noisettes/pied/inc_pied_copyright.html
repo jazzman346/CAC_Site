@@ -1,0 +1,24 @@
+<B_1er_article>
+	[(#SET{copyright1, <:sarkaspip:copyright_site:>&nbsp;})]
+<BOUCLE_1er_article(ARTICLES) {tout_voir}{id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}}{par date}{0,1}>
+	[(#DATE|annee|!={[(#AUJOURDHUI|annee)]}|?{' '})
+		[(#SET{copyright2, [(#DATE|annee)-]})]
+	]
+</BOUCLE_1er_article>
+	[(#SET{copyright3, [(#AUJOURDHUI|annee)][&nbsp;(#NOM_SITE_SPIP)]})]
+</B_1er_article>
+#SET{copyright, #GET{copyright1}|concat{#GET{copyright2}|concat{#GET{copyright3}}
+
+[(#CONFIG{sarkaspip_pied/copyright_site, 1}|=={1}|?{' '})
+	[(#SET{ligne_1, #GET{copyright}})]
+]
+[(#GET{ligne_1}|?{' '})
+		[(#SET{item, [&nbsp;|&nbsp;(#CONFIG{sarkaspip_pied/licence_site}|propre|ptobr|trim)]})]
+		[(#SET{ligne_1, [(#GET{ligne_1}|concat{#GET{item}})]})]
+]
+[(#GET{ligne_1}|?{'',' '})
+	[(#SET{ligne_1, [(#CONFIG{sarkaspip_pied/licence_site}|propre|ptobr|trim)]})]
+]
+
+[(#REM) <!-- Affichage de la ligne construite --> ]
+[<div class="copyright">(#GET{ligne_1})</div>]

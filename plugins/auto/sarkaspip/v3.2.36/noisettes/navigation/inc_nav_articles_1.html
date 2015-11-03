@@ -1,0 +1,14 @@
+[(#REM) <!--
+	Noisette d'affichage des articles d'une rubrique dans le menu deroulant
+	Recoit en argument :
+		- id_rubrique: id de la rubrique concernee
+		- avec_ul: indique si une sous-rubrique a deja ouvert un ul
+		- avec_rang: indique si on doit rajouter it_nx pour distinguer le premier article
+-->]
+<B_article>
+	[(#ENV{avec_ul}|=={oui}|oui)<ul>]
+<BOUCLE_article(ARTICLES){id_rubrique}{par num titre}{par titre}>
+		<li><a class="menu_articles[(#ENV{avec_rang}|=={oui}|oui)[ it_n(#COMPTEUR_BOUCLE)]]" href="#URL_ARTICLE">[(#TITRE)]</a></li>
+</BOUCLE_article>
+	[(#ENV{avec_ul}|=={oui}|oui)</ul>]
+</B_article>

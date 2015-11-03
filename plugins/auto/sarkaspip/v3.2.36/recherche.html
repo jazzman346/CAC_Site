@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{0}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=<:sarkaspip:rechercher:>}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=recherche}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			<div id="expression" class="recherche">
+				<div class="titre"><h1><:sarkaspip:resultats_recherche:></h1></div>
+				<div class="description">
+					<h2><:sarkaspip:resultats_recherche_dans{recherche=#RECHERCHE}:></h2>
+				</div>
+	  
+				[(#REM) <!-- Articles trouves --> ]
+				<INCLURE{fond=noisettes/recherche/inc_recherche_article}{recherche}{ajax}>
+				[(#REM) <!-- Commentaires trouves --> ]
+				<INCLURE{fond=noisettes/recherche/inc_recherche_commentaire}{recherche}{ajax}>
+				[(#REM) <!-- Albums trouves --> ]
+				<INCLURE{fond=noisettes/recherche/inc_recherche_album}{recherche}{ajax}>
+				[(#REM) <!-- Evenements trouves --> ]
+				<INCLURE{fond=noisettes/recherche/inc_recherche_evenement}{recherche}{ajax}>
+				[(#REM) <!-- Breves trouvees --> ]
+				<INCLURE{fond=noisettes/recherche/inc_recherche_breve}{recherche}{ajax}>
+				[(#REM) <!-- Rubriques trouvees --> ]
+				<INCLURE{fond=noisettes/recherche/inc_recherche_rubrique}{recherche}{ajax}>
+				[(#REM) <!-- Mots-cles trouves et articles associes--> ]
+				<INCLURE{fond=noisettes/recherche/inc_recherche_mot}{recherche}{ajax}>
+				[(#REM) <!-- Sites Web trouves --> ]
+				<INCLURE{fond=noisettes/recherche/inc_recherche_site}{recherche}{ajax}>
+			</div>
+		</div><!--content-->
+	</div><!--wrapper-->
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=recherche}>
+	</div>  <!--navigation-->
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=recherche}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=recherche}{squelette=#SQUELETTE}>
+	</div>  <!--footer-->
+
+</div>
+</body>
+</html>
+

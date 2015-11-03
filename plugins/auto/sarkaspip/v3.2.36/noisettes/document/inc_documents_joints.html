@@ -1,0 +1,25 @@
+[(#REM) 
+<!-- Liens vers les documents joints, a l'exclusion des images, pour la rubrique ou l'article concerne
+	Recoit en argument :
+		- id_article: id de l'article concerne
+		- id_rubrique: id de la rubrique concernee 
+		- avec_descriptif: indique si en plus du titre on affiche le descriptif du document
+-->
+]
+<B_documents_article>
+	<div id="documents_joints" class="portfolio">
+		<h2><:sarkaspip:docu_article|ucfirst:></h2>
+<BOUCLE_documents_article(DOCUMENTS){id_article ?}{id_rubrique ?}{extension !IN gif,jpg,png}{mode=document}{vu=non}{par num titre, id_document}>
+		[(#SET{titre, [(#TITRE|texte_backend|sinon{[(#TYPE_DOCUMENT) - ][(#TAILLE|taille_en_octets)]})]})]
+		[(#SET{descr, [(#DESCRIPTIF|PtoBR)]})]
+		<dl>
+			<dt><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#LOGO_DOCUMENT||inserer_attribut{alt, [(#GET{titre}|couper{#EVAL{_SARKASPIP_CONFIG_TAILLE_TITRE_DOCUMENT}})]})]</a></dt>
+			[<dt>(#GET{titre}|couper{#EVAL{_SARKASPIP_CONFIG_TAILLE_TITRE_DOCUMENT}})</dt>]
+			[(#ENV{avec_descriptif}|=={oui}|?{' '})
+				[<dd>(#GET{descr}|couper{#EVAL{_SARKASPIP_CONFIG_TAILLE_DESCR_DOCUMENT}})</dd>]
+			]
+		</dl>
+</BOUCLE_documents_article>
+		<br class="nettoyeur" />
+	</div> <!-- Fin portfolio -->
+</B_documents_article>

@@ -1,0 +1,9 @@
+[(#REM) 
+<!-- Corps de la page plan du site pour ajaxisation
+	Recoit en argument :
+		- tri: le tri courant (date, rubrique ou auteur)
+-->
+]
+[(#ENV{tri}|=={par_date}|?{' '})<INCLURE{fond=noisettes/plan/inc_plan_date}>]
+[(#ENV{tri}|=={par_rubrique}|?{' '})<INCLURE{fond=noisettes/plan/inc_plan_rubrique}>]
+[(#ENV{tri}|=={par_auteur}|?{' '})<INCLURE{fond=noisettes/plan/inc_plan_auteur}>]	       

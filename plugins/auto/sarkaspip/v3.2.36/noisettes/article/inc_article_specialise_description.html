@@ -1,0 +1,32 @@
+[(#REM) 
+<!-- Affichage de l'article: logo, titre, texte, ps...
+	Recoit en argument :
+		- id_article: id de l'article concerne
+		- page: indique le type de page affichee (afaire..)
+		- taille_logo: taille max du logo si affiche
+		- titre_defaut: titre de la page par defaut
+		- descriptif_defaut: descriptif de la page par defaut
+-->
+]
+<BOUCLE_description (ARTICLES) {id_article}>
+	[(#REM) <!-- Il existe un article de presentation de la page afaire dans la rubrique specialisee squelette -->]
+	[<div class="#EDIT{titre} titre"><h1>(#TITRE|sinon{#ENV{titre_defaut}})</h1></div>]
+	<div class="description">
+		[<div class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</div><br /><br />]
+		[<div class="logo gauche">(#LOGO_ARTICLE||image_reduire{#ENV{taille_logo}})</div>]
+		[<div class="#EDIT{chapo} chapo">(#CHAPO)</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE|typo_couleur|sinon{#ENV{descriptif_defaut}})</div>]
+		[<br class="nettoyeur" /><div class="#EDIT{hyperlien} lien_site"><a href="#URL_SITE">(#NOM_SITE)</a></div>]
+		[<br class="nettoyeur" /><div class="#EDIT{ps} ps">(#PS)</div>]
+		[<br class="nettoyeur" /><div class="notes">(#NOTES)</div>]
+</BOUCLE_description>
+	[(#REM) <!-- Il n'existe d'article de presentation de la page afaire, on met des valeurs par defaut -->]
+	[<div class="titre"><h1>(#ENV{titre_defaut})</h1></div>]
+	<div class="description">
+		[<div class="texte">(#ENV{descriptif_defaut})</div>]
+<//B_description>
+		<br class="nettoyeur" />
+		[(#ENV{page}|=={afaire}|oui)
+			<INCLURE{fond=noisettes/afaire/inc_afaire_sommaire}>
+		]
+	</div>

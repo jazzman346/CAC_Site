@@ -1,0 +1,11 @@
+[(#REM) <!-- Liens vers les rubriques filles --> ]
+<B_rubriques_filles>
+<div class="filles">
+	<p><:sarkaspip:titre_rubriques_filles:></p>
+	<ul>
+<BOUCLE_rubriques_filles(RUBRIQUES){id_parent=#ENV{id_rubrique}}{par num titre}{par titre}>
+		[<li><a href="#URL_RUBRIQUE">(#TITRE)</a></li>]
+</BOUCLE_rubriques_filles>
+	</ul>
+</div> <!-- Fin filles -->
+</B_rubriques_filles>

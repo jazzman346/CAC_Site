@@ -1,0 +1,16 @@
+[(#REM) <!-- Noisette lire aussi des articles connexes a un article
+Recoit en argument:
+- id_article de l'article concerne
+-->]
+<B_lire_aussi>
+	<div class="contenu">
+		#ANCRE_PAGINATION
+		<h2 class="titre_bloc"><:sarkaspip:lire_aussi_article:></h2>
+		<div class="liste"><ul>
+<BOUCLE_lire_aussi(ARTICLES){id_article IN #ARTICLES_LIES}{pagination #CONFIG{sarkaspip_noisettes/pas_pagination_navigation, 10}}>
+			[<li>(#INCLURE{fond=noisettes/article/inc_article_lien}{id_article}{classe=titre})</li>]
+</BOUCLE_lire_aussi>
+		</ul></div>
+		[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_noisettes/modele_pagination_navigation}})</div>]
+	</div> <!-- Fin contenu -->
+</B_lire_aussi>

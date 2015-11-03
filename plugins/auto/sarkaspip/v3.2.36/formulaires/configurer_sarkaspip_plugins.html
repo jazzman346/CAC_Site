@@ -1,0 +1,78 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_plugins:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_plugins_info:></legend>
+			#SET{nb_plugins, 0}
+			[(#PLUGIN{BOUTONSTEXTE}|oui)
+				[(#SET{nb_plugins, [(#GET{nb_plugins}|plus{1})]})]
+			]
+			[(#PLUGIN{MEDIABOX}|oui)
+				[(#SET{nb_plugins, [(#GET{nb_plugins}|plus{1})]})]
+			]
+			[(#PLUGIN{SOCIALTAGS}|oui)
+				[(#SET{nb_plugins, [(#GET{nb_plugins}|plus{1})]})]
+			]
+			[(#GET{nb_plugins}|=={0}|?{' '})<p><:sarkaspip:cfg_inf_plugins_0:></p>]
+			[(#GET{nb_plugins}|=={1}|?{' '})<p><:sarkaspip:cfg_inf_plugins_1:></p>]
+			[(#GET{nb_plugins}|>{1}|?{' '})<p><:sarkaspip:cfg_inf_plugins_n:></p>]
+		</fieldset>
+
+	[(#PLUGIN{BOUTONSTEXTE}|oui)
+		<fieldset>
+			<legend>[<:sarkaspip:cfg_lgd_plugin:>&nbsp;(#PLUGIN{BOUTONSTEXTE, nom}|extraire_multi)]</legend>
+			[<p><:sarkaspip:cfg_inf_plugins_config:>&nbsp;&#171;&nbsp;(#PLUGIN{BOUTONSTEXTE, nom}|extraire_multi)&nbsp;&#187;</p>]
+			<label>
+				<input type="radio" name="config_boutonstexte" value="sarkaspip" [(#ENV{config_boutonstexte, defaut}|=={sarkaspip}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_config_sarkaspip:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="config_boutonstexte" value="defaut" [(#ENV{config_boutonstexte, defaut}|=={defaut}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_config_defaut:>
+			</label>
+		</fieldset>
+	]
+
+	[(#PLUGIN{MEDIABOX}|oui)
+		<fieldset>
+			<legend>[<:sarkaspip:cfg_lgd_plugin:>&nbsp;(#PLUGIN{MEDIABOX, nom}|extraire_multi)]</legend>
+			[<p><:sarkaspip:cfg_inf_plugins_config:>&nbsp;&#171;&nbsp;(#PLUGIN{MEDIABOX, nom}|extraire_multi)&nbsp;&#187;</p>]
+			<label>
+				<input type="radio" name="config_mediabox" value="sarkaspip" [(#ENV{config_mediabox, defaut}|=={sarkaspip}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_config_sarkaspip:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="config_mediabox" value="defaut" [(#ENV{config_mediabox, defaut}|=={defaut}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_config_defaut:>
+			</label>
+		</fieldset>
+	]
+
+	[(#PLUGIN{SOCIALTAGS}|oui)
+		<fieldset>
+			<legend>[<:sarkaspip:cfg_lgd_plugin:>&nbsp;(#PLUGIN{SOCIALTAGS, nom}|extraire_multi)]</legend>
+			[<p><:sarkaspip:cfg_inf_plugins_config:>&nbsp;&#171;&nbsp;(#PLUGIN{SOCIALTAGS, nom}|extraire_multi)&nbsp;&#187;</p>]
+			<label>
+				<input type="radio" name="config_socialtags" value="sarkaspip" [(#ENV{config_socialtags, defaut}|=={sarkaspip}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_config_sarkaspip:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="config_socialtags" value="defaut" [(#ENV{config_socialtags, defaut}|=={defaut}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_config_defaut:>
+			</label>
+		</fieldset>
+	]
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_plugins}|afficher_config)]
+</div>

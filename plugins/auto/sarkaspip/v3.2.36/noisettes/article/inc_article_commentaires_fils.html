@@ -1,0 +1,113 @@
+[(#REM) 
+<!-- Commentaires de l'article ou le commentaire precise depuis la page forum
+	Recoit en argument :
+		- id_article: id de l'article concernee
+		- id_forum: id du commentaire concerne
+-->
+] 
+<div id="commentaires_article" class="commentaires">
+	[(#ENV{id_forum}|?{'', ' '})
+		<a id="commentaires" name="commentaires" href="#commentaires"></a>
+		[(#ENV{statut}|=={ferme}|non)
+		<a class="fonction" id="commenter"[ href="(#URL_PAGE{post, #PARAMETRES_FORUM})"] title="<:sarkaspip:commenter_article:>"></a>
+		]
+		<h2>
+			<:sarkaspip:commentaires_article:>
+		[(#ENV{statut}|=={ferme}|oui)
+			&nbsp;<:sarkaspip:forum_ferme:>
+		]
+		</h2>
+	]
+	[(#ENV{id_forum}|?{' '})
+		[(#ENV{afficher_titre, oui}|=={oui}|?{' '})
+			<h2><:sarkaspip:reponse_suite_commentaire|ucfirst:></h2>
+		]
+	]
+	<B_commentaires>
+	[(#ENV{id_forum}|?{'', ' '})
+		#ANCRE_PAGINATION
+		[(#ENV{position_pagination}|match{^(1|3)$}|?{' '})
+			[<div class="pagination">(#PAGINATION{#ENV{modele_pagination}})</div>]
+		]
+	]
+	<BOUCLE_commentaires(FORUMS){id_article}{id_parent=0}{!par date}{pagination #ENV{pas_pagination}}>
+		<div class="message"[ id="co_n(#COMPTEUR_BOUCLE)"]>
+			<a id="forum[(#ID_FORUM)]" name="forum[(#ID_FORUM)]" href="#forum[(#ID_FORUM)]"></a>
+			<div class="gravatar">
+				<BOUCLE_auteur_pere(AUTEURS) {tout}{id_auteur=#_commentaires:ID_AUTEUR}>
+					#SET{nom_auteur, #NOM}
+					#SET{url_auteur, #URL_AUTEUR}
+					[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar32.png}}||image_passe_partout{32}|image_recadre{32,32,center,FFFFFF}|inserer_attribut{class,spip_logos gravatar}|inserer_attribut{alt,[<:sarkaspip:logo_de:> (#GET{nom_auteur})]})]
+				</BOUCLE_auteur_pere>
+					#SET{nom_auteur, #_commentaires:NOM}
+					[(#PLUGIN{GRAVATAR}|oui)
+						[(#GRAVATAR{#_commentaires:EMAIL, 32, #CHEMIN{images/gravatar32.png}}||image_passe_partout{32}|image_recadre{32,32,center,FFFFFF}|inserer_attribut{class,spip_logos gravatar}|inserer_attribut{alt,[<:sarkaspip:logo_de:> (#GET{nom_auteur})]})]
+					]
+					[(#PLUGIN{GRAVATAR}|non)
+						<img src="#CHEMIN{images/gravatar32.png}" width="32" height="32" class="spip_logos gravatar" alt="[<:sarkaspip:logo_de:> (#GET{nom_auteur})]" />
+					]
+				<//B_auteur_pere>
+    		</div>
+			<div class="cartouche_simple">
+				<div class="#EDIT{titre} titre">#TITRE</div>
+				[(#ENV{id_forum}|?{'', ' '})
+					[(#ENV{statut}|=={ferme}|non)
+						[<a class="fonction repondre_commentaire" href="(#URL_PAGE{post}|parametre_url{'id_article',#ENV{id_article}}|parametre_url{'id_forum',#ID_FORUM})" rel="noindex nofollow" title="<:sarkaspip:repondre_commentaire:>"></a>]
+					]
+				]
+				[(#DATE|nom_jour)][&nbsp;(#DATE|affdate)]
+				<:sarkaspip:agrave:>&nbsp;[(#DATE|affdate{'H\hi'})]
+				[(#ENV{presentation_auteur}|=={1}|et{#GET{url_auteur}|oui}|?{
+					[- <:sarkaspip:par_auteur:>&nbsp;<a href="#GET{url_auteur}">(#GET{nom_auteur})</a>],
+					[- <:sarkaspip:par_auteur:>&nbsp;(#GET{nom_auteur})]}
+				)]
+			</div>
+			<div class="#EDIT{texte} texte">#TEXTE</div>
+			[<div class="texte #EDIT{hyperlien}"><:sarkaspip:site_web:>&nbsp;:&nbsp;<span class="lien_site"><a href="[(#URL_SITE)]">(#NOM_SITE)</a></span></div>]
+			<INCLURE{fond=noisettes/document/inc_documents_commentaires}{id_forum}>
+			<div class="nettoyeur"></div>
+		</div>
+		<B_fils>
+		<BOUCLE_fils(FORUMS){id_thread}{id_parent>0}{par date}{inverse #ENV{sens_tri}}>
+			<div class="message fil">
+				#SET{nb_reponses,#COMPTEUR_BOUCLE}
+				<a id="forum[(#ID_FORUM)]" name="forum[(#ID_FORUM)]" href="#forum[(#ID_FORUM)]"></a>
+            	<div class="gravatar">
+					<BOUCLE_auteur_pere2(AUTEURS) {tout}{id_auteur=#_fils:ID_AUTEUR}>
+						[(#LOGO_AUTEUR||sinon{#CHEMIN{images/gravatar32.png}}||image_passe_partout{32}|image_recadre{32,32,center,FFFFFF}|inserer_attribut{class,spip_logos gravatar}|inserer_attribut{alt,[<:sarkaspip:logo_de:> (#GET{nom_auteur})]})]
+						#SET{nom_auteur, #NOM}
+						#SET{url_auteur, #URL_AUTEUR}
+					</BOUCLE_auteur_pere2>
+						#SET{nom_auteur, #_fils:NOM}
+						[(#PLUGIN{GRAVATAR}|oui)
+							[(#GRAVATAR{#GET{mail_auteur}, 32, #CHEMIN{images/gravatar32.png}}||image_passe_partout{32}|image_recadre{32,32,center,FFFFFF}|inserer_attribut{class,spip_logos gravatar}|inserer_attribut{alt,[<:sarkaspip:logo_de:> (#GET{nom_auteur})]})]
+						]
+						[(#PLUGIN{GRAVATAR}|non)
+							<img src="#CHEMIN{images/gravatar32.png}" width="32" height="32" class="spip_logos gravatar" alt="[<:sarkaspip:logo_de:> (#GET{nom_auteur})]" />
+						]
+					<//B_auteur_pere2>
+   				</div>
+				<div class="cartouche_simple" >
+					[(#DATE|nom_jour)][&nbsp;(#DATE|affdate)]
+					<:sarkaspip:agrave:>&nbsp;[(#DATE|affdate{'H\hi'})]
+					[(#ENV{presentation_auteur}|=={1}|et{#GET{url_auteur}|oui}|?{
+						[- <:sarkaspip:par_auteur:>&nbsp;<a href="#GET{url_auteur}">(#GET{nom_auteur})</a>],
+						[- <:sarkaspip:par_auteur:>&nbsp;(#GET{nom_auteur})]}
+					)]
+				</div>
+				<div class="#EDIT{texte} texte">#TEXTE</div>
+				[<div class="texte #EDIT{hyperlien}"><:sarkaspip:site_web:>&nbsp;:&nbsp;<span class="lien_site"><a href="[(#URL_SITE)]">(#NOM_SITE)</a></span></div>]
+				<INCLURE{fond=noisettes/document/inc_documents_commentaires}{id_forum}>
+				<div class="nettoyeur"></div>
+			</div>
+   	  	</BOUCLE_fils>
+		</B_fils>
+		<//B_fils>
+	</BOUCLE_commentaires>
+	[(#ENV{id_forum}|?{'', ' '})
+		[(#ENV{position_pagination}|match{^(2|3)$}|?{' '})
+			[<div class="pagination">(#PAGINATION{#ENV{modele_pagination}})</div>]
+		]
+	]
+	</B_commentaires>
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{43200}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<BOUCLE_meta(BREVES){id_breve}>
+		<INCLURE{fond=noisettes/inc_header}
+			{meta_titre=#TITRE*}
+			{meta_description=#INTRODUCTION{#EVAL{_SARKASPIP_CONFIG_INTRO_META}}|supprimer_tags}>
+			#SET{secteur, #ID_SECTEUR}
+	</BOUCLE_meta>
+		<INCLURE{fond=noisettes/inc_header}
+			{meta_titre=<:sarkaspip:breves:>}>
+	<//B_meta>
+
+<body  dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=breve}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+		[(#REM) <!-- affichage de la breve courante --> ]
+		[(#ENV{id_breve}|?{' '})
+			<div id="breve" class="article">
+				[(#INCLURE{fond=noisettes/breve/inc_breve_description}{id_breve}{editable=oui})]
+				<br />
+			</div>
+		]
+			
+		[(#REM) <!-- affichage de toutes les autres breves du site --> ]
+		[(#INCLURE{fond=noisettes/breve/inc_breves_toutes}{ajax}{id_breve})]
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=breve}{id_secteur=#GET{secteur}}>
+	</div>
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+			
+		[(#REM) <!-- Affichage des mots-cles associes a la breve --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=breve}{id_secteur=#GET{secteur}}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=breve}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>
+
+

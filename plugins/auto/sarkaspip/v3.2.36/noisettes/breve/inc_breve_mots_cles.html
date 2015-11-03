@@ -1,0 +1,16 @@
+[(#REM) <!-- Noisette mots-cles associes a la breve
+Recoit en argument:
+- id_breve de l'article concerne
+-->]
+<B_mots>
+	<div class="contenu">
+		<h2 class="titre_bloc"><:sarkaspip:mots_clefs_breve:></h2>
+		<div class="liste"><ul>
+<BOUCLE_mots(MOTS){id_breve}{type!=squelette_habillage}{par titre}>
+			<li><a class="titre" href="#URL_MOT" title="<:sarkaspip:navigation_bulle_recherche_motcle:>">
+					#TITRE
+			</a></li>
+</BOUCLE_mots>
+		</ul></div>
+	</div> <!-- Fin contenu -->
+</B_mots>

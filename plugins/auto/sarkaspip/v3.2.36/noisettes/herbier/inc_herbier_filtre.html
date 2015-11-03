@@ -1,0 +1,35 @@
+[(#REM) <!-- Modele pour l'affichage des mots cles dans les pages type agenda et galerie
+Recoit en argument :
+- categorie suivant le contexte
+--> ]
+<B_filtre_motscles>
+<div id="noisette_filtre" class="noisette">
+	<h1 class="intitule"><:sarkaspip:filtre_titre:></h1>
+	<div class="contenu">
+		[(#ENV{categorie,-1}|=={-1}|?{
+			<h2 class="titre_bloc bouton"><:sarkaspip:filtre_soustitre_herbier_tout:></h2>,
+			<h2><a class="titre_bloc bouton" href="[(#URL_PAGE{herbier})]" title="<:sarkaspip:filtre_bulle_herbier_tout:>"><:sarkaspip:filtre_soustitre_herbier_tout:></a></h2>
+		})]
+	</div>
+	<div class="contenu">
+		[(#ENV{categorie,-1}|=={0}|?{
+			<h2 class="titre_bloc bouton"><:sarkaspip:filtre_soustitre_herbier_0_motcle:></h2>,
+			<h2><a class="titre_bloc bouton" href="[(#URL_PAGE{herbier, categorie=0})]" title="<:sarkaspip:filtre_bulle_herbier_0_motcle:>"><:sarkaspip:filtre_soustitre_herbier_0_motcle:></a></h2>
+		})]
+	</div>
+	<div class="contenu">
+		<h2 class="titre_bloc"><:sarkaspip:filtre_soustitre_motcle:></h2>
+		<div class="liste"><ul>
+<BOUCLE_filtre_motscles(MOTS syndic){type != squelette_habillage}{syndic.id_syndic > 0}{fusion mots.titre}{par mots.titre}{pagination #CONFIG{sarkaspip_noisettes/pas_pagination_motcle, 10}}>
+			[(#ID_MOT|=={#ENV{categorie}}|?{
+				<li><span class="titre">#TITRE</span></li>,
+				<li><a class="titre" href="[(#URL_PAGE{herbier}|parametre_url{categorie,#ID_MOT})]" title="<:sarkaspip:filtre_bulle_herbier_1_motcle:>">
+					#TITRE
+				</a></li>}
+			)]
+</BOUCLE_filtre_motscles>
+		</ul></div>
+		[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_noisettes/modele_pagination_motcle}})</div>]
+	</div>
+</div>
+</B_filtre_motscles>

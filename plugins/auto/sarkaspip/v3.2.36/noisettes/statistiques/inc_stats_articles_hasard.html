@@ -1,0 +1,16 @@
+[(#REM) <!-- affichage des statistiques des articles aleatoires --> ]
+<B_hasard>
+	[(#CONFIG{sarkaspip_noisettes/composition_stats_2, 3}|match{^(2)$}|?{' '})
+		<h1 class="intitule"><:sarkaspip:hit_parade:></h1>
+	]
+	<div class="contenu">
+		<h2 class="titre_bloc"><:sarkaspip:articles_aleatoires:></h2>
+		<div class="liste"><ul>
+<BOUCLE_hasard(ARTICLES){id_secteur!==#RACINE_SPECIALISEE}{par hasard}{doublons}{0,#CONFIG{sarkaspip_noisettes/max_articles_hasard, 5}} >
+			[<li><a class="titre" href="#URL_ARTICLE">
+				(#TITRE)
+			</a></li>]
+</BOUCLE_hasard>
+		</ul></div>
+	</div>
+</B_hasard>

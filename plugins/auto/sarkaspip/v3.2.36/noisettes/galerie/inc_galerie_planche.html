@@ -1,0 +1,12 @@
+<div class="titre"><h1>[(#CONFIG{sarkaspip_galerie/titre, <:sarkaspip:albums_galerie:>}|entites_html)]</h1></div>
+[<div class="description">(#CONFIG{sarkaspip_galerie/descriptif}|propre)</div>]
+
+[(#ENV{categorie,-1}|=={-1}|?{' '})
+	<INCLURE{fond=noisettes/galerie/inc_galerie_planche_tout}{ajax}>
+]
+[(#ENV{categorie,-1}|=={0}|?{' '})
+	<INCLURE{fond=noisettes/galerie/inc_galerie_planche_sans_categorie}{ajax}>
+]
+[(#ENV{categorie,-1}|>={1}|?{' '})
+	<INCLURE{fond=noisettes/galerie/inc_galerie_planche_categorie}{ajax}{categorie}>
+]

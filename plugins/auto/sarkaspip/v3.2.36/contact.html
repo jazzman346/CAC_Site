@@ -1,0 +1,65 @@
+[(#CONFIG{sarkaspip_formulaires/plugin_contact, 0}|=={0}|?{' '})
+	#SET{contact, #CONFIG{sarkaspip_formulaires/auteur_contact}}
+]
+[(#CONFIG{sarkaspip_formulaires/plugin_contact, 0}|=={1}|?{' '})
+	[(#PLUGIN{CONTACT}|?{' '})
+		[(#CONFIG{contact/choix_destinataires}|?{' '})
+			#SET{contact, #CONFIG{contact/choix_destinataires}|table_valeur{0}}
+		]
+	]
+]
+<BOUCLE_auteur_principal(AUTEURS) {tout}{id_auteur=#GET{contact}|sinon{0}}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{86400}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=(#CONFIG{sarkaspip_formulaires/titre_contact, <:sarkaspip:contacter_site:>})}
+		{meta_description=(#BIO|couper{150})}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=contact}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			<div id="contact" class="formulaire">
+				[<div class="titre"><h1>(#CONFIG{sarkaspip_formulaires/titre_contact, <:sarkaspip:contacter_site:>})</h1></div>]
+				[<div class="description">(#CONFIG{sarkaspip_formulaires/descriptif_contact}|propre)</div>]
+				[(#CONFIG{sarkaspip_formulaires/plugin_contact, 0}|=={0}|?{' '})
+					[(#FORMULAIRE_ECRIRE_AUTEUR)]
+				]
+				[(#CONFIG{sarkaspip_formulaires/plugin_contact, 0}|=={1}|?{' '})
+					[(#PLUGIN{CONTACT}|?{' '})
+						[<div class="ajax">(#FORMULAIRE_CONTACT)</div>]
+					]
+				]
+			</div>
+		</div>
+	</div>
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+			<INCLURE{fond=noisettes/navigation}{env}{page=contact}>
+	</div>
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+			<INCLURE{fond=noisettes/extra}{env}{page=contact}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+			<INCLURE{fond=noisettes/pied}{env}{page=contact}{squelette=#SQUELETTE}>
+	</div>
+
+</div>
+</body>
+</html>
+[(#REM) <!-- ================================== ERREUR BOUCLE VIDE  ================================== --> ]
+</BOUCLE_auteur_principal>
+	<INCLURE{fond=404}>
+<//B_auteur_principal>

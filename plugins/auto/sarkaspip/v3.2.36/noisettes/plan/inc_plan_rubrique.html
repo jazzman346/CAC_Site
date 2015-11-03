@@ -1,0 +1,79 @@
+[(#REM) <!-- Plan du site par rubrique --> ]
+<B_non_vide>
+[(#CONFIG{sarkaspip_plan/position_pagination, 1}|match{^(1|3)$}|?{' '})
+	<INCLURE{fond=noisettes/plan/inc_plan_pagination}{tri=par_rubrique}>
+]
+<ul>
+<BOUCLE_non_vide(ARTICLES){id_article!==#RACINE_SPECIALISEE{galerie,not_in}}{0,1}>
+	[(#REM) <!-- Les articles des rubriques non specialisees --> ]
+	<BOUCLE_secteurs(RUBRIQUES){racine}{id_rubrique!==#RACINE_SPECIALISEE}{par num titre, titre}>
+		<li>[(#INCLURE{fond=noisettes/rubrique/inc_rubrique_lien}
+				{id_rubrique}
+				{classe=noeud})]
+		<B_articles_secteur>
+			<ul>
+		<BOUCLE_articles_secteur(ARTICLES){id_rubrique}{par date}{inverse #CONFIG{sarkaspip_plan/senstri_date, 1}}>
+				[(#SET{date, [<span class="date">&#91;(#DATE|affdate{'d-m-Y'})&#93;&nbsp;</span>&nbsp;]})]
+				[<li>
+					(#INCLURE{fond=noisettes/article/inc_article_lien}
+						{id_article}
+						{classe=feuille}
+						{avant_titre=#GET{date}})
+				</li>]
+		</BOUCLE_articles_secteur>
+			</ul>
+		</B_articles_secteur>
+	
+		<B_hierarchie>
+			<ul>
+		<BOUCLE_hierarchie(RUBRIQUES){id_parent}{par num titre, titre}>
+				<li>[(#INCLURE{fond=noisettes/rubrique/inc_rubrique_lien}
+						{id_rubrique}
+						{classe=noeud})]
+				<B_articles_hierarchie>
+					<ul>
+				<BOUCLE_articles_hierarchie(ARTICLES){id_rubrique}{par date}{inverse #CONFIG{sarkaspip_plan/senstri_date, 1}}>
+						[(#SET{date, [<span class="date">&#91;(#DATE|affdate{'d-m-Y'})&#93;&nbsp;</span>&nbsp;]})]
+						[<li>
+							(#INCLURE{fond=noisettes/article/inc_article_lien}
+								{id_article}
+								{classe=feuille}
+								{avant_titre=#GET{date}})
+						</li>]
+				</BOUCLE_articles_hierarchie>
+					</ul>
+				</B_articles_hierarchie>
+				<BOUCLE_sous_hierarchie(boucle_hierarchie)></BOUCLE_sous_hierarchie>
+				</li>
+		</BOUCLE_hierarchie>
+			</ul>
+		</B_hierarchie>
+		</li>
+	</BOUCLE_secteurs>
+	
+	[(#REM) <!-- Les albums de la galerie --> ]
+	<B_albums>
+	<BOUCLE_galerie(RUBRIQUES){id_rubrique=#RACINE_SPECIALISEE{galerie}}>
+		<li>[(#INCLURE{fond=noisettes/rubrique/inc_rubrique_lien}
+				{id_rubrique}
+				{classe=noeud})]
+	</BOUCLE_galerie>
+			<ul>
+	<BOUCLE_albums(ARTICLES){id_secteur=#RACINE_SPECIALISEE{galerie}}{par date}{inverse #CONFIG{sarkaspip_plan/senstri_date, 1}}>
+				[(#SET{date, [<span class="date">&#91;(#DATE|affdate{'d-m-Y'})&#93;&nbsp;</span>&nbsp;]})]
+				[<li>
+					(#INCLURE{fond=noisettes/article/inc_article_lien}
+						{id_article}
+						{classe=feuille}
+						{avant_titre=#GET{date}})
+				</li>]
+	</BOUCLE_albums>
+			</ul>
+		</li>
+	</B_albums>
+</BOUCLE_non_vide>
+</ul>
+[(#CONFIG{sarkaspip_plan/position_pagination, 1}|match{^(2|3)$}|?{' '})
+	<INCLURE{fond=noisettes/plan/inc_plan_pagination}{tri=par_rubrique}>
+]
+</B_non_vide>

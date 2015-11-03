@@ -1,0 +1,21 @@
+[(#REM) 
+<!-- Affichage du nombre de signatures dans les introductions d'articles
+	Recoit en argument :
+		- id_article: id de l'article ou album concerne
+-->
+]
+<BOUCLE_combien(SIGNATURES) {id_article}{plat}></BOUCLE_combien>
+	[(#TOTAL_BOUCLE|=={0}|?{' '})
+		[(#SET{libelle, <:sarkaspip:0_signature|ucfirst:>})]
+	]
+	[(#TOTAL_BOUCLE|!={0}|?{' '})
+		[(#SET{libelle, [(#TOTAL_BOUCLE)&nbsp;[(#TOTAL_BOUCLE|=={1}|?{<:sarkaspip:signature_petition:>,<:sarkaspip:signatures_petition:>})]]})]
+	]
+<//B_combien>
+[(#ENV{ancre_meme_page}|=={oui}|?{' '})
+	<a class="fonction" id="voir_signatures" href="#signatures"[ title="(#GET{libelle})"]></a>
+]
+
+[(#ENV{ancre_meme_page}|=={non}|?{' '})
+<a[ href="(#URL_ARTICLE|ancre_url{commentaires})"]>#GET{libelle}</a>
+]

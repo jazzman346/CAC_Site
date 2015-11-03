@@ -1,0 +1,23 @@
+[(#REM) 
+<!-- Affichage de la rubrique: logo, titre, texte ou descriptif
+	Recoit en argument :
+		- id_rubrique: id de la rubrique concernee
+		- avec_filles: indique si on doit afficher les rubriques filles ou pas
+-->
+]
+<BOUCLE_description (RUBRIQUES) {id_rubrique}>
+	[<div class="#EDIT{titre} titre"><h1>(#TITRE)</h1></div>]
+	<div class="description">
+		[<div class="logo droite">(#LOGO_RUBRIQUE||image_reduire{#CONFIG{sarkaspip_rubrique/taille_logo_rubrique, 150}})</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE|typo_couleur)</div>]
+		[(#TEXTE*|?{'', ' '})
+			[<div class="#EDIT{descriptif} texte">(#DESCRIPTIF|typo_couleur)</div>]
+		]
+		[<br class="nettoyeur" /><div class="notes">(#NOTES)</div>]
+		<br class="nettoyeur" />
+		[(#REM) <!-- Rubriques filles --> ]
+		[(#ENV{avec_filles, non}|=={oui}|?{' '})
+			<INCLURE{fond=noisettes/rubrique/inc_rubrique_filles}{id_rubrique}>
+		]
+	</div>
+</BOUCLE_description>

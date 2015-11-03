@@ -1,0 +1,29 @@
+[(#REM)
+<!-- 
+	Noisette d'affichage des n derniers album publies par l'auteur
+	Recoit en argument :
+		- id_auteur: id de l'auteur concerne
+		- lang: pas encore utilise
+ -->
+]
+<B_album>
+	<div id="albums_auteur" class="planche">
+		<h2><:sarkaspip:albums_auteur:></h2>
+		#ANCRE_PAGINATION
+		[(#CONFIG{sarkaspip_auteur/position_pagination_albums, 2}|match{^(1|3)$}|?{' '})
+			[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_auteur/modele_pagination_albums}})</div>]
+		]
+		<ul>
+<BOUCLE_album(ARTICLES){id_auteur}{id_secteur=#RACINE_SPECIALISEE{galerie}}{par date}{inverse}{pagination #CONFIG{sarkaspip_auteur/pas_pagination_albums, 5}}>
+		<INCLURE{fond=noisettes/album/inc_album_introduction}
+			{id_article}
+			{1_colonne=#CONFIG{sarkaspip_auteur/album_1_colonne, 0}}
+			{compteur_boucle=#COMPTEUR_BOUCLE}>
+</BOUCLE_album>
+		</ul>
+		<br class="nettoyeur" />      
+		[(#CONFIG{sarkaspip_auteur/position_pagination_albums, 2}|match{^(2|3)$}|?{' '})
+			[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_auteur/modele_pagination_albums}})</div>]
+		]
+	</div>
+</B_album>

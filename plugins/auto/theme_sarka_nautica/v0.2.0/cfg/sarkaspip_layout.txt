@@ -1,0 +1,1 @@
+a:4:{s:13:"numero_layout";s:2:"34";s:12:"largeur_site";s:3:"776";s:17:"appliquer_padding";s:1:"1";s:15:"largeur_padding";s:2:"10";}

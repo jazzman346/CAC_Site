@@ -1,0 +1,17 @@
+<p>#ENV{explication}</p>
+<label>
+	<input type="radio" name="rss#ENV{suffixe}" value="oui" [(#ENV{rss#ENV{suffixe}, oui}|=={oui}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_oui:>
+</label>
+<label>
+	<input type="radio" name="rss#ENV{suffixe}" value="non" [(#ENV{rss#ENV{suffixe}, oui}|=={non}|?{checked="checked"})] />
+	<:sarkaspip:cfg_lbl_non:>
+</label>
+<div id="bloc_rss#ENV{suffixe}">
+	<br />
+	<label><:sarkaspip:cfg_lbl_rss_nombre:></label>
+	<input type="text" name="nb#ENV{suffixe}" value="#ENV{nb#ENV{suffixe}, 10}" size="2" class="fondl" />
+	<br />
+	<label><:sarkaspip:cfg_lbl_rss_age:></label>
+	<input type="text" name="age#ENV{suffixe}" value="#ENV{age#ENV{suffixe}, 3}" size="2" class="fondl" />
+</div>

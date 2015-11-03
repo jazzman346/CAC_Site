@@ -1,0 +1,35 @@
+[(#REM) 
+<!-- Affichage de la liste des commentaires trouves lors d'une recherche
+	Recoit en argument :
+		- recherche : critere de recherche
+-->
+]
+
+<B_commentaires_recherche>
+	<div id="recherche_commentaire" class="commentaires">
+		<a rel="nofollow" href="#header" title="<:sarkaspip:kezako_haut_page:>" class="fonction revenir_haut_page"></a>
+		<h2><:sarkaspip:recherche_commentaires_resultat:>&nbsp;&#40;#GRAND_TOTAL&#41;</h2>	
+		#ANCRE_PAGINATION
+		[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_commentaire, 3}|match{^(1|3)$}|?{' '})
+		   [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_commentaire}})</div>]
+		]
+		<ul>
+<BOUCLE_commentaires_recherche(FORUMS) {recherche}{articles.id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}}{par points} {inverse}{pagination #CONFIG{sarkaspip_recherche/pas_pagination_recherche_commentaire, 5}}>
+		[(#INCLURE{fond=noisettes/recherche/inc_recherche_extrait}
+			{titre=#TITRE}
+			{afficher_date=oui}
+			{date=#DATE}
+			{url=#URL_FORUM}
+			{afficher_logo=non}
+			{afficher_auteur=oui}
+			{auteur=#NOM}
+			{ajax}
+		)]	
+</BOUCLE_commentaires_recherche>
+		</ul>
+		[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_commentaire, 3}|match{^(2|3)$}|?{' '})
+		   [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_commentaire}})</div>]
+		]
+	</div>
+</B_commentaires_recherche>
+

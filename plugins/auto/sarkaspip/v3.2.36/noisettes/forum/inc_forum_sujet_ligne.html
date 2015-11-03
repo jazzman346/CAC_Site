@@ -1,0 +1,43 @@
+[(#REM) 
+<!-- Affichage d'un sujet d'un forum
+	Recoit en argument :
+		- id_article: id de l'article sur lequel est poste le message
+		- id_forum: id du forum concerne
+		- id_thread: id du thread concerne
+		- titre: titre du thread concerne
+		- sujet: type de discussion (annonce, epingle ou discussion)
+		- statut_forum: si ferme, on verrouille le sujet quelque soit son statut propre
+-->
+]
+[(#ENV{statut_forum}|!={ouvert}|ou{#ENV{titre}|strstr{_verrouille_}}|oui) #SET{verrou, lock}]
+[(#ENV{titre}|strstr{_resolu_}|oui) #SET{resolu, oui}]
+
+<tr class="[(#ENV{compteur_boucle}|alterner{row_odd,row_even})]">
+	<td class="etat"><img src="[(#CHEMIN{[images/forum_(#ENV{sujet})[_(#GET{verrou})].gif]})"][ alt="(#ENV{sujet})"] width="24" height="24" /></td>
+	<td class="description" id="forum#ENV{id_forum}">
+		<h3 class="titre">
+			<a href="[(#URL_PAGE{forum_sujet}|parametre_url{id_article,#ENV{id_article}}|parametre_url{id_forum,#ENV{id_forum}})]"[(#GET{verrou}|oui) title="<:sarkaspip:bulle_sujet_verrouille:>"]>
+				[(#ENV{titre}|nettoyer_titre_sujet)]
+			</a>
+		</h3>
+	</td>
+	<td class="etat">[(#GET{resolu}|oui)<img src="#CHEMIN{images/forum_sujet_resolu.gif}" alt="#ENV{resolu}" width="24" height="24" />]</td>
+
+	<BOUCLE_compteur_reponses(FORUMS){id_thread}{plat}{exclus}></BOUCLE_compteur_reponses>
+	<td class="messages">#TOTAL_BOUCLE</td>
+	<//B_compteur_reponses>
+
+	<td class="dernier_message">
+	<BOUCLE_dernier_message(FORUMS){id_thread}{plat}{!par date}{0,1}>
+		[(#DATE|affdate)]&nbsp;<:sarkaspip:agrave:>&nbsp;[(#DATE|affdate{'H\hi'})]<br />
+		<:sarkaspip:par_auteur:>
+		<BOUCLE_auteur_message(AUTEURS){id_auteur}{tout}>
+			<a href="#URL_AUTEUR">#NOM</a>
+		</BOUCLE_auteur_message>
+		</B_auteur_message>
+			[(#NOM|sinon{<:sarkaspip:anonyme:>})]
+		<//B_auteur_message>
+	</BOUCLE_dernier_message>
+	</td>
+</tr>
+<tr>

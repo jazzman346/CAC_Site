@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{86400}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=<:sarkaspip:rechercher_par_mot:>}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=mot}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			<div id="mot" class="recherche">
+				<div class="titre"><h1><:sarkaspip:rechercher_par_mot:></h1></div>
+				[(#REM)<!-- 
+					#ENV{id_mot} vaut l'id du mot selectionne lorsque l'appel s'est fait a partir des noisettes des mots cles de la colonne extra
+					#ENV{id_mot} est nul lorsque l'appel se fait directement par le bouton mot-cle du menu inc_nav_raccourci, 
+				--> ]
+				<div class="ajax">#FORMULAIRE_MULTI_MOTS{#ENV{id_mot}}</div>
+			</div><!--mot-->			
+		</div><!--content-->
+	</div><!--wrapper-->
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=mot}>
+	</div>  <!--navigation-->
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]
+		[(#REM) <!-- affichage des groupes de mots et des mots associes --> ]
+		<INCLURE{fond=noisettes/extra}{env}{page=mot}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=mot}{squelette=#SQUELETTE}>
+	</div>  <!--footer-->
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+[(#REM) 
+<!-- Calcul de l'url de la rubrique dans le menu des rubriques (donc ne traite pas les rubriques speciales)
+		- si seul article de premier niveau et pas de sous-rubrique	alors url rubrique = url article
+		- sinon (tout autre cas, par exemple rubrique vide) alors url rubrique = url rubrique
+	 Arguments:
+		- id_rubrique: id de la rubrique concernee
+		- classe: permet d'exposer la rubrique si besoin (menu 3)
+		- rang: identifiant du menu pour differencier le premier des autres
+-->]
+<BOUCLE_contexte_rubrique(RUBRIQUES){id_rubrique}>
+	[(#REM) <!-- test sur nombre d'articles -->]
+	<BOUCLE_articles_plusdun(ARTICLES){id_rubrique}{1,1}>
+		<a[ href="(#_contexte_rubrique:URL_RUBRIQUE)]"[ class="(#ENV{classe})"][ id="(#ENV{rang})"]>[(#_contexte_rubrique:TITRE|couper{80})]</a>
+	</BOUCLE_articles_plusdun>
+	</B_articles_plusdun>
+		<BOUCLE_articles_unseul(ARTICLES){id_rubrique}{0,1}>
+			[(#REM) <!-- test sur presence sous-rubriques ou de documents joints -->]
+			<BOUCLE_test_sousrubrique(RUBRIQUES){id_parent}>
+			</BOUCLE_test_sousrubrique>
+				<a[ href="(#_contexte_rubrique:URL_RUBRIQUE)]"[ class="(#ENV{classe})"][ id="(#ENV{rang})"]>[(#_contexte_rubrique:TITRE|couper{80})]</a>
+			</B_test_sousrubrique>
+				<BOUCLE_test_document(DOCUMENTS){id_rubrique=#_contexte_rubrique:ID_RUBRIQUE}{mode=document}{vu=non}>
+				</BOUCLE_test_document>
+					<a[ href="(#_contexte_rubrique:URL_RUBRIQUE)]"[ class="(#ENV{classe})"][ id="(#ENV{rang})"]>[(#_contexte_rubrique:TITRE|couper{80})]</a>
+				</B_test_document>
+					<a[ href="(#_articles_unseul:URL_ARTICLE)]"[ class="(#ENV{classe})"][ id="(#ENV{rang})"]>[(#_contexte_rubrique:TITRE|couper{80})]</a>
+				<//B_test_document>
+			<//B_test_sousrubrique>
+		</BOUCLE_articles_unseul>
+		</B_articles_unseul>
+			<a[ href="(#_contexte_rubrique:URL_RUBRIQUE)]"[ class="(#ENV{classe})"][ id="(#ENV{rang})"]>[(#_contexte_rubrique:TITRE|couper{80})]</a>
+		<//B_articles_unseul>
+	<//B_articles_plusdun>
+</BOUCLE_contexte_rubrique>

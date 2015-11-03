@@ -1,0 +1,28 @@
+[(#REM)<!-- Plan du site par auteur -->]
+<B_auteurs>
+[(#CONFIG{sarkaspip_plan/position_pagination, 1}|match{^(1|3)$}|?{' '})
+	<INCLURE{fond=noisettes/plan/inc_plan_pagination}{tri=par_auteur}>
+]
+<ul>
+<BOUCLE_auteurs(AUTEURS){tout}{par nom}>	  
+	<B_articles_auteur>
+		<li><a class="noeud" href="#URL_AUTEUR" title="<:sarkaspip:navigation_bulle_vers_auteur:>">#NOM</a>
+			<ul>
+	<BOUCLE_articles_auteur(ARTICLES){id_auteur}{id_secteur!==#RACINE_SPECIALISEE{galerie, not_in}}{par date}{inverse #CONFIG{sarkaspip_plan/senstri_date, 1}}>
+				[(#SET{date, [<span class="date">&#91;(#DATE|affdate{'d-m-Y'})&#93;&nbsp;</span>&nbsp;]})]
+				[<li>
+					(#INCLURE{fond=noisettes/article/inc_article_lien}
+						{id_article}
+						{classe=feuille}
+						{avant_titre=#GET{date}})
+				</li>]
+	</BOUCLE_articles_auteur>
+			</ul>
+		</li>
+	</B_articles_auteur>
+</BOUCLE_auteurs>
+</ul>
+	[(#CONFIG{sarkaspip_plan/position_pagination, 1}|match{^(2|3)$}|?{' '})
+	<INCLURE{fond=noisettes/plan/inc_plan_pagination}{tri=par_auteur}>
+]
+</B_auteurs>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+#CACHE{86400}
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+	<INCLURE{fond=noisettes/inc_header}
+		{meta_titre=(#CONFIG{sarkaspip_formulaires/titre_login2, <:sarkaspip:acceder_espace_prive:>})}>
+
+<body dir="#LANG_DIR">
+<div id="container">
+
+	<div id="header">
+		[(#REM) <!-- =================================== ZONE BANDEAU ==================================== --> ]
+		<INCLURE{fond=noisettes/bandeau}{env}{page=login}>
+	</div>
+	
+	<div id="wrapper">
+		<div id="content">
+			<div id="login_prive" class="formulaire">
+				[<div class="titre"><h1>(#CONFIG{sarkaspip_formulaires/titre_login2, <:sarkaspip:acceder_espace_prive:>})</h1></div>]
+				[<div class="description">(#CONFIG{sarkaspip_formulaires/descriptif_login2}|propre)</div>]
+				[(#MENU_LANG_ECRIRE)]
+				[(#LOGIN_PRIVE)
+				<p style="text-align: center;">
+					[(#CONFIG{accepter_inscriptions}|=={oui}|?{&#91;<a href="[(#URL_PAGE{inscription})]"><:sarkaspip:login_sinscrire:></a>&#93;})]
+					&#91;<a href="#URL_PAGE{spip_pass}" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;"><:sarkaspip:login_motpasseoublie:></a>&#93;
+					&#91;<a href="#URL_SITE_SPIP/"><:sarkaspip:login_retoursitepublic:></a>&#93;
+				</p>]
+			</div>
+		</div><!--content-->
+	</div><!--wrapper-->
+	
+	<div id="navigation">
+		[(#REM) <!-- ============================== ZONE COLONNE DE GAUCHE  ============================= --> ]
+		<INCLURE{fond=noisettes/navigation}{env}{page=login}>
+	</div>  <!--navigation-->
+	
+	<div id="extra">
+		[(#REM) <!-- ============================== ZONE COLONNE DE DROITE  ============================= --> ]	
+		<INCLURE{fond=noisettes/extra}{env}{page=login}>
+	</div>
+	
+	<div id="footer">
+		[(#REM) <!-- ================================== ZONE PIED DE PAGE  ================================== --> ]
+		<INCLURE{fond=noisettes/pied}{env}{page=login}{squelette=#SQUELETTE}>
+	</div>  <!--footer-->
+
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<div class="bandeau_chemin">
+	[(#CONFIG{sarkaspip_noisettes/position_rechspip, 3}|=={3}|?{' '})
+		<div class="recherche_chemin">
+			[(#REM) <!-- formulaire de recherche standard --> ]
+			#FORMULAIRE_RECHERCHE
+			<span><:sarkaspip:rechercher_sur_site:></span>
+		</div>
+	]
+		
+[(#PLUGIN{BOUTONSTEXTE}|?{' '})
+	<img src="#CHEMIN{images/fontsizeup.png}" alt="fontsizeup" class="textsizeup" />
+	<img src="#CHEMIN{images/fontsizedown.png}" alt="fontsizedown" class="textsizedown" />
+]
+	<div class="chemin">
+		<a href="#URL_SITE_SPIP"><:sarkaspip:accueil_site:></a>
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{id_secteur!=#RACINE_SPECIALISEE{squelette}}>
+	<BOUCLE_hierarchie(HIERARCHIE)>
+		[#EVAL{_SARKASPIP_CONFIG_SYMBOLE_CHEMIN}(#ID_RUBRIQUE|match{#RACINE_SPECIALISEE}|oui)
+			<INCLURE{fond=noisettes/rubrique/inc_rubrique_lien}{id_rubrique=#ID_RUBRIQUE}>
+		]
+		[#EVAL{_SARKASPIP_CONFIG_SYMBOLE_CHEMIN}(#ID_SECTEUR|match{#RACINE_SPECIALISEE}|non)
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|non)
+				<INCLURE{fond=noisettes/rubrique/inc_rubrique_lien}{id_rubrique=#ID_RUBRIQUE}>
+			]
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|oui)
+				<INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique=#ID_RUBRIQUE}>
+			]
+		]
+	</BOUCLE_hierarchie>
+		[#EVAL{_SARKASPIP_CONFIG_SYMBOLE_CHEMIN}(#ID_RUBRIQUE|match{#RACINE_SPECIALISEE}|oui)
+			<INCLURE{fond=noisettes/rubrique/inc_rubrique_lien}{id_rubrique=#ID_RUBRIQUE}>
+		]
+		[#EVAL{_SARKASPIP_CONFIG_SYMBOLE_CHEMIN}(#ID_SECTEUR|match{#RACINE_SPECIALISEE}|non)
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|non)
+				<INCLURE{fond=noisettes/rubrique/inc_rubrique_lien}{id_rubrique=#ID_RUBRIQUE}>
+			]
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|oui)
+				<INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique=#ID_RUBRIQUE}>
+			]
+		]
+</BOUCLE_rubrique>
+<BOUCLE_sujet(ARTICLES){id_article}>
+		#EVAL{_SARKASPIP_CONFIG_SYMBOLE_CHEMIN}
+		<INCLURE{fond=noisettes/article/inc_article_lien}{id_article}>
+</BOUCLE_sujet>
+	</div>
+</div>

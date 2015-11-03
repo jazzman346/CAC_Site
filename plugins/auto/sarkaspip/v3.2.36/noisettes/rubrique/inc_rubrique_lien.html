@@ -1,0 +1,31 @@
+[(#REM) 
+<!-- Affichage du lien d'une rubrique (traite les cas de rubrique specialisee)
+	Recoit en argument :
+		- id_rubrique: id de la rubrique concernee
+		- classe: attribut class css du lien
+		- bulle: attribut title du lien 
+-->
+]
+<BOUCLE_rubrique_lien(RUBRIQUES){id_rubrique}>
+	#SET{titre, #TITRE}
+	[(#ID_SECTEUR|=={#RACINE_SPECIALISEE{galerie}}|oui)
+		#SET{url, #URL_PAGE{galerie}|parametre_url{id_rubrique,#ID_SECTEUR}}
+		[(#SET{bulle, <:sarkaspip:navigation_bulle_vers_galerie:>})]
+	]
+	[(#ID_SECTEUR|=={#RACINE_SPECIALISEE{agenda}}|oui)
+		#SET{url, #URL_PAGE{agenda}|parametre_url{id_rubrique,#ID_SECTEUR}|parametre_url{annee,#AUJOURDHUI|annee}|parametre_url{mois,#AUJOURDHUI|mois}}
+		[(#SET{bulle, <:sarkaspip:navigation_bulle_vers_agenda:>})]
+	]
+	[(#ID_SECTEUR|=={#RACINE_SPECIALISEE{forum}}|oui)
+		#SET{url, #URL_PAGE{forum_groupe}}
+		[(#SET{bulle, <:sarkaspip:navigation_bulle_vers_groupe:>})]
+	]
+	[(#ID_SECTEUR|match{#RACINE_SPECIALISEE}|non)
+		#SET{url, #URL_RUBRIQUE}
+		[(#SET{bulle, <:sarkaspip:navigation_bulle_vers_rubrique:>})]
+	]
+</BOUCLE_rubrique_lien>
+[(#ENV{bulle}|oui)
+	[(#SET{bulle, #ENV{bulle}})]
+]
+<a[ class="(#ENV{classe})"] href="#GET{url}"[ title="(#GET{bulle})"]>#GET{titre}</a>

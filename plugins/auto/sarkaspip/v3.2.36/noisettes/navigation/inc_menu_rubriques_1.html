@@ -1,0 +1,42 @@
+<B_menu_rubriques>
+<div id="menu_rubriques" class="noisette menu_rub1">
+	<ul class="menulist">
+<BOUCLE_menu_rubriques(RUBRIQUES){racine}{id_rubrique!==#RACINE_SPECIALISEE}{par num titre, titre}>
+		<BOUCLE_debut_secteur(RUBRIQUES){id_parent}{0,1}><li class="smenu"></BOUCLE_debut_secteur><li><//B_debut_secteur>
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|!={2}|oui)[<a href="#URL_RUBRIQUE">(#TITRE|couper{80})</a>]]
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|oui)
+				[(#INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique})]
+			]
+			<B_menu_ssrubriques>
+				<ul>
+			<BOUCLE_menu_ssrubriques(RUBRIQUES){id_parent}{par num titre, titre}>
+				<BOUCLE_debut_ssrubrique(RUBRIQUES){id_parent}{0,1}><li class="smenu"></BOUCLE_debut_ssrubrique><li><//B_debut_ssrubrique>
+					[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|!={2}|oui)[<a href="#URL_RUBRIQUE">(#TITRE|couper{80})</a>]]
+					[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={2}|oui)
+						[(#INCLURE{fond=noisettes/navigation/inc_nav_rubrique_lien}{id_rubrique})]
+					]
+				<BOUCLE_fin_hierarchie(RUBRIQUES){id_parent}{0,1}> </BOUCLE_fin_hierarchie>
+					[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={1}|oui)
+						[(#INCLURE{fond=noisettes/navigation/inc_nav_articles_1}{id_rubrique}{avec_ul=oui})]
+					]
+				<//B_fin_hierarchie>
+					<BOUCLE_ssmenu(boucle_menu_ssrubriques)></BOUCLE_ssmenu>
+				</li>
+				[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={1}|oui)
+					[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)
+						[(#INCLURE{fond=noisettes/navigation/inc_nav_articles_1}{id_rubrique=#ID_PARENT}{avec_ul=non})]
+					]
+				]
+			</BOUCLE_menu_ssrubriques>
+				</ul>
+			</B_menu_ssrubriques>
+		<BOUCLE_fin_secteur(RUBRIQUES){id_parent}{0,1}> </BOUCLE_fin_secteur>
+			[(#CONFIG{sarkaspip_menus/option_rubriques, 0}|=={1}|oui)
+				[(#INCLURE{fond=noisettes/navigation/inc_nav_articles_1}{id_rubrique=#ID_SECTEUR}{avec_ul=oui})]
+			]
+		<//B_fin_secteur>
+		</li>
+</BOUCLE_menu_rubriques>
+	</ul> <!-- menulist -->
+</div> <!-- menu_rub1 -->
+</B_menu_rubriques>

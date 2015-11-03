@@ -1,0 +1,47 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_recherche:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_recherche_presentation:></legend>
+			<p><:sarkaspip:cfg_inf_recherche_information:></p>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_recherche_choix_groupe:></legend>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_groupes_mots}
+					{suffixe=_recherche}
+					{label= <:sarkaspip:cfg_lbl_groupes_mots_recherche:> }
+					{env}>
+		</fieldset>
+
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_recherche_pagination:></legend>
+			<p><b><:sarkaspip:cfg_inf_recherche_article:></b></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}{defaut_pas=5}{defaut_position=3}{suffixe=_recherche_article}{env}>
+			<br />
+			<p><b><:sarkaspip:cfg_inf_recherche_commentaire:></b></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}{defaut_pas=5}{defaut_position=3}{suffixe=_recherche_commentaire}{env}>
+			<br />
+			<p><b><:sarkaspip:cfg_inf_recherche_breve:></b></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}{defaut_pas=5}{defaut_position=3}{suffixe=_recherche_breve}{env}>
+			<br />
+			<p><b><:sarkaspip:cfg_inf_recherche_rubrique:></b></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}{defaut_pas=5}{defaut_position=3}{suffixe=_recherche_rubrique}{env}>
+			<br />
+			<p><b><:sarkaspip:cfg_inf_recherche_mot:></b></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}{defaut_pas=5}{defaut_position=3}{suffixe=_recherche_mot}{env}>
+			<br />
+			<p><b><:sarkaspip:cfg_inf_recherche_site:></b></p>
+			<INCLURE{fond=noisettes/cfg/inc_cfg_pagination}{defaut_pas=5}{defaut_position=3}{suffixe=_recherche_site}{env}>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_recherche}|afficher_config)]
+</div>

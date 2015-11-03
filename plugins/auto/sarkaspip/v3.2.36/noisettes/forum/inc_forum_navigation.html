@@ -1,0 +1,10 @@
+[(#REM) <!-- affichage de la noisette de navigation vers les objets connexes au forum --> ]
+<div id="noisette_navigation" class="noisette">
+	<h1 class="intitule"><:sarkaspip:navigation_titre:></h1>
+		[(#REM) <!-- Liste des groupes  --> ]
+		<INCLURE{fond=noisettes/forum/inc_groupe_freres}{ajax}{id_secteur}{id_rubrique}{exposer_groupe=non}>
+		[(#REM) <!-- Liste des forums du meme groupe --> ]
+		<INCLURE{fond=noisettes/forum/inc_forum_freres}{ajax}{id_article}{id_rubrique}>
+		[(#REM) <!-- Liste des articles "Lire aussi" --> ]
+		<INCLURE{fond=noisettes/article/inc_article_lire_aussi}{ajax}{id_article}>
+</div>

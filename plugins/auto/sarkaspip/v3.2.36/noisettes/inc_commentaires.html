@@ -1,0 +1,26 @@
+[(#REM) <!-- affichage des X commentaires d'articles les plus recents du site ou du secteur concerne --> ]
+<B_commentaires>
+	<div id="noisette_commentaires" class="noisette">
+		<h1 class="intitule"><:sarkaspip:derniers_commentaires:></h1>
+		#ANCRE_PAGINATION
+		<div class="contenu mixte">
+<BOUCLE_commentaires(FORUMS){objet=article}{id_secteur ?}{articles.id_rubrique!==#BRANCHE_SPECIALISEE{galerie,not_in}}{plat}{!par date_heure}{0,#CONFIG{sarkaspip_noisettes/max_commentaires, 50}}{pagination #CONFIG{sarkaspip_noisettes/pas_pagination_commentaires, 10}}>
+		<BOUCLE_article_commente(ARTICLES){id_article=#ID_OBJET}>
+			[(#ID_SECTEUR|=={#RACINE_SPECIALISEE{galerie}}|oui)
+				[(#SET{url, #URL_PAGE{album,id_article=#ID_ARTICLE}|ancre_url{forum#ID_FORUM}})] 
+				[(#SET{title, <:sarkaspip:go_album:>})]
+			]
+			[(#ID_SECTEUR|=={#RACINE_SPECIALISEE{galerie}}|non)
+				[(#SET{url, #URL_FORUM})] 
+				[(#SET{title, <:sarkaspip:go_article:>})]
+			]
+		</BOUCLE_article_commente>
+			[<h2 class="titre">(#DATE|affdate_court|unique{date_commentaires})</h2>]
+			[<a class="introduction" href="#GET{url}" title="#GET{title}">
+				(#INTRODUCTION{#CONFIG{sarkaspip_noisettes/intro_commentaire, 100}}|PtoBR)
+			</a>]
+</BOUCLE_commentaires>
+			[<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_noisettes/modele_pagination_commentaires}})</div>]
+		</div>
+	</div>
+</B_commentaires>

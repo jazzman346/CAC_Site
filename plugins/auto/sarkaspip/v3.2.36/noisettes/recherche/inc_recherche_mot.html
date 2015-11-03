@@ -1,0 +1,31 @@
+[(#REM) 
+<!-- Affichage de la liste des mots trouves lors d'une recherche
+	Recoit en argument :
+		- recherche : le(s) mot(s) recherches
+-->
+]
+<B_mots>
+	<div id="recherche_mot_article" class="commentaires">
+		<a rel="nofollow" href="#header" title="<:sarkaspip:kezako_haut_page:>" class="fonction revenir_haut_page"></a>
+		<h2><:sarkaspip:recherche_mots_resultat:>&nbsp;&#40;#GRAND_TOTAL&#41;</h2>
+		#ANCRE_PAGINATION
+		[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_mot, 3}|match{^(1|3)$}|?{' '})
+		  [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_mot}})</div>]
+		]
+		<ul>
+<BOUCLE_mots(MOTS) {recherche}{id_rubrique!==#BRANCHE_SPECIALISEE}{par points}{type!=squelette_habillage}{inverse}{pagination #CONFIG{sarkaspip_recherche/pas_pagination_recherche_mot, 5}}>
+		[(#INCLURE{fond=noisettes/recherche/inc_recherche_extrait}
+			{titre=#TITRE}
+			{afficher_date=non}
+			{url=#URL_MOT}
+			{afficher_logo=non}
+			{afficher_auteur=non}      
+			{ajax}
+		)]
+</BOUCLE_mots>
+		</ul>
+		[(#CONFIG{sarkaspip_recherche/position_pagination_recherche_mot, 3}|match{^(2|3)$}|?{' '})
+		  [<div class="pagination">(#PAGINATION{#CONFIG{sarkaspip_recherche/modele_pagination_recherche_mot}})</div>]
+		]
+	</div>
+</B_mots>

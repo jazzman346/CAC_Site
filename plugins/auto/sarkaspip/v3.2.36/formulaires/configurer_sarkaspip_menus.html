@@ -1,0 +1,266 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+
+	<h3 class="titrem"><:sarkaspip:cfg_boite_menus:></h3>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#REM) <!-- Choix du menu des rubriques vertical --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_menu_rubriques:></legend>
+			<p><:sarkaspip:cfg_inf_menu_rubriques:></p>
+			<label>
+				<input type="radio" name="position_rubriques" value="0" [(#ENV{position_rubriques, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_rubriques" value="1" [(#ENV{position_rubriques, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_rubriques" value="5" [(#ENV{position_rubriques, 1}|=={5}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_5:>
+			</label>
+			<br />
+			<div id="bloc_modele1">
+				<p><:sarkaspip:cfg_inf_menu_modele_rubriques:></p>
+				<label>
+					<input type="radio" name="modele_rubriques" value="1" [(#ENV{modele_rubriques, 1}|=={1}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_inc_rubriques_1:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="modele_rubriques" value="2" [(#ENV{modele_rubriques, 1}|=={2}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_inc_rubriques_2:>
+				</label>
+				<br />
+				<label>
+					<input type="radio" name="modele_rubriques" value="3" [(#ENV{modele_rubriques, 1}|=={3}|?{checked="checked"})] />
+					<:sarkaspip:cfg_lbl_inc_rubriques_3:>
+				</label>
+				<div id="bloc_option1">
+					<p><:sarkaspip:cfg_inf_menu_option1:></p>
+					<label>
+						<input type="radio" name="option_rubriques" id="option_rubriques_0" value="0" [(#ENV{option_rubriques, 0}|=={0}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_menu_option1_1:>
+					</label>
+					<br />
+					<label id="bloc_option2">
+						<input type="radio" name="option_rubriques" value="1" [(#ENV{option_rubriques, 0}|=={1}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_menu_option1_2:>
+					<br />
+					</label>
+					<label>
+						<input type="radio" name="option_rubriques" value="2" [(#ENV{option_rubriques, 0}|=={2}|?{checked="checked"})] />
+						<:sarkaspip:cfg_lbl_menu_option1_3:>
+					</label>
+				</div>
+			</div>
+		</fieldset>
+
+		[(#REM) <!-- Menu des secteurs --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_menu_secteurs:></legend>
+			<p><:sarkaspip:cfg_inf_menu_secteurs:></p>
+			<label>
+				<input type="radio" name="position_secteurs" value="0" [(#ENV{position_secteurs, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_secteurs" value="5" [(#ENV{position_secteurs, 0}|=={5}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_5:>
+			</label>
+			<br />
+		</fieldset>
+
+		[(#REM) <!-- Menu raccourcis des pages speciales --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_menu_pages_speciales:></legend>
+			<p><:sarkaspip:cfg_inf_menu_pages_speciales:></p>
+			<label>
+				<input type="radio" name="position_pages" value="0" [(#ENV{position_pages, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_pages" value="1" [(#ENV{position_pages, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_pages" value="4" [(#ENV{position_pages, 1}|=={4}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_4:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_pages" value="5" [(#ENV{position_pages, 1}|=={5}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_5:>
+			</label>
+			<br />
+		</fieldset>
+
+		[(#REM) <!-- Menu raccourcis des formulaires --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_menu_formulaires:></legend>
+			<p><:sarkaspip:cfg_inf_menu_formulaires:></p>
+			<label>
+				<input type="radio" name="position_formulaires" value="0" [(#ENV{position_formulaires, 1}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_formulaires" value="1" [(#ENV{position_formulaires, 1}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_1:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_formulaires" value="4" [(#ENV{position_formulaires, 1}|=={4}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_4:>
+			</label>
+			<br />
+			<p><:sarkaspip:cfg_inf_lien_plan:></p>
+			<label>
+				<input type="radio" name="lien_plan" value="1" [(#ENV{lien_plan, 0}|=={1}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_oui:>
+			</label>
+			<label>
+				<input type="radio" name="lien_plan" value="0" [(#ENV{lien_plan, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_non:>
+			</label>
+			<br />
+		</fieldset>
+
+		[(#REM) <!-- Menu des langues --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_menu_langues:></legend>
+			<p><:sarkaspip:cfg_inf_menu_langues:></p>
+			<label>
+				<input type="radio" name="position_langues" value="0" [(#ENV{position_langues, 4}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_langues" value="4" [(#ENV{position_langues, 4}|=={4}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_4:>
+			</label>
+			<br />
+		</fieldset>
+
+		[(#REM) <!-- Choix du menu de liens personnalises --> ]
+		<fieldset>
+			<legend><:sarkaspip:cfg_lgd_menu_perso:></legend>
+			<p><:sarkaspip:cfg_inf_menu_perso:></p>
+			<label>
+				<input type="radio" name="position_perso" value="0" [(#ENV{position_perso, 0}|=={0}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_0:>
+			</label>
+			<br />
+			<label>
+				<input type="radio" name="position_perso" value="5" [(#ENV{position_perso, 0}|=={5}|?{checked="checked"})] />
+				<:sarkaspip:cfg_lbl_inc_position_5:>
+			</label>
+			<br />
+			<div id="bloc_liens">
+				<p><:sarkaspip:cfg_inf_menu_perso_aide:></p>
+				<table>
+					<tr>
+						<th><:sarkaspip:cfg_lbl_lien_texte:></th>
+						<th><:sarkaspip:cfg_lbl_lien_url:></th>
+					</tr>
+					<tr>
+						<td><input type="text" name="lien_texte_1" value="#ENV{lien_texte_1}" size="30" class="fondl" /></td>
+						<td><input type="text" name="lien_url_1" value="[(#ENV{lien_url_1})]" size="40" class="fondl" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="lien_texte_2" value="#ENV{lien_texte_2}" size="30" class="fondl" /></td>
+						<td><input type="text" name="lien_url_2" value="[(#ENV{lien_url_2})]" size="40" class="fondl" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="lien_texte_3" value="#ENV{lien_texte_3}" size="30" class="fondl" /></td>
+						<td><input type="text" name="lien_url_3" value="[(#ENV{lien_url_3})]" size="40" class="fondl" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="lien_texte_4" value="#ENV{lien_texte_4}" size="30" class="fondl" /></td>
+						<td><input type="text" name="lien_url_4" value="[(#ENV{lien_url_4})]" size="40" class="fondl" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="lien_texte_5" value="#ENV{lien_texte_5}" size="30" class="fondl" /></td>
+						<td><input type="text" name="lien_url_5" value="[(#ENV{lien_url_5})]" size="40" class="fondl" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="lien_texte_6" value="#ENV{lien_texte_6}" size="30" class="fondl" /></td>
+						<td><input type="text" name="lien_url_6" value="[(#ENV{lien_url_6})]" size="40" class="fondl" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="lien_texte_7" value="#ENV{lien_texte_7}" size="30" class="fondl" /></td>
+						<td><input type="text" name="lien_url_7" value="[(#ENV{lien_url_7})]" size="40" class="fondl" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="lien_texte_8" value="#ENV{lien_texte_8}" size="30" class="fondl" /></td>
+						<td><input type="text" name="lien_url_8" value="[(#ENV{lien_url_8})]" size="40" class="fondl" /></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="lien_texte_9" value="#ENV{lien_texte_9}" size="30" class="fondl" /></td>
+						<td><input type="text" name="lien_url_9" value="[(#ENV{lien_url_9})]" size="40" class="fondl" /></td>
+					</tr>
+				</table>
+			</div>
+		</fieldset>
+
+		<INCLURE{fond=noisettes/cfg/inc_cfg_boutons}>
+	</div></form>
+
+	[(#VAL{sarkaspip_menus}|afficher_config)]
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		[(#ENV{modele_rubriques, 1}|!={1}|?{jQuery("#bloc_option2").hide();})]
+		[(#ENV{modele_rubriques, 1}|=={0}|?{jQuery("#bloc_option1").hide();})]
+		[(#ENV{position_rubriques, 1}|=={0}|?{jQuery("#bloc_modele1").hide();})]
+		[(#ENV{position_perso, 0}|=={0}|?{jQuery("#bloc_liens").hide();})]
+
+		jQuery("input[name='position_rubriques']").change(function() {
+			if (jQuery("input[name='position_rubriques']:checked").val() == 0) {
+				jQuery("#bloc_modele1").hide();
+			}
+			else {
+				jQuery("#bloc_modele1").show();
+			}
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='modele_rubriques']").change(function() {
+			if (jQuery("input[name='modele_rubriques']:checked").val() == 1) {
+				jQuery("#bloc_option1").show();
+				jQuery("#bloc_option2").show();
+				jQuery("#option_rubriques_0").attr({checked: "checked"});
+			}
+			else if (jQuery("input[name='modele_rubriques']:checked").val() == 0) {
+				jQuery("#bloc_option2").hide();
+				jQuery("#bloc_option1").hide();
+			}
+			else {
+				jQuery("#bloc_option1").show();
+				jQuery("#bloc_option2").hide();
+				jQuery("#option_rubriques_0").attr({checked: "checked"});
+			}
+			jQuery(this).blur();
+		});
+
+		jQuery("input[name='position_perso']").change(function() {
+			if (jQuery("input[name='position_perso']:checked").val() == 0) {
+				jQuery("#bloc_liens").hide();}
+			else {
+				jQuery("#bloc_liens").show();}
+
+		jQuery(this).blur();
+		});
+	});
+//]]>
+</script>
